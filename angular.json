@@ -120,6 +120,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "PiFrontEndDevHope"
+    }
+  },
+  "defaultProject": "PiFrontEndDevHope",
+  "cli": {
+    "analytics": false
+  }
 }
