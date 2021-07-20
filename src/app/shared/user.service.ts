@@ -30,7 +30,4 @@ export class UserService {
   updateUser(id: number, u: User) {
     return this.http.put(this.url + id, u);
   }
-
-
-
 }

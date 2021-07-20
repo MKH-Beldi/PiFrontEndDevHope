@@ -1,6 +1,7 @@
 import DateTimeFormat = Intl.DateTimeFormat;
-import {SpecialtyDr} from "./specialtyDr";
-import {City} from "./city";
+import {SpecialtyDr} from './specialtyDr';
+import {City} from './city';
+
 export class User {
   id: number;
   email: string;
@@ -22,5 +23,5 @@ export class User {
   createdAt: DateTimeFormat;
   updatedAt: DateTimeFormat;
   city: City;
-  specialtyDr: SpecialtyDr;
+  specialtyDr: SpecialtyDr[];
 }
