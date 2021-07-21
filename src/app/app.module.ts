@@ -11,6 +11,7 @@ import localeFr from '@angular/common/locales/fr';
 import {registerLocaleData} from '@angular/common';
 import { SpecialtyDrFormComponent } from './form/specialty-dr-form/specialty-dr-form.component';
 import {SpecialtyDrService} from './shared/specialty-dr.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 registerLocaleData(localeFr);
 
 
@@ -25,7 +26,8 @@ registerLocaleData(localeFr);
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'fr-FR'}, SpecialtyDrService],
   bootstrap: [AppComponent]
