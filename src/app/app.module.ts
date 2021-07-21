@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import {LOCALE_ID, NgModule} from '@angular/core';
-import { ScheduleModule, DayService, WeekService, WorkWeekService, MonthService, AgendaService, RecurrenceEditorModule } from '@syncfusion/ej2-angular-schedule';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,8 +11,12 @@ import localeFr from '@angular/common/locales/fr';
 import {registerLocaleData} from '@angular/common';
 import { SpecialtyDrFormComponent } from './form/specialty-dr-form/specialty-dr-form.component';
 import {SpecialtyDrService} from './shared/specialty-dr.service';
-import { CalanderComponent } from './views/calander/calander.component';
 registerLocaleData(localeFr);
+import { ScheduleModule } from '@syncfusion/ej2-angular-schedule';
+
+import { DayService, WeekService, WorkWeekService, MonthService, AgendaService, MonthAgendaService} from '@syncfusion/ej2-angular-schedule';
+import { ScheduleComponent } from './schedule/schedule.component';
+
 
 
 @NgModule({
@@ -22,7 +25,8 @@ registerLocaleData(localeFr);
     UserListComponent,
     SpecialtyDrListComponent,
     SpecialtyDrFormComponent,
-    CalanderComponent
+    ScheduleComponent,
+
   ],
   imports: [
     BrowserModule,
