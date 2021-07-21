@@ -27,4 +27,8 @@ export class SpecialtyDrService {
   updateSpecialtyDr(id: number, s: SpecialtyDr) {
     return this.http.put(this.url + 'update/' + id, s);
   }
+  
+  deleteSpecialtyDr(id: number, s: SpecialtyDr) {
+    return this.http.delete(this.url + 'delete/' + id);
+  }
 }
