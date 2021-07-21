@@ -12,7 +12,11 @@ import {registerLocaleData} from '@angular/common';
 import { SpecialtyDrFormComponent } from './form/specialty-dr-form/specialty-dr-form.component';
 import {SpecialtyDrService} from './shared/specialty-dr.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SymptomFormComponent } from './form/symptom-form/symptom-form.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
 registerLocaleData(localeFr);
+
 
 
 @NgModule({
@@ -20,14 +24,17 @@ registerLocaleData(localeFr);
     AppComponent,
     UserListComponent,
     SpecialtyDrListComponent,
-    SpecialtyDrFormComponent
+    SpecialtyDrFormComponent,
+    SymptomFormComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatSelectModule
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'fr-FR'}, SpecialtyDrService],
   bootstrap: [AppComponent]

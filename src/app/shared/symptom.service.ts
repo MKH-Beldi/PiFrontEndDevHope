@@ -20,6 +20,10 @@ export class SymptomService {
     return this.http.get<Symptom[]>(this.url + 'get/' + criteria + '/' + value);
   }
 
+  getZone() {
+    return this.http.get<Symptom[]>(this.url + 'getZone');
+  }
+
   addSymptom(s: Symptom) {
     return this.http.post(this.url + 'create', s);
   }
