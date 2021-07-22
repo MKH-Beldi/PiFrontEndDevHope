@@ -15,6 +15,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SymptomFormComponent } from './form/symptom-form/symptom-form.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
+import { ProfilComponent } from './profil/profil.component';
+import { PublicationComponent } from './publication/publication.component';
+import { CommentComponent } from './comment/comment.component';
 registerLocaleData(localeFr);
 
 
@@ -25,7 +28,10 @@ registerLocaleData(localeFr);
     UserListComponent,
     SpecialtyDrListComponent,
     SpecialtyDrFormComponent,
-    SymptomFormComponent
+    SymptomFormComponent,
+    ProfilComponent,
+    PublicationComponent,
+    CommentComponent
   ],
   imports: [
     BrowserModule,
