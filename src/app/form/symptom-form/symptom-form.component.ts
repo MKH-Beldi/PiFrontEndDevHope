@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Symptom} from '../../model/symptom';
 import {SymptomService} from '../../shared/symptom.service';
+import {NotificationService} from "../../shared/notification.service";
+import {SpecialtyDr} from "../../model/specialtyDr";
 
 @Component({
   selector: 'app-symptom-form',
@@ -13,7 +15,7 @@ export class SymptomFormComponent implements OnInit {
   symptomsZone: any[];
   symptom = new Symptom();
 
-  constructor(private symptomService: SymptomService ) { }
+  constructor(private symptomService: SymptomService, private notifyService: NotificationService ) { }
 
   ngOnInit(): void {
     this.symptomService.getZone().subscribe(
@@ -24,5 +26,12 @@ export class SymptomFormComponent implements OnInit {
   }
 
   addSymptom() {
+    this.symptomService.addSymptom(this.symptom).subscribe(
+      (status) => {
+        if (status.status === 201 ){
+          this.notifyService.showSuccess('Symptôme ajouté avec succès !', 'Succès');
+        }
+      }
+    );
   }
 }

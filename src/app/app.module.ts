@@ -15,6 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SymptomFormComponent } from './form/symptom-form/symptom-form.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
+import { ToastrModule } from 'ngx-toastr';
 registerLocaleData(localeFr);
 
 
@@ -26,6 +27,7 @@ registerLocaleData(localeFr);
     SpecialtyDrListComponent,
     SpecialtyDrFormComponent,
     SymptomFormComponent
+
   ],
   imports: [
     BrowserModule,
@@ -34,7 +36,8 @@ registerLocaleData(localeFr);
     FormsModule,
     BrowserAnimationsModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    ToastrModule.forRoot()
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'fr-FR'}, SpecialtyDrService],
   bootstrap: [AppComponent]

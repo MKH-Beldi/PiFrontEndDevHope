@@ -25,7 +25,7 @@ export class SymptomService {
   }
 
   addSymptom(s: Symptom) {
-    return this.http.post(this.url + 'create', s);
+    return this.http.post(this.url + 'create', s, {observe: 'response'});
   }
 
   updateSymptom(id: number, s: Symptom) {
