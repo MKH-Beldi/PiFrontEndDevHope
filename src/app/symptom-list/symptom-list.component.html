@@ -1,0 +1,48 @@
+<div class=container>
+  <h2><i class="bi bi-check2-circle"></i> Ajouter vos symptômes</h2>
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-2">
+        <label for="symtomZone" class="form-label">Symptôme zone <span style="color: red"> *</span></label>
+        <select class="form-select" aria-label="symtomZone" id="symtomZone" name="symtomZone"
+                required
+                [(ngModel)]="symptomsZoneSelected"
+                #zone="ngModel"
+                (change)="onSelectZone()">
+          <option disabled selected [ngValue]="undefined">Choisir ...</option>
+          <option *ngFor="let object of symptomsZone" [ngValue]="object.name">
+            {{ object.name }}
+          </option>
+        </select>
+        <div *ngIf="zone.invalid && (zone.dirty || zone.touched)" class="mt-1">
+          <span *ngIf="zone.errors.required" class="form-text text-danger">
+            <i class="bi bi-exclamation-circle"></i> Zone symptôme est requis.
+          </span>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <label for="symtoms" class="form-label" id="symtomsLabel" name="symtomsLabel">Symptômes <span style="color: red"> *</span></label>
+        <ng-select  aria-label="symtomsLabel" id="symtoms" name="symtoms"
+                   [items]="symptomsSelect"
+                   bindLabel="description"
+                   placeholder="Choisir les symptômes"
+                   appendTo="body"
+                   multiple="true"
+                   required="true"
+                   [(ngModel)]="symptomsSelected"
+                    (change)="getSelectedValue()"
+                   #symptoms="ngModel"
+                   >
+        </ng-select>
+        <div id="symtomDescriptionHelp" class="form-text"><i class="bi bi-info-circle"></i> Symptôme introuvable, veuillez choisir le plus proche parmis la liste (informez le médecin).</div>
+        <div *ngIf="symptoms.invalid && (symptoms.dirty || symptoms.touched)" class="mt-1">
+          <span *ngIf="symptoms.errors.required" class="form-text text-danger">
+            <i class="bi bi-exclamation-circle"></i> Veuillez choisir au moins un symptôme.
+          </span>
+        </div>
+      </div>
+  </div>
+</div>
+

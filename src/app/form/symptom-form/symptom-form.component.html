@@ -4,7 +4,7 @@
     <div class="row">
       <div class="col-md-2 mb-2">
         <label for="symtomZone" class="form-label">Symptôme zone<span style="color: red"> *</span></label>
-        <select class="form-select" aria-label="Default select example" id="symtomZone" name="symtomZone"
+        <select class="form-select" aria-label="symtomZone" id="symtomZone" name="symtomZone"
                 required
                 [(ngModel)]="symptom.name"
                 #zone="ngModel">
@@ -14,9 +14,9 @@
           </option>
         </select>
         <div *ngIf="zone.invalid && (zone.dirty || zone.touched)" class="mt-1">
-      <span *ngIf="zone.errors.required" class="form-text text-danger">
-        Zone symptôme est requis.
-      </span>
+          <span *ngIf="zone.errors.required" class="form-text text-danger">
+            <i class="bi bi-exclamation-circle"></i> Zone symptôme est requis.
+          </span>
         </div>
       </div>
       <div class="col-md-4">
@@ -27,18 +27,18 @@
                minlength="6"
                [(ngModel)]="symptom.description"
                #desc="ngModel">
-        <div *ngIf="desc.pristine" id="symtomDescriptionHelp" class="form-text">Description doit contenir au moins 6 lettres.</div>
+        <div *ngIf="desc.pristine" id="symtomDescriptionHelp" class="form-text"><i class="bi bi-info-circle"></i> Description doit contenir au moins 6 lettres.</div>
         <div *ngIf="desc.invalid && (desc.dirty || desc.touched)" class="mt-1">
           <span *ngIf="desc.errors.required" class="form-text text-danger">
-            Description symptôme est requise.
+            <i class="bi bi-exclamation-circle"></i> Description symptôme est requise.
           </span>
           <span *ngIf="desc.errors.pattern || desc.errors.minlength" class=" form-text text-danger">
-             Veuillez description une valeur valide.
+             <i class="bi bi-exclamation-circle"></i> Veuillez description une valeur valide.
           </span>
           </div>
         </div>
     </div>
-      <div class="col-12">
+      <div class="col-12 mb-3">
         <button type="submit" class="btn btn-success" (click)="addSymptom()" [disabled]="f.invalid "><i class="bi bi-plus-circle"></i> Ajouter</button>
       </div>
   </form>
