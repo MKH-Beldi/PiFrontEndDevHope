@@ -1,8 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Symptom} from '../../model/symptom';
 import {SymptomService} from '../../shared/symptom.service';
-import {NotificationService} from '../../shared/notification.service';
-
 
 @Component({
   selector: 'app-symptom-form',
@@ -18,7 +16,7 @@ export class SymptomFormComponent implements OnInit {
   @Output() addEvent = new EventEmitter<Symptom>();
   @Output() editEvent = new EventEmitter<Symptom>();
 
-  constructor(private symptomService: SymptomService, private notifyService: NotificationService ) { }
+  constructor(private symptomService: SymptomService) { }
 
   ngOnInit(): void {
     if (this.addModeChild){

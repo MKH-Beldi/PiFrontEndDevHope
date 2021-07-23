@@ -27,7 +27,6 @@ export class SymptomListComponent implements OnInit {
   onSelectZone(){
     this.symptomService.getBy('name', this.symptomsZoneSelected).subscribe(
       (data: Symptom[]) => {
-        console.log(data);
         this.symptomsSelect = data;
       }
     );

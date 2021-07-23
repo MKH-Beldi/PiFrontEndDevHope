@@ -21,8 +21,6 @@ export class SymptomTableComponent implements OnInit {
   addMode: boolean;
   viewForm: boolean;
 
-
-
   constructor(private symptomService: SymptomService, private notifyService: NotificationService) {}
 
   ngOnInit(): void {
@@ -47,10 +45,12 @@ export class SymptomTableComponent implements OnInit {
     symptom.createdAt = new Date();
     symptom.createdAt.setHours(symptom.createdAt.getHours() - 1);
     this.symptomService.addSymptom(symptom).subscribe(
-      (status) => {
-        if (status.status === 201 ){
+      (data: any[]) => {
+        if (data[0]){
+          symptom.id = data[0];
           this.symptoms.push(symptom);
           this.notifyService.showSuccess('Symptôme ajouté avec succès !', 'Ajout');
+          this.viewForm = false;
         }
       }
     );
@@ -73,6 +73,7 @@ export class SymptomTableComponent implements OnInit {
           const indexEdit = this.symptoms.indexOf(s);
           this.symptoms[indexEdit] = s;
           this.notifyService.showInfo('Symptôme modifié avec succès !', 'Modification');
+          this.viewForm = false;
         }
       }
     );
