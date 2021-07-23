@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Symptom} from '../../model/symptom';
 import {SymptomService} from '../../shared/symptom.service';
-import {NotificationService} from "../../shared/notification.service";
-import {SpecialtyDr} from "../../model/specialtyDr";
+import {NotificationService} from '../../shared/notification.service';
+
 
 @Component({
   selector: 'app-symptom-form',
@@ -13,11 +13,17 @@ export class SymptomFormComponent implements OnInit {
 
   symptoms: Symptom[];
   symptomsZone: any[];
-  symptom = new Symptom();
+  @Input() addModeChild: boolean;
+  @Input() symptom: Symptom;
+  @Output() addEvent = new EventEmitter<Symptom>();
+  @Output() editEvent = new EventEmitter<Symptom>();
 
   constructor(private symptomService: SymptomService, private notifyService: NotificationService ) { }
 
   ngOnInit(): void {
+    if (this.addModeChild){
+      this.symptom = new Symptom();
+    }
     this.symptomService.getZone().subscribe(
       (data: any[]) => {
         this.symptomsZone = data;
@@ -25,13 +31,11 @@ export class SymptomFormComponent implements OnInit {
     );
   }
 
-  addSymptom() {
-    this.symptomService.addSymptom(this.symptom).subscribe(
-      (status) => {
-        if (status.status === 201 ){
-          this.notifyService.showSuccess('Symptôme ajouté avec succès !', 'Ajout');
-        }
-      }
-    );
+  sendAddNotif() {
+    this.addEvent.emit(this.symptom);
+  }
+
+  sendEditNotif() {
+    this.editEvent.emit(this.symptom);
   }
 }

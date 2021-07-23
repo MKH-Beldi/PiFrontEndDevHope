@@ -49,7 +49,7 @@ registerLocaleData(localeFr);
     MatSelectModule,
     ToastrModule.forRoot(),
     NgSelectModule,
-    NgxPaginationModule
+    NgxPaginationModule,
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'fr-FR'}, SpecialtyDrService],
   bootstrap: [AppComponent]

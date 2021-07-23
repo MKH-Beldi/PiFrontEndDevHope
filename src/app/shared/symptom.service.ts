@@ -29,7 +29,7 @@ export class SymptomService {
   }
 
   updateSymptom(id: number, s: Symptom) {
-    return this.http.put(this.url + 'update/' + id, s);
+    return this.http.put(this.url + 'update/' + id, s, {observe: 'response'});
   }
 
   deleteSymptom(id: number) {

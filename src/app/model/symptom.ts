@@ -5,6 +5,6 @@ export class Symptom {
   name: string;
   description: string;
   type: string;
-  createdAt: DateTimeFormat;
-  updatedAt: DateTimeFormat;
+  createdAt: Date;
+  updatedAt: Date;
 }

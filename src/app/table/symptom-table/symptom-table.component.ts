@@ -10,6 +10,7 @@ import {NotificationService} from '../../shared/notification.service';
 })
 export class SymptomTableComponent implements OnInit {
 
+  symptomToEdit: Symptom;
   symptoms: Symptom[];
   searchValue: string;
   symptomsZoneSelect: any[];
@@ -17,12 +18,15 @@ export class SymptomTableComponent implements OnInit {
   filtreValue: string;
   config: any;
   totalData: any;
+  addMode: boolean;
+  viewForm: boolean;
 
 
 
   constructor(private symptomService: SymptomService, private notifyService: NotificationService) {}
 
   ngOnInit(): void {
+    this.viewForm = false ;
     this.symptomService.getAll().subscribe(
       (data: Symptom[]) => {
         this.symptoms = data;
@@ -38,14 +42,50 @@ export class SymptomTableComponent implements OnInit {
     };
   }
 
+  addSymptom(symptom: Symptom) {
+    this.viewForm = true;
+    symptom.createdAt = new Date();
+    symptom.createdAt.setHours(symptom.createdAt.getHours() - 1);
+    this.symptomService.addSymptom(symptom).subscribe(
+      (status) => {
+        if (status.status === 201 ){
+          this.symptoms.push(symptom);
+          this.notifyService.showSuccess('Symptôme ajouté avec succès !', 'Ajout');
+        }
+      }
+    );
+  }
+
+  sendEdit(s: Symptom) {
+    this.viewForm = true;
+    this.addMode = false;
+    this.symptomToEdit = s;
+  }
+
+  editSymptom(s: Symptom) {
+    this.viewForm = true;
+    this.addMode = false;
+    this.symptomToEdit.updatedAt = new Date();
+    this.symptomToEdit.updatedAt.setHours(this.symptomToEdit.updatedAt.getHours() - 1);
+    this.symptomService.updateSymptom(s.id, this.symptomToEdit).subscribe(
+      (status) => {
+        if (status.status === 201 ){
+          const indexEdit = this.symptoms.indexOf(s);
+          this.symptoms[indexEdit] = s;
+          this.notifyService.showInfo('Symptôme modifié avec succès !', 'Modification');
+        }
+      }
+    );
+  }
+
   deleteSymptom(s: Symptom){
     this.symptomService.deleteSymptom(s.id).subscribe(
       (status) => {
         if (status.status === 201 ){
+          const indexDelete = this.symptoms.indexOf(s);
+          this.symptoms.splice(indexDelete, 1);
           this.notifyService.showError('Symptôme supprimer avec succès !', 'Delete');
         }
-        const idDelete = this.symptoms.indexOf(s);
-        this.symptoms.splice(idDelete, 1);
       }
     );
   }
@@ -57,6 +97,5 @@ export class SymptomTableComponent implements OnInit {
   pageChanged(event){
     this.config.currentPage = event;
   }
-
 
 }

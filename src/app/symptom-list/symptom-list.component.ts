@@ -37,4 +37,5 @@ export class SymptomListComponent implements OnInit {
     console.log(this.symptomsSelected);
   }
 
+
 }

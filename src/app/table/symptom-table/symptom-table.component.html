@@ -1,10 +1,15 @@
+<app-symptom-form *ngIf="viewForm" (addEvent)="addSymptom($event)"
+                  (editEvent)="editSymptom($event)"
+                  [addModeChild]="addMode"
+                  [symptom]="symptomToEdit"
+                  ></app-symptom-form>
 <div class=container>
-  <div class="row">
+  <div class="row mt-2">
     <div class="col-md-8">
       <h2><i class="bi bi-table"></i> Symptômes table</h2>
     </div>
     <div class="col-md-4">
-      <div class="search-box">
+      <div class="search-box ">
         <i class="bi bi-search"></i>
         <input type="text" class="form-control" placeholder="Search" [(ngModel)]="searchValue">
       </div>
@@ -24,7 +29,10 @@
         <th scope="col"></th>
         <th scope="col"></th>
         <th scope="col"></th>
-        <th scope="col"></th>
+        <th scope="col" class="text-lg-center h5">
+          <a *ngIf="!viewForm" role="button" class="text-success p-2" title="Add" data-toggle="tooltip" (click)="viewForm = true; addMode=true"><i class="bi bi-plus-square"></i></a>
+          <a *ngIf="viewForm" role="button" class="text-danger p-2" title="Add" data-toggle="tooltip" (click)="viewForm = false; addMode=false"><i class="bi bi-x-circle"></i></a>
+        </th>
       </tr>
       <tr>
         <th scope="col">#</th>
@@ -43,7 +51,7 @@
         <td>{{ object.createdAt | date : 'medium'  : 'GMT+2' }}</td>
         <td>{{ object.updatedAt | date : 'medium'  : 'GMT+2' }}</td>
         <td class="text-lg-center h5">
-          <a role="button" class="text-info p-2" title="Edit" data-toggle="tooltip"><i class="bi bi-pencil-square"></i></a>
+          <a role="button" class="text-info p-2" title="Edit" data-toggle="tooltip" (click)="sendEdit(object)"><i class="bi bi-pencil-square"></i></a>
           <a role="button" class="text-danger p-2" title="Delete" data-toggle="tooltip" (click)="deleteSymptom(object)"><i class="bi bi-trash"></i></a>
         </td>
       </tr>
