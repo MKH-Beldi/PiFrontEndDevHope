@@ -21,6 +21,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { SymptomTableComponent } from './table/symptom-table/symptom-table.component';
 import { SearchFilterPipe } from './pipe/search-filter.pipe';
 import { SortDirective } from './directive/sort.directive';
+import { NgxPaginationModule } from 'ngx-pagination';
 registerLocaleData(localeFr);
 
 
@@ -47,7 +48,8 @@ registerLocaleData(localeFr);
     MatFormFieldModule,
     MatSelectModule,
     ToastrModule.forRoot(),
-    NgSelectModule
+    NgSelectModule,
+    NgxPaginationModule
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'fr-FR'}, SpecialtyDrService],
   bootstrap: [AppComponent]

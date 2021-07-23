@@ -29,7 +29,7 @@ export class SymptomFormComponent implements OnInit {
     this.symptomService.addSymptom(this.symptom).subscribe(
       (status) => {
         if (status.status === 201 ){
-          this.notifyService.showSuccess('Symptôme ajouté avec succès !', 'Succès');
+          this.notifyService.showSuccess('Symptôme ajouté avec succès !', 'Ajout');
         }
       }
     );

@@ -33,6 +33,6 @@ export class SymptomService {
   }
 
   deleteSymptom(id: number) {
-    return this.http.delete(this.url + 'delete/' + id);
+    return this.http.delete(this.url + 'delete/' + id, {observe: 'response'});
   }
 }
