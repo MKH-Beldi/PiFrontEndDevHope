@@ -1,0 +1,48 @@
+<div class=container>
+  <div class="row">
+    <div class="col-md-8">
+      <h2><i class="bi bi-table"></i> Symptômes table</h2>
+    </div>
+    <div class="col-md-4 mt-1">
+      <div class="search-box">
+        <i class="bi bi-search"></i>
+        <input type="text" class="form-control" placeholder="Search" [(ngModel)]="searchValue">
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row mb-2">
+      <div class="col-md-2">
+        <select class="no-css form-select form-select-sm" [(ngModel)]="filtreValue" (change)="getFiltreName('name')">
+          <option selected [ngValue]="undefined">Filtre par zone</option>
+          <option *ngFor="let object of symptomsZoneSelect"> {{ object }}</option>
+        </select>
+      </div>
+    </div>
+    <table class="table table-striped table-hover table-bordered">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col" [appSort]="symptoms" data-order="desc" data-name="name"><i class="bi bi-chevron-bar-expand"></i> Zone</th>
+        <th scope="col" [appSort]="symptoms" data-order="desc" data-name="description"><i class="bi bi-chevron-bar-expand"></i> Nom</th>
+        <th scope="col" [appSort]="symptoms" data-order="desc" data-name="createdAt" data-type="date"><i class="bi bi-chevron-bar-expand"></i> Date creation</th>
+        <th scope="col" [appSort]="symptoms" data-order="desc" data-name="updatedAt" data-type="date"><i class="bi bi-chevron-bar-expand"></i> Date modification </th>
+        <th scope="col">Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr start="i" *ngFor="let object of symptoms | searchFilter:searchValue | searchFilter:filtreValue:filtreName ; let i = index">
+        <th scope="row">{{ i+1 }}</th>
+        <td>{{ object.name }}</td>
+        <td>{{ object.description }}</td>
+        <td>{{ object.createdAt | date : 'medium'  : 'GMT+2' }}</td>
+        <td>{{ object.updatedAt | date : 'medium'  : 'GMT+2' }}</td>
+        <td class="text-lg-center h5">
+          <a href="#" class="text-info p-2" title="Edit" data-toggle="tooltip"><i class="bi bi-pencil-square"></i></a>
+          <a href="#" class="text-danger p-2" title="Delete" data-toggle="tooltip"><i class="bi bi-trash"></i></a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

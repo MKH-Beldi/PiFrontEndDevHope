@@ -6,5 +6,5 @@ export class Symptom {
   description: string;
   type: string;
   createdAt: DateTimeFormat;
-  updatedA: DateTimeFormat;
+  updatedAt: DateTimeFormat;
 }

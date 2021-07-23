@@ -18,6 +18,9 @@ import {MatSelectModule} from '@angular/material/select';
 import { ToastrModule } from 'ngx-toastr';
 import { SymptomListComponent } from './symptom-list/symptom-list.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { SymptomTableComponent } from './table/symptom-table/symptom-table.component';
+import { SearchFilterPipe } from './pipe/search-filter.pipe';
+import { SortDirective } from './directive/sort.directive';
 registerLocaleData(localeFr);
 
 
@@ -29,7 +32,10 @@ registerLocaleData(localeFr);
     SpecialtyDrListComponent,
     SpecialtyDrFormComponent,
     SymptomFormComponent,
-    SymptomListComponent
+    SymptomListComponent,
+    SymptomTableComponent,
+    SearchFilterPipe,
+    SortDirective
 
   ],
   imports: [
