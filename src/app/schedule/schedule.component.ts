@@ -1,36 +1,88 @@
-import { Component, OnInit } from '@angular/core';
-import { EventSettingsModel, View, DayService, WeekService, WorkWeekService, MonthService, AgendaService } from '@syncfusion/ej2-angular-schedule';
-import { DataManager, ODataV4Adaptor, Query ,WebApiAdaptor } from '@syncfusion/ej2-data';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Schedule} from "../model/schedule";
 import {ScheduleService} from "../shared/schedule.service";
+
+import { CalendarOptions } from '@fullcalendar/angular';
+import {HttpClient} from "@angular/common/http";
+
+
 @Component({
   selector: 'app-schedule',
   styleUrls: ['./schedule.component.css'],
-  providers: [DayService, WeekService, WorkWeekService, MonthService, AgendaService],
-  template: `<ejs-schedule width='100%' height='550px' [selectedDate]="selectedDate" [eventSettings]="eventSettings"></ejs-schedule>`
+  providers: [],
+templateUrl: './schedule.component.html'
+
+
+
 })
-export class ScheduleComponent implements OnInit {
 
-  list : Schedule[] ;
-
+export class ScheduleComponent {
 
 
-  constructor(private scheduleService: ScheduleService) {
+
+  handleDateClick(arg) {
+    alert('date click! ' + arg.dateStr)
   }
-  public readonly: boolean = true;
-  public selectedDate: Date = new Date(2020, 9, 20);
-  private dataManager: DataManager = new DataManager({
-    url: this.scheduleService.url ,
-    adaptor: new WebApiAdaptor(),
-    crossDomain:true
-  });
-  public eventSettings: EventSettingsModel = {
-    dataSource: this.dataManager };
 
-  ngOnInit(): void {
-    this.scheduleService.getSchedule().subscribe((data: Schedule[]) =>
-      this.list = data);
-    console.log(this.list);
+  // events: any[];
+
+  Events = [];
+
+  list: Schedule[];
+
+  calendarOptions: CalendarOptions = {
+    headerToolbar: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+    },
+    initialView: 'dayGridMonth',
+    weekends: true,
+    editable: true,
+    selectable: true,
+    selectMirror: true,
+    dayMaxEvents: true,
+    dateClick: this.handleDateClick.bind(this), // bind is important!
+    events: [
+      {this: this.list },
+      { title: 'event 2', date: '2021-08-02' }
+    ]
+  };
+
+  constructor(private httpclient: HttpClient) {
   }
+  onDateClick(res) {
+    alert('Clicked on date : ' + res.dateStr)
+  }
+
+
+    ngOnInit():void {
+      setTimeout(() => {
+        return this.httpclient.get("http://127.0.0.1:8000/api/schedule/")
+          .subscribe(res => {
+            this.Events.push(res);
+            console.log(this.Events);
+          });
+      }, 2200);
+      setTimeout(() => {
+        this.calendarOptions = {
+          initialView: 'dayGridMonth',
+          dateClick: this.onDateClick.bind(this),
+          events: this.Events
+        };
+      }, 2500);
+
+    }
 
 }
+
+
+
+
+
+
+
+
+
+
+

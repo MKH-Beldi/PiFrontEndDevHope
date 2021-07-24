@@ -14,9 +14,19 @@ import {SpecialtyDrService} from './shared/specialty-dr.service';
 registerLocaleData(localeFr);
 import { ScheduleModule } from '@syncfusion/ej2-angular-schedule';
 
-import { DayService, WeekService, WorkWeekService, MonthService, AgendaService, MonthAgendaService} from '@syncfusion/ej2-angular-schedule';
-import { ScheduleComponent } from './schedule/schedule.component';
+import { DayService, WeekService, WorkWeekService, MonthService, AgendaService, MonthAgendaService,TimelineViewsService} from '@syncfusion/ej2-angular-schedule';
+import { ButtonModule} from "@syncfusion/ej2-angular-buttons";
 
+import { ScheduleComponent } from './schedule/schedule.component';
+import {DayPilot, DayPilotCalendarComponent} from "daypilot-pro-angular";
+import { FullCalendarModule } from '@fullcalendar/angular';
+import interactionPlugin from '@fullcalendar/interaction';
+import dayGridPlugin from '@fullcalendar/daygrid';
+
+FullCalendarModule.registerPlugins([ // register FullCalendar plugins
+  dayGridPlugin,
+  interactionPlugin
+]);
 
 
 @NgModule({
@@ -27,15 +37,22 @@ import { ScheduleComponent } from './schedule/schedule.component';
     SpecialtyDrFormComponent,
     ScheduleComponent,
 
+
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ScheduleModule
+    ScheduleModule,
+    FullCalendarModule
+
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'fr-FR'}, SpecialtyDrService, DayService, WeekService, WorkWeekService, MonthService, AgendaService],
+  exports: [ScheduleComponent],
+
+  providers: [{ provide: LOCALE_ID, useValue: 'fr-FR'}, SpecialtyDrService, DayService, WeekService, WorkWeekService, MonthService, AgendaService, TimelineViewsService],
   bootstrap: [AppComponent]
+
 })
 export class AppModule { }

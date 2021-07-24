@@ -1,1 +1,31 @@
-<p>schedule works!</p>
+<a> Hello every  body  </a>
+<h1>Calendar</h1>
+<div class="container">
+
+  <full-calendar [options]="calendarOptions"     ></full-calendar>
+</div>
+
+<table>
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Consultation</th>
+    <th scope="col">Docteur</th>
+    <th scope="col">Patient</th>
+    <th scope="col">Date d</th>
+    <th scope="col">Date Fin</th>
+
+  </tr>
+  </thead>
+  <tbody>
+  <tr start="i" *ngFor="let object of list ; let i = index">
+    <th scope="row">{{ i+1 }}</th>
+    <td>{{ object.title }}</td>
+    <td>{{ object.userDr }}</td>
+    <td>{{ object.userPatient }}</td>
+
+    <td>{{ object.startHour | date : 'medium'  : 'GMT+2' }}</td>
+    <td>{{ object.endHour | date : 'medium'  : 'GMT+2' }}</td>
+  </tr>
+  </tbody>
+</table>
