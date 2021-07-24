@@ -18,12 +18,15 @@ export class SymptomTableComponent implements OnInit {
   filtreValue: string;
   config: any;
   totalData: any;
+  nbrItem = 10;
   addMode: boolean;
   viewForm: boolean;
+
 
   constructor(private symptomService: SymptomService, private notifyService: NotificationService) {}
 
   ngOnInit(): void {
+    console.log(this.nbrItem);
     this.viewForm = false ;
     this.symptomService.getAll().subscribe(
       (data: Symptom[]) => {
@@ -34,7 +37,7 @@ export class SymptomTableComponent implements OnInit {
       }
     );
     this.config = {
-      itemsPerPage: 10,
+      itemsPerPage: this.nbrItem,
       currentPage: 1,
       totalItems: this.totalData
     };
