@@ -6,31 +6,23 @@ import {Certificat} from '../model/certificat';
 })
 export class CertificatService {
 
-  url = 'http://localhost:3000/certificats/';
+  url = 'http://localhost:8000/api/certificat/';
 
   constructor(private http: HttpClient) {
   }
-
   getAll() {
-    return this.http.get<Certificat[]>(this.url);
+    return this.http.get<Certificat>(this.url);
   }
 
-  getById(id: number) {
-    return this.http.get<Certificat>(this.url + id);
+  getBy(criteria: string, value: any) {
+    return this.http.get<Certificat[]>(this.url + 'get/' + criteria + '/' + value);
   }
 
   addCertificat(c: Certificat) {
-    return this.http.post(this.url, c);
-  }
-
-  deleteCertificat(id: number) {
-    return this.http.delete(this.url + id);
+    return this.http.post(this.url + 'create', c);
   }
 
   updateCertificat(id: number, c: Certificat) {
-    return this.http.put(this.url + id, c);
+    return this.http.put(this.url + 'update/' + id, c);
   }
-
-
-
 }

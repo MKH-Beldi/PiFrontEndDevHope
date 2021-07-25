@@ -6,31 +6,24 @@ import {FileMedicalExam} from '../model/fileMedicalExam';
 })
 export class FileMedicalExamService {
 
-  url = 'http://localhost:3000/fileMedicalExam/';
+  url = 'http://localhost:8000/api/fileMedicalExam/';
 
   constructor(private http: HttpClient) {
   }
-
-  getAll() {
-    return this.http.get<FileMedicalExam[]>(this.url);
-  }
-
-  getById(id: number) {
-    return this.http.get<FileMedicalExam>(this.url + id);
+  getBy(criteria: string, value: any) {
+    return this.http.get<FileMedicalExam[]>(this.url + 'get/' + criteria + '/' + value);
   }
 
   addFileMedicalExam(fme: FileMedicalExam) {
-    return this.http.post(this.url, fme);
-  }
-
-  deleteFileMedicalExam(id: number) {
-    return this.http.delete(this.url + id);
+    return this.http.post(this.url + 'create', fme);
   }
 
   updateFileMedicalExam(id: number, fme: FileMedicalExam) {
-    return this.http.put(this.url + id, fme);
+    return this.http.put(this.url + 'update/' + id, fme);
   }
 
-
+  deleteFileMedicalExam(id: number) {
+    return this.http.delete(this.url + 'delete/' + id, {observe: 'response'});
+  }
 
 }
