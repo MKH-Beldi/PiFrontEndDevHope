@@ -8,7 +8,9 @@
                [(ngModel)]="certificat.nbrRestDay"
                required
                #nrd="ngModel">
-        <div *ngIf="nrd.pristine" id="stHelp" class="form-text"><i class="bi bi-info-circle"></i> Nombre de jours</div>
+
+
+        <div  *ngIf="nrd.pristine" id="stHelp" class="form-text"><i class="bi bi-info-circle"></i> Nombre de jours</div>
         <div *ngIf="nrd.invalid && (nrd.dirty || nrd.touched)" class="mt-1">
           <span *ngIf="nrd.errors.required" class="form-text text-danger">
             <i class="bi bi-exclamation-circle"></i> Titre Medical Examen est requise.
