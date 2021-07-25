@@ -1,11 +1,11 @@
 import DateTimeFormat = Intl.DateTimeFormat;
-import {Consultation} from "./consultation";
-import {User} from "./user";
+import {Consultation} from './consultation';
+import {User} from './user';
 
 export class Schedule {
   id: number;
-  startHour: DateTimeFormat;
-  endHour: DateTimeFormat;
+  start: Date;
+  end: Date;
   // tslint:disable-next-line:ban-types
   isAvailable: Boolean;
   title: string;
