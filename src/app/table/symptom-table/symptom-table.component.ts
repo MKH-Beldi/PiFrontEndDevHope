@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {SymptomService} from '../../shared/symptom.service';
 import {Symptom} from '../../model/symptom';
 import {NotificationService} from '../../shared/notification.service';
+import {any} from "codelyzer/util/function";
 
 @Component({
   selector: 'app-symptom-table',
@@ -18,7 +19,6 @@ export class SymptomTableComponent implements OnInit {
   filtreValue: string;
   config: any;
   totalData: any;
-  nbrItem = 10;
   addMode: boolean;
   viewForm: boolean;
 
@@ -26,7 +26,6 @@ export class SymptomTableComponent implements OnInit {
   constructor(private symptomService: SymptomService, private notifyService: NotificationService) {}
 
   ngOnInit(): void {
-    console.log(this.nbrItem);
     this.viewForm = false ;
     this.symptomService.getAll().subscribe(
       (data: Symptom[]) => {
@@ -37,7 +36,7 @@ export class SymptomTableComponent implements OnInit {
       }
     );
     this.config = {
-      itemsPerPage: this.nbrItem,
+      itemsPerPage: 10,
       currentPage: 1,
       totalItems: this.totalData
     };

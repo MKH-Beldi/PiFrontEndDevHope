@@ -1,12 +1,13 @@
-.ng-valid[required], .ng-valid.required  {
+.ng-valid[required]:not(ckeditor), .ng-valid.required:not(ckeditor)  {
   border-left: 5px solid #42A948; /* green */
 }
 
-.ng-invalid:not(form)  {
-  border-left: 5px solid #a94442; /* red */
+.ng-touched.ng-invalid:not(form, ckeditor)  {
+  border-left: 5px solid #FF0000; /* red */
 }
 
-.ng-untouched:not(form)  {
-  border-left: 5px solid deepskyblue; /* red */
+.ck-editor__editable_inline {
+  min-height: 150px !important;
 }
+
 

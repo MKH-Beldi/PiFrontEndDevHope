@@ -22,6 +22,8 @@ import { SymptomTableComponent } from './table/symptom-table/symptom-table.compo
 import { SearchFilterPipe } from './pipe/search-filter.pipe';
 import { SortDirective } from './directive/sort.directive';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ConsultationFormComponent } from './component/form/consultation-form/consultation-form.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 registerLocaleData(localeFr);
 
 
@@ -36,7 +38,8 @@ registerLocaleData(localeFr);
     SymptomListComponent,
     SymptomTableComponent,
     SearchFilterPipe,
-    SortDirective
+    SortDirective,
+    ConsultationFormComponent
 
   ],
   imports: [
@@ -50,6 +53,7 @@ registerLocaleData(localeFr);
     ToastrModule.forRoot(),
     NgSelectModule,
     NgxPaginationModule,
+    CKEditorModule
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'fr-FR'}, SpecialtyDrService],
   bootstrap: [AppComponent]
