@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {SymptomService} from '../../shared/symptom.service';
-import {Symptom} from '../../model/symptom';
-import {NotificationService} from '../../shared/notification.service';
-import {any} from "codelyzer/util/function";
+import {SymptomService} from '../../../shared/symptom.service';
+import {NotificationService} from '../../../shared/notification.service';
+import {Symptom} from '../../../model/symptom';
 
 @Component({
   selector: 'app-symptom-table',

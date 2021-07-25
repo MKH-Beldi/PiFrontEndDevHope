@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {SymptomService} from '../shared/symptom.service';
-import {Symptom} from '../model/symptom';
+import {Symptom} from '../../model/symptom';
+import {SymptomService} from '../../shared/symptom.service';
+
 
 @Component({
   selector: 'app-symptom-list',

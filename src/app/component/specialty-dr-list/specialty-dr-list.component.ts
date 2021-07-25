@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {SpecialtyDr} from '../model/specialtyDr';
-import {SpecialtyDrService} from '../shared/specialty-dr.service';
+import {SpecialtyDr} from '../../model/specialtyDr';
+import {SpecialtyDrService} from '../../shared/specialty-dr.service';
+
 
 @Component({
   selector: 'app-specialty-dr-list',

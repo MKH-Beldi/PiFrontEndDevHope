@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Symptom} from '../../model/symptom';
-import {SymptomService} from '../../shared/symptom.service';
+import {Symptom} from '../../../model/symptom';
+import {SymptomService} from '../../../shared/symptom.service';
+
 
 @Component({
   selector: 'app-symptom-form',

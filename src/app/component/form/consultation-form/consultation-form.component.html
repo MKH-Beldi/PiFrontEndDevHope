@@ -1,6 +1,6 @@
 <div class=container>
-  <h2 *ngIf="addModeChild"><i class="bi bi-plus-circle"></i> Ajouter consultation</h2>
-  <h2 *ngIf="!addModeChild"><i class="bi bi-pencil-square"></i> Modifier consultation</h2>
+  <h2 *ngIf="addMode"><i class="bi bi-plus-circle"></i> Ajouter consultation</h2>
+  <h2 *ngIf="!addMode"><i class="bi bi-pencil-square"></i> Modifier consultation</h2>
   <div class="container">
     <form #f="ngForm" class="row g-3">
       <div class="col-md-4">
@@ -12,8 +12,8 @@
         <input type="text" class="form-control" id="lastNamePatient" name="lastNamePatient" disabled [(ngModel)]="patient.lastName">
       </div>
       <div class="col-md-4">
-        <label for="DateOfBirthPatient" class="form-label">Date de naissance</label>
-        <input type="text" class="form-control" id="DateOfBirthPatient" name="DateOfBirthPatient" disabled [(ngModel)]="patient.dateOfBirth">
+        <label for="DateOfBirthPatient" class="form-label">Date de naissance </label>
+        <input type="text" class="form-control" id="DateOfBirthPatient" name="DateOfBirthPatient" disabled [ngModel]="patient.dateOfBirth | date : 'shortDate'  : 'GMT+2'">
       </div>
       <div class="col-md-3">
         <label for="poidsPatient" class="form-label">Poids (Kg)</label>
@@ -50,8 +50,8 @@
         </ckeditor>
       </div>
       <div class="col-12 mb-3">
-        <button *ngIf="addModeChild" type="submit" class="btn btn-success" (click)="saveConsultation()" [disabled]="f.invalid "><i class="bi bi-save2"></i> Enregistrer</button>
-        <button *ngIf="!addModeChild" type="submit" class="btn btn-primary" (click)="saveConsultation()" [disabled]="f.invalid "><i class="bi bi-pencil-square"></i> Modifier</button>
+        <button *ngIf="addMode" type="submit" class="btn btn-success" (click)="saveConsultation()" [disabled]="f.invalid "><i class="bi bi-save2"></i> Enregistrer</button>
+        <button *ngIf="!addMode" type="submit" class="btn btn-primary" (click)="saveConsultation()" [disabled]="f.invalid "><i class="bi bi-pencil-square"></i> Modifier</button>
       </div>
     </form>
   </div>
