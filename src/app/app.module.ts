@@ -13,7 +13,6 @@ import { FileMedicalExamFormComponent } from './component/form/file-medical-exam
 import { CertificatViewComponent } from './component/view/certificat-view/certificat-view.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MedicalExamListComponent } from './component/medical-exam-list/medical-exam-list.component';
-
 registerLocaleData(localeFr);
 
 
