@@ -4,10 +4,10 @@ import {User} from "./user";
 
 export class Schedule {
   id: number;
-  startHour: DateTimeFormat;
-  endHour: DateTimeFormat;
+  start: Date;
+  end: Date;
   // tslint:disable-next-line:ban-types
-  isAvailable: Boolean;
+  isAvailable: boolean;
   title: string;
   color: string;
   userDr: User;

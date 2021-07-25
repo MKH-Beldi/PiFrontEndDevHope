@@ -20,12 +20,14 @@ import { ButtonModule} from "@syncfusion/ej2-angular-buttons";
 import { ScheduleComponent } from './schedule/schedule.component';
 import {DayPilot, DayPilotCalendarComponent} from "daypilot-pro-angular";
 import { FullCalendarModule } from '@fullcalendar/angular';
+import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
-  interactionPlugin
+  interactionPlugin,
+  timeGridPlugin
 ]);
 
 
@@ -47,7 +49,6 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     FormsModule,
     ScheduleModule,
     FullCalendarModule
-
   ],
   exports: [ScheduleComponent],
 
