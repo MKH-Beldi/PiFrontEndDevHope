@@ -31,9 +31,20 @@ import {MedicalExamFormComponent} from './component/form/medical-exam-form/medic
 import {FileMedicalExamFormComponent} from './component/form/file-medical-exam-form/file-medical-exam-form.component';
 import {CertificatViewComponent} from './component/certificat-view/certificat-view.component';
 import {MedicalExamListComponent} from './component/medical-exam-list/medical-exam-list.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import {ScheduleComponent} from './component/schedule/schedule.component';
+import {ReactiveFormsModule } from '@angular/forms';
+
 registerLocaleData(localeFr);
 
-
+FullCalendarModule.registerPlugins([ // register FullCalendar plugins
+  dayGridPlugin,
+  interactionPlugin,
+  timeGridPlugin
+]);
 
 @NgModule({
   declarations: [
@@ -51,7 +62,9 @@ registerLocaleData(localeFr);
     MedicalExamFormComponent,
     FileMedicalExamFormComponent,
     CertificatViewComponent,
-    MedicalExamListComponent
+    MedicalExamListComponent,
+    ScheduleComponent,
+
 
   ],
   imports: [
@@ -65,7 +78,10 @@ registerLocaleData(localeFr);
     ToastrModule.forRoot(),
     NgSelectModule,
     NgxPaginationModule,
-    CKEditorModule
+    CKEditorModule,
+    ReactiveFormsModule,
+    FullCalendarModule
+
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'fr-FR'}, SpecialtyDrService, SymptomService, ConsultationService],
   bootstrap: [AppComponent]

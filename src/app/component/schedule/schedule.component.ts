@@ -2,8 +2,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import { CalendarOptions } from '@fullcalendar/angular';
 import {FormGroup, Validators} from '@angular/forms';
-import {ScheduleService} from "../../shared/schedule.service";
-import {Schedule} from "../../model/schedule";
+import {ScheduleService} from '../../shared/schedule.service';
+import {Schedule} from '../../model/schedule';
 declare let $: any;
 
 @Component({
