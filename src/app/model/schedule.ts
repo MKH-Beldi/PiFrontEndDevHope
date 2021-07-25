@@ -7,7 +7,7 @@ export class Schedule {
   start: Date;
   end: Date;
   // tslint:disable-next-line:ban-types
-  isAvailable: Boolean;
+  isAvailable: boolean;
   title: string;
   color: string;
   userDr: User;
