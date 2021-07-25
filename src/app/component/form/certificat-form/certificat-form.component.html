@@ -1,0 +1,42 @@
+<div class=container>
+  <h2><i class="bi bi-plus-circle"></i> Ajouter un certificat</h2>
+  <form #f="ngForm" class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <label for="nbrRestDay" class="form-label">Nombre de Jours Certificat<span style="color: red"> *</span></label>
+        <input type="number" min="0" class="form-control" id="nbrRestDay" name="nbrRestDay"
+               [(ngModel)]="certificat.nbrRestDay"
+               required
+               #nrd="ngModel">
+        <div *ngIf="nrd.pristine" id="stHelp" class="form-text"><i class="bi bi-info-circle"></i> Nombre de jours</div>
+        <div *ngIf="nrd.invalid && (nrd.dirty || nrd.touched)" class="mt-1">
+          <span *ngIf="nrd.errors.required" class="form-text text-danger">
+            <i class="bi bi-exclamation-circle"></i> Titre Medical Examen est requise.
+          </span>
+          <span *ngIf="nrd.errors.pattern || nrd.errors.nrd" class=" form-text text-danger">
+             <i class="bi bi-exclamation-circle"></i> Veuillez description une valeur valide.
+          </span>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label for="startDate" class="form-label">Date Début Certificat<span style="color: red"> *</span></label>
+        <input type="Date" class="form-control" id="startDate" placeholder="1234 Main St" name="startDate"
+               [(ngModel)]="certificat.startDate"
+               required
+               #st="ngModel">
+        <div *ngIf="st.pristine" id="symtomDescriptionHelp" class="form-text"><i class="bi bi-info-circle"></i> Description doit contenir au moins 6 lettres.</div>
+        <div *ngIf="st.invalid && (st.dirty || st.touched)" class="mt-1">
+          <span *ngIf="st.errors.required" class="form-text text-danger">
+            <i class="bi bi-exclamation-circle"></i> Description medical examen est requise.
+          </span>
+          <span *ngIf="st.errors.pattern" class="form-text text-danger">
+             <i class="bi bi-exclamation-circle"></i> Veuillez description une valeur valide.
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 mb-3">
+      <button type="submit" class="btn btn-success" (click)="addCertificat()" [disabled]="f.invalid "><i class="bi bi-plus-circle"></i> Ajouter</button>
+    </div>
+  </form>
+</div>

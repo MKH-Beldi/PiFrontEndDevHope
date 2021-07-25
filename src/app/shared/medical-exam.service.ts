@@ -6,31 +6,27 @@ import {MedicalExam} from '../model/medicalExam';
 })
 export class MedicalExamService {
 
-  url = 'http://localhost:3000/medicalExam/';
+  url = 'http://localhost:8000/api/medicalExam/';
 
   constructor(private http: HttpClient) {
   }
-
   getAll() {
     return this.http.get<MedicalExam[]>(this.url);
   }
-
-  getById(id: number) {
-    return this.http.get<MedicalExam>(this.url + id);
+  getBy(criteria: string, value: any) {
+    return this.http.get<MedicalExam[]>(this.url + 'get/' + criteria + '/' + value);
   }
 
   addMedicalExam(me: MedicalExam) {
-    return this.http.post(this.url, me);
-  }
-
-  deleteMedicalExam(id: number) {
-    return this.http.delete(this.url + id);
+    console.log(me);
+    return this.http.post(this.url + 'create', me);
   }
 
   updateMedicalExam(id: number, me: MedicalExam) {
-    return this.http.put(this.url + id, me);
+    return this.http.put(this.url + 'update/' + id, me);
   }
 
-
-
+  deleteMedicalExam(id: number) {
+    return this.http.delete(this.url + 'delete/' + id, {observe: 'response'});
+  }
 }

@@ -1,5 +1,6 @@
 import DateTimeFormat = Intl.DateTimeFormat;
 import {Consultation} from "./consultation";
+import {User} from "./user";
 
 export class MedicalExam {
   id: number;
@@ -10,5 +11,5 @@ export class MedicalExam {
   createdAt: DateTimeFormat;
   updatedA: DateTimeFormat;
   consultation: Consultation;
-  userLab: number;
+  userLab: User;
   }

@@ -1,35 +1,40 @@
 import { BrowserModule } from '@angular/platform-browser';
 import {LOCALE_ID, NgModule} from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { UserListComponent } from './user-list/user-list.component';
-import { SpecialtyDrListComponent } from './specialty-dr-list/specialty-dr-list.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import localeFr from '@angular/common/locales/fr';
-import {registerLocaleData} from '@angular/common';
-import { SpecialtyDrFormComponent } from './form/specialty-dr-form/specialty-dr-form.component';
-import {SpecialtyDrService} from './shared/specialty-dr.service';
+import {registerLocaleData , DatePipe } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CertificatFormComponent } from './component/form/certificat-form/certificat-form.component';
+import { MedicalExamFormComponent } from './component/form/medical-exam-form/medical-exam-form.component';
+import { FileMedicalExamFormComponent } from './component/form/file-medical-exam-form/file-medical-exam-form.component';
+import { CertificatViewComponent } from './component/view/certificat-view/certificat-view.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { MedicalExamListComponent } from './component/medical-exam-list/medical-exam-list.component';
+
 registerLocaleData(localeFr);
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    UserListComponent,
-    SpecialtyDrListComponent,
-    SpecialtyDrFormComponent
+    CertificatFormComponent,
+    MedicalExamFormComponent,
+    FileMedicalExamFormComponent,
+    CertificatViewComponent,
+    MedicalExamListComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgxPaginationModule
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'fr-FR'}, SpecialtyDrService],
+  providers: [DatePipe, { provide: LOCALE_ID, useValue: 'fr-FR'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
