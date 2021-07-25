@@ -26,6 +26,11 @@ import { SymptomListComponent } from './component/symptom-list/symptom-list.comp
 import { SymptomFormComponent } from './component/form/symptom-form/symptom-form.component';
 import {SymptomService} from './shared/symptom.service';
 import {ConsultationService} from './shared/consultation.service';
+import {CertificatFormComponent} from './component/form/certificat-form/certificat-form.component';
+import {MedicalExamFormComponent} from './component/form/medical-exam-form/medical-exam-form.component';
+import {FileMedicalExamFormComponent} from './component/form/file-medical-exam-form/file-medical-exam-form.component';
+import {CertificatViewComponent} from './component/certificat-view/certificat-view.component';
+import {MedicalExamListComponent} from './component/medical-exam-list/medical-exam-list.component';
 registerLocaleData(localeFr);
 
 
@@ -41,7 +46,12 @@ registerLocaleData(localeFr);
     HeaderComponent,
     SymptomTableComponent,
     SymptomListComponent,
-    SymptomFormComponent
+    SymptomFormComponent,
+    CertificatFormComponent,
+    MedicalExamFormComponent,
+    FileMedicalExamFormComponent,
+    CertificatViewComponent,
+    MedicalExamListComponent
 
   ],
   imports: [
