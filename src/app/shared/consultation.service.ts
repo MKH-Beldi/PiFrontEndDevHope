@@ -8,6 +8,7 @@ import {Consultation} from '../model/consultation';
 export class ConsultationService {
 
   url = 'http://127.0.0.1:8000/api/consultation/';
+  statusConsultation: string[] = ['en attente de consultation', 'en cours de traitement', 'en attente d\'examen ', 'en attente de contrôle', 'patient s\'est rétabli'];
 
   constructor(private http: HttpClient) {
   }
@@ -20,15 +21,18 @@ export class ConsultationService {
     return this.http.get<Consultation[]>(this.url + 'get/' + criteria + '/' + value);
   }
 
-  addSymptom(c: Consultation) {
+  addConsultation(c: Consultation) {
     return this.http.post(this.url + 'create', c);
   }
 
-  updateSymptom(id: number, c: Consultation) {
-    return this.http.put(this.url + 'update/' + id, c, {observe: 'response'});
+  updateConsultation(id: number, c: Consultation) {
+    return this.http.put(this.url + 'update/' + id, c);
   }
 
-  deleteSymptom(id: number) {
+  deleteConsultation(id: number) {
     return this.http.delete(this.url + 'delete/' + id, {observe: 'response'});
+  }
+  getStatus(){
+    return this.statusConsultation;
   }
 }

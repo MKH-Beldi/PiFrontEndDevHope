@@ -37,6 +37,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import {ScheduleComponent} from './component/schedule/schedule.component';
 import {ReactiveFormsModule } from '@angular/forms';
+import { FooterComponent } from './component/footer/footer.component';
 
 registerLocaleData(localeFr);
 
@@ -64,6 +65,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     CertificatViewComponent,
     MedicalExamListComponent,
     ScheduleComponent,
+    FooterComponent,
 
 
   ],
@@ -83,7 +85,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     FullCalendarModule
 
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'fr-FR'}, SpecialtyDrService, SymptomService, ConsultationService],
+  providers: [{ provide: LOCALE_ID, useValue: 'fr-FR'}, SpecialtyDrService, ConsultationService, SymptomService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

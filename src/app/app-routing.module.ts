@@ -9,7 +9,6 @@ import {SymptomFormComponent} from './component/form/symptom-form/symptom-form.c
 
 const routes: Routes = [
   { path: 'consultation/table', component: ConsultationTableComponent },
-  { path: 'consultation/add', component: ConsultationFormComponent },
   { path: 'consultation/edit/:id', component: ConsultationFormComponent },
   { path: 'symptom/table', component: SymptomTableComponent },
   { path: 'symptom/list', component: SymptomListComponent },

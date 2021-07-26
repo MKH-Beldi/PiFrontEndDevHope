@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {User} from '../model/user';
+import {Symptom} from "../model/symptom";
 @Injectable({
   providedIn: 'root'
 })
@@ -15,8 +16,8 @@ export class UserService {
     return this.http.get<User[]>(this.url);
   }
 
-  getById(id: number) {
-    return this.http.get<User>(this.url + id);
+  getBy(criteria: string, value: any) {
+    return this.http.get<User[]>(this.url + 'get/' + criteria + '/' + value);
   }
 
   addUser(u: User) {

@@ -1,19 +1,45 @@
 <div class=container>
-  <h2 *ngIf="addMode"><i class="bi bi-plus-circle"></i> Ajouter consultation</h2>
-  <h2 *ngIf="!addMode"><i class="bi bi-pencil-square"></i> Modifier consultation</h2>
+  <h2><i class="bi bi-pencil-square"></i> Consultation</h2>
   <div class="container">
     <form #f="ngForm" class="row g-3">
       <div class="col-md-4">
         <label for="firstNamePatient" class="form-label">Nom de patient</label>
-        <input type="text" class="form-control" id="firstNamePatient" name="firstNamePatient" disabled [(ngModel)]="patient.firstName">
+        <input type="text" class="form-control" id="firstNamePatient" name="firstNamePatient" disabled [ngModel]="userPatient.firstName">
       </div>
       <div class="col-md-4">
         <label for="lastNamePatient" class="form-label">Prénom de patient</label>
-        <input type="text" class="form-control" id="lastNamePatient" name="lastNamePatient" disabled [(ngModel)]="patient.lastName">
+        <input type="text" class="form-control" id="lastNamePatient" name="lastNamePatient" disabled [ngModel]="userPatient.lastName">
       </div>
       <div class="col-md-4">
         <label for="DateOfBirthPatient" class="form-label">Date de naissance </label>
-        <input type="text" class="form-control" id="DateOfBirthPatient" name="DateOfBirthPatient" disabled [ngModel]="patient.dateOfBirth | date : 'shortDate'  : 'GMT+2'">
+        <input type="text" class="form-control" id="DateOfBirthPatient" name="DateOfBirthPatient" disabled [ngModel]="userPatient.dateOfBirth | date : 'shortDate'  : 'GMT+2'">
+      </div>
+      <div class="rowmt-3">
+        <div class="col-md-4">
+          <label for="symtomZone" class="form-label">Statut <span style="color: red"> *</span></label>
+          <select class="form-select" aria-label="symtomZone" id="symtomZone" name="symtomZone"
+                  required
+                  [(ngModel)]="consultation.status"
+                  #status="ngModel">
+            <option *ngFor="let object of statusConsultation" [ngValue]="object">
+              {{ object }}
+            </option>
+          </select>
+          <div *ngIf="status.invalid && (status.dirty || status.touched)" class="">
+            <span *ngIf="status.errors.required" class="form-text text-danger">
+              <i class="bi bi-exclamation-circle"></i> Statut est requis.
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <ul class="list-group" *ngIf="!viewForm">
+          <h2><i class="bi bi-list"></i> Liste des symptômes <a role="button" class="text-info p-2" title="Edit" data-toggle="tooltip"  (click)="viewFormSymptom()"><i class="bi bi-pencil-square"></i></a></h2>
+          <li *ngFor="let object of symptoms" class="list-group-item">{{object.description}}</li>
+        </ul>
+        <app-symptom-list *ngIf="viewForm"
+        (sendSymptoms)="addSymptom($event)">
+        </app-symptom-list>
       </div>
       <div class="col-md-3">
         <label for="poidsPatient" class="form-label">Poids (Kg)</label>
@@ -50,8 +76,7 @@
         </ckeditor>
       </div>
       <div class="col-12 mb-3">
-        <button *ngIf="addMode" type="submit" class="btn btn-success" (click)="saveConsultation()" [disabled]="f.invalid "><i class="bi bi-save2"></i> Enregistrer</button>
-        <button *ngIf="!addMode" type="submit" class="btn btn-primary" (click)="saveConsultation()" [disabled]="f.invalid "><i class="bi bi-pencil-square"></i> Modifier</button>
+        <button type="submit" class="btn btn-primary" (click)="saveConsultation()" [disabled]="f.invalid "><i class="bi bi-save2"></i> Enregistrer</button>
       </div>
     </form>
   </div>
