@@ -9,16 +9,12 @@ import localeFr from '@angular/common/locales/fr';
 import { registerLocaleData } from '@angular/common';
 import { SpecialtyDrService } from './shared/specialty-dr.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SymptomFormComponent } from './form/symptom-form/symptom-form.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
-import { ProfilComponent } from './profil/profil.component';
-import { PublicationComponent } from './publication/publication.component';
-import { CommentComponent } from './comment/comment.component';
+import { ProfilComponent } from './component/profil/profil.component';
+import { PublicationComponent } from './component/publication/publication.component';
+import { CommentComponent } from './component/comment/comment.component';
 registerLocaleData(localeFr);
-=======
-import { MatFormFieldModule} from '@angular/material/form-field';
-import { MatSelectModule } from '@angular/material/select';
 import { ToastrModule } from 'ngx-toastr';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { SearchFilterPipe } from './pipe/search-filter.pipe';
@@ -45,7 +41,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import {ScheduleComponent} from './component/schedule/schedule.component';
 import {ReactiveFormsModule } from '@angular/forms';
->>>>>>> main
+
 
 registerLocaleData(localeFr);
 
@@ -58,15 +54,10 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
 @NgModule({
   declarations: [
     AppComponent,
-<<<<<<< HEAD
-    UserListComponent,
-    SpecialtyDrListComponent,
-    SpecialtyDrFormComponent,
     SymptomFormComponent,
     ProfilComponent,
     PublicationComponent,
-    CommentComponent
-=======
+    CommentComponent,
     SearchFilterPipe,
     SortDirective,
     ConsultationFormComponent,
@@ -81,11 +72,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     FileMedicalExamFormComponent,
     CertificatViewComponent,
     MedicalExamListComponent,
-    ScheduleComponent,
-
-
->>>>>>> main
-  ],
+    ScheduleComponent, ] ,
   imports: [
     BrowserModule,
     AppRoutingModule,
