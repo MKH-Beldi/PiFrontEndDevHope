@@ -37,6 +37,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import {ScheduleComponent} from './component/schedule/schedule.component';
 import {ReactiveFormsModule } from '@angular/forms';
+import {ScheduleFormComponent} from "./component/form/schedule-form/schedule-form.component";
 
 registerLocaleData(localeFr);
 
@@ -64,6 +65,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     CertificatViewComponent,
     MedicalExamListComponent,
     ScheduleComponent,
+    ScheduleFormComponent,
 
 
   ],

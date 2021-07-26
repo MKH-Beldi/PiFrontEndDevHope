@@ -1,0 +1,62 @@
+
+<!--Modal PopUp with Add Event Form-->
+
+<div class="modal-dialog">
+  <div class="modal-content">
+
+    <div class="modal-header">
+      <h4 class="modal-title align-center"></h4>
+      <button type="button" class="close"    data-dismiss="modal">&times;</button>
+    </div>
+
+    <div class="modal-body">
+      <form  #f="ngForm" >
+        <div class="row">
+          <div class="col-sm-12">
+            <label>Event Title</label>
+            <input placeholder=" " type="text" name="title" id="title"  [(ngModel)]="schedule.title" required ngModel #l="ngModel" />
+            <div class="alert alert-danger" *ngIf="l.invalid && l.touched" >
+
+              <div >Title is required</div>
+
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <label>Date de rdv:</label>
+            <input placeholder=" " type="Date" class="title inp "  name="date" id="date"     [(ngModel)]="schedule.date" />
+          </div>
+
+          <div class="col-sm-12">
+            <label>start hour Date</label>
+            <input placeholder="ajuter l'heure " type="text"  name="start" id="start" class="title inp " [(ngModel)]="starChild"  />
+            <div class="invalid-feedback">
+              <div >start date is required</div>
+
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <label>end hour date </label>
+            <input placeholder=" " type="text" class="title inp "[(ngModel)]="endDate" />
+          </div>
+
+
+
+
+
+        </div>
+
+        <button type="submit" class="btn btn-primary"  (click)="sendAddNotif() ">Submit</button>
+      </form>
+
+
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+

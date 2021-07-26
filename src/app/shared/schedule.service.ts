@@ -19,6 +19,6 @@ export class ScheduleService {
     return this.http.put(this.url + 'update/' + id,s);
   }
   deleteSchedule(id: number) {
-    return this.http.delete(this.url + 'delete/' + id);
+    return this.http.delete(this.url + 'delete/' + id, {observe: 'response'});
   }
 }
