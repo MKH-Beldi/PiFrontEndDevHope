@@ -27,7 +27,17 @@
               "src/custom-theme.scss",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/ngx-toastr/toastr.css",
-              "src/styles.css"
+              "src/styles.css",
+              "src/css/animate.css",
+              "src/css/flaticon.css",
+              "src/css/font-awesome.min.css",
+              "src/css/gijgo.css",
+              "src/css/magnific-popup.css",
+              "src/css/nice-select.css",
+              "src/css/owl.carousel.min.css",
+              "src/css/slicknav.css",
+              "src/css/style.css",
+              "src/css/themify-icons.css"
             ],
             "scripts": [
               "./node_modules/jquery/dist/jquery.js",

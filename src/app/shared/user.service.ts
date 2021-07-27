@@ -6,8 +6,8 @@ import {User} from '../model/user';
 })
 export class UserService {
 
-  url = 'http://localhost:3000/users/';
-
+  url = 'http://127.0.0.1:8000/api/user/';
+//http://127.0.0.1:8000/api/user/get/id/1
   constructor(private http: HttpClient) {
   }
 
@@ -29,5 +29,8 @@ export class UserService {
 
   updateUser(id: number, u: User) {
     return this.http.put(this.url + id, u);
+  }
+  getUserByCriteria(criteria, value){
+    return this.http.get<User>(this.url +'get/'+criteria+'/'+value);
   }
 }
