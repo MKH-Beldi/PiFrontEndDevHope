@@ -114,19 +114,7 @@ export class ScheduleComponent {
     alert('Clicked on date : ' + res.dateStr);
   }
 
-  deleteSchedule(schedule: Schedule){
-    this.scheduleService.deleteSchedule(schedule.id).subscribe(
-      (status) => {
-        if (status.status === 201){
-          const indexDelete = this.schedules.indexOf(schedule);
-          this.schedules.splice(indexDelete, 1);
-          this.notifyService.showError('rendez-vous  supprimé avec succès !', 'Delete');
-        }
 
-      }
-    );
-
-  }
 
   updateSchedule( id: number, schedule: Schedule  ) {
 
