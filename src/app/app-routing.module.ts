@@ -12,6 +12,12 @@ import { ProfilComponent } from './component/profil/profil.component';
 import { AddPublicationComponent } from './component/add-publication/add-publication.component';
 import { ListPublicationComponent } from './component/list-publication/list-publication.component';
 import { CommentComponent } from './component/comment/comment.component';
+import {CertificatViewComponent} from './component/certificat-view/certificat-view.component';
+import {MedicalExamListComponent} from './component/medical-exam-list/medical-exam-list.component';
+import {FileMedicalExamListComponent} from './component/file-medical-exam-list/file-medical-exam-list.component';
+import {CertificatListComponent} from './component/certificat-list/certificat-list.component';
+import {CertificatFormComponent} from './component/form/certificat-form/certificat-form.component';
+import {MedicalExamViewComponent} from './component/medical-exam-view/medical-exam-view.component';
 
 
 
@@ -30,6 +36,10 @@ const routes: Routes = [
   { path: 'publication/add/:userId', component: AddPublicationComponent },
   { path: 'publication/list/:userId', component: ListPublicationComponent },
   { path: 'comment/list/:pubId/:userId', component: CommentComponent },
+  { path: 'certificat/table', component: CertificatListComponent },
+  { path: 'medicalExam/table', component: MedicalExamListComponent },
+  { path: 'fileMedicalExam/table', component: FileMedicalExamListComponent },
+  { path: 'medicalExamView/:id', component: MedicalExamViewComponent , pathMatch: 'full' }
 
 ];
 

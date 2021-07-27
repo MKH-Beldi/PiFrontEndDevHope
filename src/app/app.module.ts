@@ -48,6 +48,11 @@ import {AddPublicationComponent} from './component/add-publication/add-publicati
 import {ListPublicationComponent} from './component/list-publication/list-publication.component';
 import {PublicationFormComponent} from './component/form/publication-form/publication-form.component';
 
+import {FileMedicalExamListComponent} from './component/file-medical-exam-list/file-medical-exam-list.component';
+import {CertificatListComponent} from './component/certificat-list/certificat-list.component';
+import {MedicalExamViewComponent} from './component/medical-exam-view/medical-exam-view.component';
+
+
 registerLocaleData(localeFr);
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
@@ -87,6 +92,10 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     AddPublicationComponent,
     ListPublicationComponent,
     PublicationFormComponent,
+    FileMedicalExamListComponent,
+    CertificatListComponent,
+    MedicalExamViewComponent,
+
 
   ],
   imports: [
