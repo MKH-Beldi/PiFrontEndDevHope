@@ -6,24 +6,12 @@
     </div>
   </div>
 </div>
-
-<div class="modal" id="myModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-      <div class="modal-header">
-        <h4 class="modal-title align-center"></h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-
-      <div class="modal-body text-center">
-      </div>
-    </div>
-  </div>
+<div class="modal" id="myModal1">
+  <app-schedule-form (addEvent)="addSchedule($event)"
+  [starChild]="star"> </app-schedule-form>
 </div>
-
-
-
-
+  <div class="modal" id="myModal2">
+<app-schedule-table   [routerLink]="['/schedule/add']" (editEvent) ="updateSchedule(idEvent , $event)" [idChild]="idEvent" [titlechild]="titleEvent"  [startchild]="startEvent"  [endchild]="endEvent" > </app-schedule-table>
+  </div>
 
 

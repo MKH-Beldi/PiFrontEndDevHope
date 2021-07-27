@@ -1,28 +1,35 @@
 
 import {Component, OnInit, ViewChild} from '@angular/core';
 import { CalendarOptions } from '@fullcalendar/angular';
-import {FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ScheduleService} from '../../shared/schedule.service';
 import {Schedule} from '../../model/schedule';
+import {NotificationService} from '../../shared/notification.service';
+import DateTimeFormat = Intl.DateTimeFormat;
+
 declare let $: any;
+declare let s: any;
+
 
 @Component({
   selector: 'app-schedule',
   styleUrls: ['./schedule.component.css'],
   providers: [],
-templateUrl: './schedule.component.html'
+  templateUrl: './schedule.component.html'
 
 })
 
 export class ScheduleComponent {
 
   schedules: Schedule[];
+  star: DateTimeFormat;
+  idEvent: number;
+  titleEvent: string;
+  startEvent: Date;
+  endEvent: Date;
   s: Schedule;
   list: [];
-  /* Add Event Form */
-  eventdate: string;
-  successdata: any;
-  addEventForm: FormGroup;
+
   submitted = false;
 
   calendarOptions: CalendarOptions = {
@@ -32,17 +39,22 @@ export class ScheduleComponent {
       right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
     },
     initialView: 'timeGridWeek',
+    eventTimeFormat: { hour12: false, hour: '2-digit', minute: '2-digit' },
+
     weekends: true,
     editable: true,
     selectable: true,
     selectMirror: true,
-    dayMaxEvents: true,
+
+    // dayMaxEvents: true,
+    eventClick: this.showSchedule.bind(this),
     dateClick: this.handleDateClick.bind(this), // bind is important!
-    events: []
+    events: [ ]
   };
 
-  constructor(private scheduleService: ScheduleService) {
-  }
+
+
+  constructor(private scheduleService: ScheduleService ,private notifyService: NotificationService) {}
 
   ngOnInit(): void {
 
@@ -54,65 +66,67 @@ export class ScheduleComponent {
     );
   }
 
+  addSchedule(schedule: Schedule){
+    console.log(schedule);
+    this.scheduleService.addSchedule(schedule).subscribe(
+      (data: any[]) => {
+        if (data[0]){
+          schedule.id = data[0];
+          this.schedules.push(schedule);
+          this.notifyService.showSuccess('schedule ajouté avec succès !', 'Ajout');
+        }
+      }
+    );
+  }
 
   handleDateClick(arg) {
-    console.log(typeof $);
-    $('#myModal').modal("show");
-    $(".modal-title").text("");
-    $(".modal-title").text("Add Event at : "+arg.dateStr);
+
+    $("#myModal1").modal("show");
+    this.star = arg.dateStr;
+    console.log(this.star);
+    console.log((arg.id));
+
 
   }
+  showSchedule(info) {
+
+
+
+    $("#myModal2").modal("show");
+    $("#myModal1").modal("hide");
+
+
+
+    this.idEvent= info.event.id;
+    this.titleEvent = info.event.title;
+    this.startEvent = info.event.start;
+    this.endEvent = info.event.end;
+
+    //  alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
+    //alert('View: ' + info.view.type);
+    console.log(info);
+
+  }
+
+
 
   onDateClick(res) {
     alert('Clicked on date : ' + res.dateStr);
   }
 
-  //handleDateClick(info) {
-  //alert('Clicked on: ' + info.dateStr);
-  //alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
-  ///alert('Current view: ' + info.view.type);
-  //alert('date click! ' + info.dateStr);
-  // info.dayEl.style.backgroundColor = 'red';
-  //  const title = prompt('Please enter a new title for your event');
-  //  const calendarApi = info.view.calendar;
-
-  //calendarApi.unselect(); // clear date selection
-  // }
 
 
-  //Add user form actions
-  get f() {
-    return this.addEventForm.controls;
+  updateSchedule( id: number, schedule: Schedule  ) {
+
+    console.log(schedule);
+    this.scheduleService.updateSchedule(2, schedule).subscribe(
+      (status) => {
+        if (status.status === 201 ){
+          this.notifyService.showInfo('schedule modifié avec succès !', 'Modification');
+        }
+      }
+    );
   }
-
-  onSubmit() {
-
-    this.submitted = true;
-    // stop here if form is invalid and reset the validations
-    this.addEventForm.get('title').setValidators([Validators.required]);
-    this.addEventForm.get('title').updateValueAndValidity();
-    console.warn(this.addEventForm.value);
-
-    if (this.addEventForm.invalid) {
-      return;
-    }
-    //Form Submittion and send data via API
-    if (this.submitted) {
-      // Initialize Params Object
-      var myFormData = new FormData();
-      // Begin assigning parameters
-      myFormData.append('title', this.addEventForm.value.title);
-      myFormData.append('start', this.eventdate);
-      myFormData.append('end', this.eventdate);
-      return this.scheduleService.addSchedule(this.s).subscribe();
-    }
-  }
-
-
-
-
-
-
 
 }
 

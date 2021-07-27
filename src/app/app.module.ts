@@ -37,9 +37,16 @@ import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import {ScheduleComponent} from './component/schedule/schedule.component';
 import {ReactiveFormsModule } from '@angular/forms';
-import { FileMedicalExamListComponent } from './file-medical-exam-list/file-medical-exam-list.component';
-import { CertificatListComponent } from './certificat-list/certificat-list.component';
-import { MedicalExamViewComponent } from './component/medical-exam-view/medical-exam-view.component';
+import {ScheduleFormComponent} from './component/form/schedule-form/schedule-form.component';
+import {ScheduleTableComponent} from './component/table/schedule/schedule-table/schedule-table.component';
+import {ProfilComponent} from './component/profil/profil.component';
+import {CommentComponent} from './component/comment/comment.component';
+import {PublicationComponent} from './component/publication/publication.component';
+import {FooterComponent} from './component/footer/footer.component';
+import {HomeComponent} from './component/home/home.component';
+import {AddPublicationComponent} from './component/add-publication/add-publication.component';
+import {ListPublicationComponent} from './component/list-publication/list-publication.component';
+import {PublicationFormComponent} from './component/form/publication-form/publication-form.component';
 
 registerLocaleData(localeFr);
 
@@ -67,10 +74,19 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     CertificatViewComponent,
     MedicalExamListComponent,
     ScheduleComponent,
-    FileMedicalExamListComponent,
-    CertificatListComponent,
-    MedicalExamViewComponent,
-
+    ScheduleFormComponent,
+    ScheduleTableComponent,
+    ScheduleFormComponent,
+    ScheduleTableComponent,
+    ProfilComponent,
+    CommentComponent,
+    PublicationComponent,
+    HeaderComponent,
+    FooterComponent,
+    HomeComponent,
+    AddPublicationComponent,
+    ListPublicationComponent,
+    PublicationFormComponent,
 
   ],
   imports: [
@@ -86,8 +102,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     NgxPaginationModule,
     CKEditorModule,
     ReactiveFormsModule,
-    FullCalendarModule,
-
+    FullCalendarModule
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'fr-FR'}, SpecialtyDrService, SymptomService, ConsultationService],
   bootstrap: [AppComponent]

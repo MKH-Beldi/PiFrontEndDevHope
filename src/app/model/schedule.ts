@@ -6,13 +6,14 @@ export class Schedule {
   id: number;
   start: Date;
   end: Date;
+  date: Date;
   // tslint:disable-next-line:ban-types
   isAvailable: boolean;
   title: string;
   color: string;
   userDr: User;
   userPatient: User;
-  createdAt: DateTimeFormat;
-  updatedA: DateTimeFormat;
+  createdAt: Date;
+  updatedA: Date;
   consultation: Consultation;
 }

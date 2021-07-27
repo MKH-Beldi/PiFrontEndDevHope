@@ -7,6 +7,6 @@ export class Publication {
   contente: Text;
   file: string;
   createdAt: DateTimeFormat;
-  updatedA: DateTimeFormat;
+  updatedAt: DateTimeFormat;
   userDr: User;
 }
