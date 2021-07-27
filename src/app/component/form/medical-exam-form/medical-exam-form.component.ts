@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MedicalExam} from '../../../model/medicalExam';
 import {MedicalExamService} from '../../../shared/medical-exam.service';
 import {Consultation} from '../../../model/consultation';
 import {User} from '../../../model/user';
+import {Certificat} from "../../../model/certificat";
 
 @Component({
   selector: 'app-medical-exam-form',
@@ -13,16 +14,22 @@ export class MedicalExamFormComponent implements OnInit {
 medicalExam = new MedicalExam();
 consultation = new Consultation();
 user = new User();
+  @Input() addModeChild: boolean;
+  @Input() medicalExam1: MedicalExam;
+  @Output() addEvent = new EventEmitter<MedicalExam>();
+  @Output() editEvent = new EventEmitter<MedicalExam>();
   constructor(private medicalExamService: MedicalExamService) { }
 
   ngOnInit(): void {
+    if (this.addModeChild){
+      this.medicalExam = new MedicalExam();
+    }
   }
-  addMedicalExam(){
-    this.user.id = 1;
-    this.medicalExam.userLab = this.user;
-   this.consultation.id = 1;
-   this.medicalExam.consultation = this.consultation;
-
-    this.medicalExamService.addMedicalExam(this.medicalExam).subscribe();
+  sendAddNotif(){
+    console.log("khra");
+    this.addEvent.emit(this.medicalExam);
+  }
+  sendEditNotif() {
+    this.editEvent.emit(this.medicalExam);
   }
 }
