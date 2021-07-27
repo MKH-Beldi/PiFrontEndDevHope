@@ -5,7 +5,7 @@ import {City} from './city';
 export class User {
   id: number;
   email: string;
-  roles: string;
+  roles: string[];
   password: string;
   status: string;
   lastName: string;

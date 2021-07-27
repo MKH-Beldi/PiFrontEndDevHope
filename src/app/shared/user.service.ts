@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {User} from '../model/user';
-import {Symptom} from "../model/symptom";
+
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  url = 'http://localhost:3000/users/';
+  url = 'http://127.0.0.1:8000/api/user/';
+  userRoles: string[] = ['ROLE_ADMIN', 'ROLE_DR', 'ROLE_PATIENT'];
 
   constructor(private http: HttpClient) {
   }
@@ -21,7 +22,7 @@ export class UserService {
   }
 
   addUser(u: User) {
-    return this.http.post(this.url, u);
+    return this.http.post(this.url + 'create', u, {observe: 'response'});
   }
 
   deleteUser(id: number) {
@@ -30,5 +31,9 @@ export class UserService {
 
   updateUser(id: number, u: User) {
     return this.http.put(this.url + id, u);
+  }
+
+  getRoles(){
+    return this.userRoles;
   }
 }
