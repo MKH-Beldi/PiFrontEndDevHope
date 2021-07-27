@@ -4,17 +4,18 @@ import { CalendarOptions } from '@fullcalendar/angular';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ScheduleService} from '../../shared/schedule.service';
 import {Schedule} from '../../model/schedule';
-import {User} from "../../model/user";
 import {NotificationService} from '../../shared/notification.service';
 import DateTimeFormat = Intl.DateTimeFormat;
 
 declare let $: any;
+declare let s: any;
+
 
 @Component({
   selector: 'app-schedule',
   styleUrls: ['./schedule.component.css'],
   providers: [],
-templateUrl: './schedule.component.html'
+  templateUrl: './schedule.component.html'
 
 })
 
@@ -22,7 +23,10 @@ export class ScheduleComponent {
 
   schedules: Schedule[];
   star: DateTimeFormat;
-  userPat = new User();
+  idEvent: number;
+  titleEvent: string;
+  startEvent: Date;
+  endEvent: Date;
   s: Schedule;
   list: [];
 
@@ -35,11 +39,15 @@ export class ScheduleComponent {
       right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
     },
     initialView: 'timeGridWeek',
+    eventTimeFormat: { hour12: false, hour: '2-digit', minute: '2-digit' },
+
     weekends: true,
     editable: true,
     selectable: true,
     selectMirror: true,
-    dayMaxEvents: true,
+
+    // dayMaxEvents: true,
+    eventClick: this.showSchedule.bind(this),
     dateClick: this.handleDateClick.bind(this), // bind is important!
     events: [ ]
   };
@@ -71,30 +79,40 @@ export class ScheduleComponent {
     );
   }
 
-
-
-
   handleDateClick(arg) {
+
+    $("#myModal1").modal("show");
     this.star = arg.dateStr;
     console.log(this.star);
+    console.log((arg.id));
 
-    $("#myModal").modal("show");
-    $(".modal-title, .eventstarttitle").text("");
-    $(".modal-title").text("Add Event at : "+arg.dateStr);
-    $(".eventstarttitle").text(arg.dateStr);
 
   }
+  showSchedule(info) {
+
+
+
+    $("#myModal2").modal("show");
+    $("#myModal1").modal("hide");
+
+
+
+    this.idEvent= info.event.id;
+    this.titleEvent = info.event.title;
+    this.startEvent = info.event.start;
+    this.endEvent = info.event.end;
+
+    //  alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
+    //alert('View: ' + info.view.type);
+    console.log(info);
+
+  }
+
+
 
   onDateClick(res) {
     alert('Clicked on date : ' + res.dateStr);
   }
-
-
-
- // hideForm(){
-  //  this.addEventForm.patchValue({ title : ""});
-    //this.addEventForm.get('title').updateValueAndValidity();
-  //}
 
   deleteSchedule(schedule: Schedule){
     this.scheduleService.deleteSchedule(schedule.id).subscribe(
@@ -108,6 +126,18 @@ export class ScheduleComponent {
       }
     );
 
+  }
+
+  updateSchedule( id: number, schedule: Schedule  ) {
+
+    console.log(schedule);
+    this.scheduleService.updateSchedule(2, schedule).subscribe(
+      (status) => {
+        if (status.status === 201 ){
+          this.notifyService.showInfo('schedule modifié avec succès !', 'Modification');
+        }
+      }
+    );
   }
 
 }

@@ -11,7 +11,7 @@ import {end} from "@popperjs/core";
 })
 export class ScheduleFormComponent implements OnInit {
   schedule = new Schedule() ;
-  endDate = new Date() ;
+  endDate : Date ;
   @Input() starChild = new Date();
   @Output() addEvent = new EventEmitter<Schedule>();
   @Output() editEvent = new EventEmitter<Schedule>();
@@ -22,16 +22,13 @@ export class ScheduleFormComponent implements OnInit {
   }
   sendAddNotif() {
     this.schedule.start = new Date(this.starChild);
-    this.schedule.end = new Date(this.endDate);
-    this.schedule.userPatient.id = 1;
+   // this.schedule.end = new Date(this.endDate);
+    //this.schedule.userPatient.id = 1;
     this.schedule.isAvailable = false;
     console.log(this.schedule);
     this.addEvent.emit(this.schedule);
   }
 
 
-  sendEditNotif() {
 
-    this.editEvent.emit(this.schedule);
-  }
 }

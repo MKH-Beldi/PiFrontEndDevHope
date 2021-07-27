@@ -13,7 +13,7 @@ export class Schedule {
   color: string;
   userDr: User;
   userPatient: User;
-  createdAt: DateTimeFormat;
-  updatedA: DateTimeFormat;
+  createdAt: Date;
+  updatedA: Date;
   consultation: Consultation;
 }

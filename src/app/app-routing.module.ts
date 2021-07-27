@@ -7,6 +7,7 @@ import {SymptomListComponent} from './component/symptom-list/symptom-list.compon
 import {SymptomFormComponent} from './component/form/symptom-form/symptom-form.component';
 import {ScheduleComponent} from "./component/schedule/schedule.component";
 import {ScheduleFormComponent} from "./component/form/schedule-form/schedule-form.component";
+import {ScheduleTableComponent} from "./component/table/schedule/schedule-table/schedule-table.component";
 
 
 const routes: Routes = [
@@ -17,7 +18,7 @@ const routes: Routes = [
   { path: 'symptom/list', component: SymptomListComponent },
   { path: 'symptom/add', component: SymptomFormComponent },
   { path: 'schedule/add', component: ScheduleComponent },
-  { path: 'schedule/addEvent', component: ScheduleFormComponent },
+  { path: 'schedule/edit/:id', component: ScheduleTableComponent },
 
 ];
 
