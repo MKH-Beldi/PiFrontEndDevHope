@@ -39,6 +39,8 @@ import {ScheduleComponent} from './component/schedule/schedule.component';
 import {ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from './component/footer/footer.component';
 import { UserRegisterFormComponent } from './component/form/user-register-form/user-register-form.component';
+import { SigninComponent } from './component/signin/signin.component';
+import {MatButtonModule} from "@angular/material/button";
 
 
 
@@ -71,6 +73,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     ScheduleComponent,
     FooterComponent,
     UserRegisterFormComponent,
+    SigninComponent,
 
 
   ],
@@ -88,6 +91,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     CKEditorModule,
     ReactiveFormsModule,
     FullCalendarModule,
+    MatButtonModule,
 
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'fr-FR'}, SpecialtyDrService, ConsultationService, SymptomService],

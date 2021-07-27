@@ -6,6 +6,7 @@ import {SymptomTableComponent} from './component/table/symptom-table/symptom-tab
 import {SymptomListComponent} from './component/symptom-list/symptom-list.component';
 import {SymptomFormComponent} from './component/form/symptom-form/symptom-form.component';
 import {UserRegisterFormComponent} from './component/form/user-register-form/user-register-form.component';
+import {SigninComponent} from "./component/signin/signin.component";
 
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'symptom/list', component: SymptomListComponent },
   { path: 'symptom/add', component: SymptomFormComponent },
   { path: 'user/add', component: UserRegisterFormComponent },
+  { path: 'login', component: SigninComponent },
 ];
 
 @NgModule({
