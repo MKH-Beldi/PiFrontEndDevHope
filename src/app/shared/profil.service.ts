@@ -17,21 +17,20 @@ export class ProfilService {
   }
 
   getByp(criteria: string, value: any) {
-    return this.http.get<Profil[]>(this.url + 'get/' + criteria + '/' + value);
+    return this.http.get<Profil[]>(this.url + '/get/' + criteria + '/' + value);
   }
 
   addProfil(p: Profil) {
-    return this.http.post(this.url + 'create', p);
+    return this.http.post(this.url + '/create', p);
   }
 
   updateProfil(id: number, p: Profil) {
-    return this.http.put(this.url + 'update/' + id, p);
+    return this.http.put(this.url + '/update/' + id, p);
   }
 
   deleteProfil(id: number, p: Profil) {
-    return this.http.delete(this.url + 'delete/' + id);
+    return this.http.delete(this.url + '/delete/' + id);
   }
-
 
 
 

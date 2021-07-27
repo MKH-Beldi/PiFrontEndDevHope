@@ -6,7 +6,7 @@ import {Publication} from '../model/publication';
   providedIn: 'root'
 })
 export class CommentService {
-  url = 'http://127.0.0.1:8000/api/comment';
+  url = 'http://127.0.0.1:8000/api/comment/';
 
   constructor(private http: HttpClient) {
   }
@@ -19,7 +19,7 @@ export class CommentService {
     return this.http.get<Comment[]>(this.url + 'get/' + criteria + '/' + value);
   }
 
-  addComment(c: Comment) {
+  addComment(c: any) {
     return this.http.post(this.url + 'create', c);
   }
 

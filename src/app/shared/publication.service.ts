@@ -6,7 +6,7 @@ import {Publication} from '../model/publication';
   providedIn: 'root'
 })
 export class PublicationService {
-  url = 'http://127.0.0.1:8000/api/publication';
+  url = 'http://127.0.0.1:8000/api/publication/';
 
   constructor(private http: HttpClient) {
   }

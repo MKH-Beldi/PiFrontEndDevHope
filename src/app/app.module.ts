@@ -41,6 +41,11 @@ import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import {ScheduleComponent} from './component/schedule/schedule.component';
 import {ReactiveFormsModule } from '@angular/forms';
+import { HomeComponent } from './component/home/home.component';
+import { FooterComponent } from './component/footer/footer.component';
+import { AddPublicationComponent } from './component/add-publication/add-publication.component';
+import { ListPublicationComponent } from './component/list-publication/list-publication.component';
+import { PublicationFormComponent } from './component/form/publication-form/publication-form.component';
 
 
 registerLocaleData(localeFr);
@@ -72,7 +77,12 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     FileMedicalExamFormComponent,
     CertificatViewComponent,
     MedicalExamListComponent,
-    ScheduleComponent, ] ,
+    ScheduleComponent,
+    HomeComponent,
+    FooterComponent,
+    AddPublicationComponent,
+    ListPublicationComponent,
+    PublicationFormComponent, ] ,
   imports: [
     BrowserModule,
     AppRoutingModule,
