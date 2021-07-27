@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {FileMedicalExam} from "../model/fileMedicalExam";
-import {MedicalExamService} from "../shared/medical-exam.service";
-import {FileMedicalExamService} from "../shared/file-medical-exam.service";
-import {MedicalExam} from "../model/medicalExam";
-import {ActivatedRoute} from "@angular/router";
+import {FileMedicalExam} from '../../model/fileMedicalExam';
+import {FileMedicalExamService} from '../../shared/file-medical-exam.service';
+import {MedicalExam} from '../../model/medicalExam';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-file-medical-exam-list',

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {CertificatService} from "../shared/certificat.service";
-import {Certificat} from '../model/certificat';
+import {CertificatService} from '../../shared/certificat.service';
+import {Certificat} from '../../model/certificat';
 @Component({
   selector: 'app-certificat-list',
   templateUrl: './certificat-list.component.html',
