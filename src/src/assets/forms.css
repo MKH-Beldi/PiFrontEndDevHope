@@ -1,0 +1,34 @@
+.ng-valid[required]:not(ckeditor), .ng-valid.required:not(ckeditor)  {
+  border-left: 5px solid #42A948; /* green */
+}
+
+.ng-touched.ng-invalid:not(form, ckeditor)  {
+  border-left: 5px solid #FF0000; /* red */
+}
+
+.ck-editor__editable_inline {
+  min-height: 150px !important;
+}
+
+.search-box {
+  position: relative;
+  float: right;
+}
+.search-box input {
+  height: 34px;
+  border-radius: 20px;
+  padding-left: 35px;
+  border-color: #ddd;
+  box-shadow: none;
+}
+.search-box input:focus {
+  border-color: #3FBAE4;
+}
+.search-box i {
+  color: #a0a5b1;
+  position: absolute;
+  font-size: 19px;
+  top: 8px;
+  left: 10px;
+}
+

@@ -7,7 +7,38 @@
   </div>
   <div *ngIf="profile">
     <form #f="ngForm" class="container">
+      <div class="row mt-5">
+        <div class="col-md-4">
+          <h2><b>FirstName : </b>{{ profile.userDr.firstName }}</h2>
+          <h2><b>LastName : </b>{{ profile.userDr.lastName }}</h2>
+        </div>
+        <div class="col-md-4">
+          <h2><b>Biography : </b>{{ profile.biography }}</h2>
+          <h2><b>Note : </b>{{ profile.note }}</h2>
+        </div>
+        <div class="col-md-4">
+          <h2><b>Current Position : </b>{{ profile.currentPosition }}</h2>
+          <h2><b>AcedemicTrainig : </b>{{ profile.academicTraining }}</h2>
+        </div>
+      </div>
       <div class="row">
+        <div class="col-md-6">
+          <h2><b>WorkExperience : </b>{{ profile.workExperience }}</h2>
+
+      </div>
+        <div class="col-md-6">
+          <button class="btn btn-success" (click)="goToAddPub()">
+            <i class="bi bi-plus-square"></i> Add Publication
+          </button>
+
+        </div>
+        <div class="col-md-6">
+        <button class="btn btn-success" (click)="goToPub()">
+          <i class="bi bi-plus-square"></i> Publication list
+        </button>
+      </div>
+      </div>
+      <div class="row mt-5">
         <div class="col-md-6 mt-2">
           <label for="profileBiography" class="form-label"
             >Biography<span style="color: red"> *</span></label
@@ -182,11 +213,6 @@
             [disabled]="f.invalid"
           >
             <i class="bi bi-pencil-square"></i> Modifier
-          </button>
-        </div>
-        <div class="col-6 my-5 mx-3">
-          <button class="btn btn-success" (click)="goToAddPub()">
-            <i class="bi bi-plus-square"></i> Add Publication
           </button>
         </div>
       </div>

@@ -11,10 +11,10 @@ import { PublicationService } from 'src/app/shared/publication.service';
   styleUrls: ['./add-publication.component.css']
 })
 export class AddPublicationComponent implements OnInit {
-  publication:Publication
+  publication: Publication;
   userId
   constructor(    private serviceRoute: ActivatedRoute,
-    private publicationService:PublicationService,
+    private publicationService: PublicationService,
     private notifyService: NotificationService,
     private router: Router,
 
@@ -27,7 +27,7 @@ export class AddPublicationComponent implements OnInit {
     const user = new User()
     user.id = this.userId
     this.publication.userDr = user
-    
+
   }
   AddPub(){
     // this.publication.createdAt = new Intl.DateTimeFormat('en-US')
