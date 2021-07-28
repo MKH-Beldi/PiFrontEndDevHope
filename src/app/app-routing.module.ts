@@ -29,6 +29,7 @@ const routes: Routes = [
   { path: 'symptom/table', component: SymptomTableComponent },
   { path: 'symptom/list', component: SymptomListComponent },
   { path: 'symptom/add', component: SymptomFormComponent },
+  { path: 'symptom/list/:idCons', component: SymptomListComponent },
   { path: 'publication/add/:userId', component: AddPublicationComponent },
   { path: 'publication/list/:userId', component: ListPublicationComponent },
   { path: 'publication/list', component: ListPublicationComponent },

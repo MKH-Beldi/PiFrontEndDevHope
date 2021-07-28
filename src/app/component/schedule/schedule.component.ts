@@ -10,6 +10,7 @@ import {ConsultationService} from "../../shared/consultation.service";
 import {Consultation} from "../../model/consultation";
 import {User} from "../../model/user";
 import {AuthService} from '../../shared/auth.service';
+import {Router} from "@angular/router";
 
 declare let $: any;
 declare let s: any;
@@ -60,7 +61,7 @@ export class ScheduleComponent {
 
 
 
-  constructor(private loginService: AuthService, private scheduleService: ScheduleService, private notifyService: NotificationService, private consultationService: ConsultationService) {}
+  constructor(private router: Router, private loginService: AuthService, private scheduleService: ScheduleService, private notifyService: NotificationService, private consultationService: ConsultationService) {}
 
   ngOnInit(): void {
     this.loginService.getUser().subscribe(
@@ -100,14 +101,17 @@ export class ScheduleComponent {
           schedule.id = data[0];
           this.schedules.push(schedule);
           this.notifyService.showSuccess('schedule ajouté avec succès !', 'Ajout');
+          $("#myModal1").modal("hide");
           this.consultation.status = this.consultationService.getStatus()[0];
           this.consultationService.addConsultation(this.consultation).subscribe(
             (data: any[]) => {
               let s = new Schedule();
               s.consultation = new Consultation();
               s.consultation.id = data[0];
+              const idCons = data[0];
               console.log(s);
               this.scheduleService.updateSchedule(schedule.id, s).subscribe();
+              this.router.navigate(['/symptom/list', idCons]);
             }
           );
         }

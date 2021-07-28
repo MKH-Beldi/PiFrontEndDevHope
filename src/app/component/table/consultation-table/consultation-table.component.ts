@@ -4,6 +4,8 @@ import {ConsultationService} from '../../../shared/consultation.service';
 import {NotificationService} from '../../../shared/notification.service';
 import {ScheduleService} from '../../../shared/schedule.service';
 import {Schedule} from '../../../model/schedule';
+import {User} from "../../../model/user";
+import {AuthService} from '../../../shared/auth.service';
 
 @Component({
   selector: 'app-consultation-table',
@@ -20,11 +22,17 @@ export class ConsultationTableComponent implements OnInit {
   config: any;
   addMode: boolean;
   viewForm: boolean;
+  user = new User();
   status: any[];
 
-  constructor(private consultationService: ConsultationService, private notifyService: NotificationService, private scheduleService: ScheduleService) { }
+  constructor(private loginService: AuthService, private consultationService: ConsultationService, private notifyService: NotificationService, private scheduleService: ScheduleService) { }
 
   ngOnInit(): void {
+    this.loginService.getUser().subscribe(
+      (data: User) => {
+        this.user = data;
+      }
+    );
     this.consultationService.getAll().subscribe(
       (data: Consultation[]) => {
         this.consultations = data;
