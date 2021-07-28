@@ -23,4 +23,8 @@ export class ScheduleService {
   deleteSchedule(id: number) {
     return this.http.delete(this.url + 'delete/' + id, {observe: 'response'});
   }
+
+  getBy(criteria: string, value: any) {
+    return this.http.get<Schedule[]>(this.url + 'get/' + criteria + '/' + value);
+  }
 }

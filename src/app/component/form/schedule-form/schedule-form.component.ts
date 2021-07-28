@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Schedule} from "../../../model/schedule";
 import DateTimeFormat = Intl.DateTimeFormat;
 import {end} from "@popperjs/core";
+import {ActivatedRoute, Router} from "@angular/router";
 
 
 @Component({
@@ -19,6 +20,7 @@ export class ScheduleFormComponent implements OnInit {
   constructor() { }
   ngOnInit(): void {
 
+
   }
   sendAddNotif() {
     this.schedule.start = new Date(this.starChild);
@@ -27,6 +29,7 @@ export class ScheduleFormComponent implements OnInit {
     this.schedule.isAvailable = false;
     console.log(this.schedule);
     this.addEvent.emit(this.schedule);
+
   }
 
 

@@ -12,6 +12,7 @@ import { ProfilComponent } from './component/profil/profil.component';
 import { AddPublicationComponent } from './component/add-publication/add-publication.component';
 import { ListPublicationComponent } from './component/list-publication/list-publication.component';
 import { CommentComponent } from './component/comment/comment.component';
+import {ScheduleFormComponent} from "./component/form/schedule-form/schedule-form.component";
 
 
 
@@ -24,7 +25,10 @@ const routes: Routes = [
   { path: 'symptom/table', component: SymptomTableComponent },
   { path: 'symptom/list', component: SymptomListComponent },
   { path: 'symptom/add', component: SymptomFormComponent },
-  { path: 'schedule/add', component: ScheduleComponent },
+  { path: 'schedule/list/:userId', component: ScheduleComponent },
+  { path: 'schedule/list', component: ScheduleComponent },
+  { path: 'schedule/add', component: ScheduleFormComponent },
+
   { path: 'schedule/edit/:id', component: ScheduleTableComponent },
   { path: 'publication/add/:userId', component: AddPublicationComponent },
   { path: 'publication/list/:userId', component: ListPublicationComponent },

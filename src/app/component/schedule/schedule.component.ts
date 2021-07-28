@@ -7,6 +7,7 @@ import {Schedule} from '../../model/schedule';
 import {NotificationService} from '../../shared/notification.service';
 import DateTimeFormat = Intl.DateTimeFormat;
 import {formatNumber} from "@angular/common";
+import {ActivatedRoute, Router} from '@angular/router';
 
 declare let $: any;
 declare let s: any;
@@ -43,11 +44,13 @@ export class ScheduleComponent {
     eventTimeFormat: { hour12: false, hour: '2-digit', minute: '2-digit' },
 
     weekends: true,
+
     editable: true,
     selectable: true,
     selectMirror: true,
 
     // dayMaxEvents: true,
+
     eventClick: this.showSchedule.bind(this),
     dateClick: this.handleDateClick.bind(this), // bind is important!
     events: [ ]
@@ -55,7 +58,7 @@ export class ScheduleComponent {
 
 
 
-  constructor(private scheduleService: ScheduleService ,private notifyService: NotificationService) {}
+  constructor(private scheduleService: ScheduleService ,private notifyService: NotificationService , private router: Router) {}
 
   ngOnInit(): void {
 
@@ -67,6 +70,18 @@ export class ScheduleComponent {
     );
   }
 
+  getScheduleBy () {
+    //this. = this.serviceRoute.snapshot.params.idEvent;
+    this.scheduleService.getBy('schedule',1).subscribe(
+      (res: any [])=>{
+
+        this.schedules = res;
+        this.calendarOptions.events = res;
+      }
+    );
+
+}
+
   addSchedule(schedule: Schedule){
     console.log(schedule);
     this.scheduleService.addSchedule(schedule).subscribe(
@@ -75,6 +90,8 @@ export class ScheduleComponent {
           schedule.id = data[0];
           this.schedules.push(schedule);
           this.notifyService.showSuccess('schedule ajouté avec succès !', 'Ajout');
+          this.router.navigate(['/schedule/list']);
+
         }
       }
     );
@@ -83,6 +100,7 @@ export class ScheduleComponent {
   handleDateClick(arg) {
 
     $("#myModal1").modal("show");
+   // alert('selected ' + arg.startStr + ' to ' + arg.endStr);
     this.star = arg.dateStr;
     console.log(this.star);
     console.log((arg.id));
@@ -131,6 +149,7 @@ export class ScheduleComponent {
       (status) => {
         if (status.status === 201 ){
           this.notifyService.showInfo('schedule modifié avec succès !', 'Modification');
+          this.router.navigate(['/schedule/list']);
 
         }
       }

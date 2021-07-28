@@ -33,13 +33,13 @@
 
 
               <div>
-                <button  type="submit"  class="m-0 border-0 py-4 font-14 font-monospace btn btn-danger-gradiant btn-block position-relative rounded-0 text-center text-black-50 text-uppercase" (click)="sendEditNotif()"	>
+                <button  type="submit"  class="m-0 border-0 py-4 font-14 font-monospace btn btn-danger-gradiant btn-block position-relative rounded-0 text-center text-black-50 text-uppercase" (click)="sendEditNotif()"  [routerLink]="['/schedule/list']"	>
                   <span> Modifer RDV </span>
 
                 </button>
 
 
-                <button  type="submit"  (click)="deleteSchedule(schedule)"   [routerLink]="['/schedule/add']" class="m-0 border-0 py-4 font-14 font-monospace btn btn-danger-gradiant btn-block position-relative rounded-0 text-center text-black-50 text-uppercase" (click)="sendEditNotif()"	>
+                <button  type="submit"  (click)="deleteSchedule(schedule)"   [routerLink]="['/schedule/list']" class="m-0 border-0 py-4 font-14 font-monospace btn btn-danger-gradiant btn-block position-relative rounded-0 text-center text-black-50 text-uppercase" (click)="sendEditNotif()"	>
                   <span> Supprimer RDV </span>
 
                 </button>

@@ -19,13 +19,8 @@
             </div>
 
 
-          <div class="form-row border-bottom p-4 position-relative">
-            <label class="text-inverse font-12 text-uppercase">  Date</label>
-            <div class="input-group date">
-              <input type="Date" class="border-0 p-0 font-14 form-control"  placeholder="Select the Appointment Date"  name="date" id="date"     [(ngModel)]="schedule.date" />
-              <label class="mt-2" for="dp"> <i class="icon-calendar mt-1"> </i> </label>
-            </div>
-          </div>
+
+
 
           <div class="form-row border-bottom p-4">
             <label class="text-inverse font-12 text-uppercase"> date Début </label>
@@ -41,8 +36,9 @@
 
 
         <div>
-          <button    type="submit"    href="http://localhost:4200/schedule/add" class="m-0 border-0 py-4 font-14 font-monospace btn btn-danger-gradiant btn-block position-relative rounded-0 text-center text-black-50 text-uppercase" (click)="sendAddNotif()" [disabled]="f.invalid"   	>
-            <a routerLink="/schedule/add"  > </a>
+          <button type="submit"  class="m-0 border-0 py-4 font-14 font-monospace btn btn-danger-gradiant btn-block position-relative rounded-0 text-center text-black-50 text-uppercase" (click)="sendAddNotif()" [disabled]="f.invalid"
+          >
+            <a > </a>
 									<span> Book Yor Appointment Now </span>
             		</button>
      </div>

@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12">
-      <full-calendar [options]="calendarOptions"></full-calendar>
+      <full-calendar   [options]="calendarOptions"></full-calendar>
 
     </div>
   </div>
@@ -11,5 +11,5 @@
                      [starChild]="star"> </app-schedule-form>
 </div>
 <div class="modal" id="myModal2">
-  <app-schedule-table   [routerLink]="['/schedule/add']" (editEvent) ="updateSchedule($event)" [idChild]="idEvent" [titlechild]="titleEvent"  [startchild]="startEvent"  [endchild]="endEvent" > </app-schedule-table>
+  <app-schedule-table   [routerLink]="['/schedule/edit']" (editEvent) ="updateSchedule($event)" [idChild]="idEvent" [titlechild]="titleEvent"  [startchild]="startEvent"  [endchild]="endEvent" > </app-schedule-table>
 </div>
