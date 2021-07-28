@@ -19,7 +19,7 @@
           <a class="nav-link" routerLinkActive="active"  *ngIf="isAuth" routerLink="/consultation/table">Consultation</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active"  *ngIf="isAuth" routerLink="/consultation/table">List Symptoms</a>
+          <a class="nav-link" routerLinkActive="active"  *ngIf="isAuth && (user.roles[0] == 'ROLE_ADMIN' || user.roles[0] == 'ROLE_DR')" routerLink="/symptom/table">List Symptoms</a>
         </li>
       </ul>
     </div>
