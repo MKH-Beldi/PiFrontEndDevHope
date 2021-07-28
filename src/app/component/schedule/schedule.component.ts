@@ -90,7 +90,7 @@ export class ScheduleComponent {
           schedule.id = data[0];
           this.schedules.push(schedule);
           this.notifyService.showSuccess('schedule ajouté avec succès !', 'Ajout');
-          this.router.navigate(['/schedule/list']);
+          $("#myModal").modal("hide");
 
         }
       }
