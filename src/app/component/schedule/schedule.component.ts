@@ -6,6 +6,10 @@ import {ScheduleService} from '../../shared/schedule.service';
 import {Schedule} from '../../model/schedule';
 import {NotificationService} from '../../shared/notification.service';
 import DateTimeFormat = Intl.DateTimeFormat;
+import {ConsultationService} from "../../shared/consultation.service";
+import {Consultation} from "../../model/consultation";
+import {User} from "../../model/user";
+import {AuthService} from '../../shared/auth.service';
 
 declare let $: any;
 declare let s: any;
@@ -29,6 +33,8 @@ export class ScheduleComponent {
   endEvent: Date;
   s: Schedule;
   list: [];
+  consultation = new Consultation();
+  user = new User();
 
   submitted = false;
 
@@ -54,14 +60,34 @@ export class ScheduleComponent {
 
 
 
-  constructor(private scheduleService: ScheduleService ,private notifyService: NotificationService) {}
+  constructor(private loginService: AuthService, private scheduleService: ScheduleService, private notifyService: NotificationService, private consultationService: ConsultationService) {}
 
   ngOnInit(): void {
-
-    this.scheduleService.getSchedule().subscribe(
-      (data: any[]) => {
-        this.schedules = data;
-        this.calendarOptions.events = data;
+    this.loginService.getUser().subscribe(
+      (data: User) => {
+        this.user = data;
+        if (this.user.roles[0] == 'ROLE_ADMIN'){
+          this.scheduleService.getSchedule().subscribe(
+            (data: any[]) => {
+              this.schedules = data;
+              this.calendarOptions.events = data;
+            }
+          );
+        }else if (this.user.roles[0] == 'ROLE_DR') {
+          this.scheduleService.getBy('userDr', this.user.id).subscribe(
+            (data: any[]) => {
+              this.schedules = data;
+              this.calendarOptions.events = data;
+          }
+          );
+        }else if (this.user.roles[0] == 'ROLE_PATIENT') {
+          this.scheduleService.getBy('userPatient', this.user.id).subscribe(
+            (data: any[]) => {
+              this.schedules = data;
+              this.calendarOptions.events = data;
+            }
+          );
+        }
       }
     );
   }
@@ -74,6 +100,16 @@ export class ScheduleComponent {
           schedule.id = data[0];
           this.schedules.push(schedule);
           this.notifyService.showSuccess('schedule ajouté avec succès !', 'Ajout');
+          this.consultation.status = this.consultationService.getStatus()[0];
+          this.consultationService.addConsultation(this.consultation).subscribe(
+            (data: any[]) => {
+              let s = new Schedule();
+              s.consultation = new Consultation();
+              s.consultation.id = data[0];
+              console.log(s);
+              this.scheduleService.updateSchedule(schedule.id, s).subscribe();
+            }
+          );
         }
       }
     );

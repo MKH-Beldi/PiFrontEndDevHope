@@ -58,7 +58,7 @@ import {ProfilService} from './shared/profil.service';
 
 registerLocaleData(localeFr);
 
-FullCalendarModule.registerPlugins([ // register FullCalendar plugins
+FullCalendarModule.registerPlugins([
   dayGridPlugin,
   interactionPlugin,
   timeGridPlugin
