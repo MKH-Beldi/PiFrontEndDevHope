@@ -4,7 +4,7 @@ import {LOCALE_ID, NgModule} from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import localeFr from '@angular/common/locales/fr';
 import { registerLocaleData } from '@angular/common';
 import { SpecialtyDrService } from './shared/specialty-dr.service';
@@ -20,7 +20,6 @@ import { ConsultationFormComponent } from './component/form/consultation-form/co
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { ConsultationTableComponent } from './component/table/consultation-table/consultation-table.component';
 import { ConsultationComponent } from './component/consultation/consultation.component';
-import { HeaderComponent } from './component/header/header.component';
 import { SymptomTableComponent } from './component/table/symptom-table/symptom-table.component';
 import { SymptomListComponent } from './component/symptom-list/symptom-list.component';
 import { SymptomFormComponent } from './component/form/symptom-form/symptom-form.component';
@@ -47,11 +46,15 @@ import {HomeComponent} from './component/home/home.component';
 import {AddPublicationComponent} from './component/add-publication/add-publication.component';
 import {ListPublicationComponent} from './component/list-publication/list-publication.component';
 import {PublicationFormComponent} from './component/form/publication-form/publication-form.component';
-
 import {FileMedicalExamListComponent} from './component/file-medical-exam-list/file-medical-exam-list.component';
 import {CertificatListComponent} from './component/certificat-list/certificat-list.component';
 import {MedicalExamViewComponent} from './component/medical-exam-view/medical-exam-view.component';
-
+import { UserRegisterFormComponent } from './component/form/user-register-form/user-register-form.component';
+import { SigninComponent } from './component/signin/signin.component';
+import {BasicAuthHtppInterceptorService} from './shared/basic-auth-interceptor.service';
+import {AuthService} from './shared/auth.service';
+import {HeaderComponent} from './component/header/header.component';
+import {ProfilService} from './shared/profil.service';
 
 registerLocaleData(localeFr);
 
@@ -69,7 +72,6 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     ConsultationFormComponent,
     ConsultationTableComponent,
     ConsultationComponent,
-    HeaderComponent,
     SymptomTableComponent,
     SymptomListComponent,
     SymptomFormComponent,
@@ -79,8 +81,6 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     CertificatViewComponent,
     MedicalExamListComponent,
     ScheduleComponent,
-    ScheduleFormComponent,
-    ScheduleTableComponent,
     ScheduleFormComponent,
     ScheduleTableComponent,
     ProfilComponent,
@@ -95,8 +95,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     FileMedicalExamListComponent,
     CertificatListComponent,
     MedicalExamViewComponent,
-
-
+    UserRegisterFormComponent,
+    SigninComponent
   ],
   imports: [
     BrowserModule,
@@ -113,7 +113,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     ReactiveFormsModule,
     FullCalendarModule
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'fr-FR'}, SpecialtyDrService, SymptomService, ConsultationService],
+  providers: [{ provide: LOCALE_ID, useValue: 'fr-FR'}, { provide: HTTP_INTERCEPTORS, useClass: BasicAuthHtppInterceptorService, multi: true}, SpecialtyDrService, ConsultationService, SymptomService, AuthService, ProfilService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

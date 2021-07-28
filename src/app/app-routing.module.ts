@@ -18,11 +18,12 @@ import {FileMedicalExamListComponent} from './component/file-medical-exam-list/f
 import {CertificatListComponent} from './component/certificat-list/certificat-list.component';
 import {CertificatFormComponent} from './component/form/certificat-form/certificat-form.component';
 import {MedicalExamViewComponent} from './component/medical-exam-view/medical-exam-view.component';
+import {UserRegisterFormComponent} from './component/form/user-register-form/user-register-form.component';
+import {SigninComponent} from './component/signin/signin.component';
 
 
 
 const routes: Routes = [
-  {path: '' , component: HomeComponent},
   {path: 'profile' , component: ProfilComponent},
   { path: 'consultation/table', component: ConsultationTableComponent },
   { path: 'consultation/add', component: ConsultationFormComponent },
@@ -39,6 +40,8 @@ const routes: Routes = [
   { path: 'certificat/table', component: CertificatListComponent },
   { path: 'medicalExam/table', component: MedicalExamListComponent },
   { path: 'fileMedicalExam/table', component: FileMedicalExamListComponent },
+  { path: 'user/add', component: UserRegisterFormComponent },
+  { path: 'auth/signin', component: SigninComponent },
   { path: 'medicalExamView/:id', component: MedicalExamViewComponent , pathMatch: 'full' }
 
 ];

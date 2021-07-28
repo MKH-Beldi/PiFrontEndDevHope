@@ -9,7 +9,7 @@ import {Router} from '@angular/router';
 })
 export class SigninComponent implements OnInit {
 
-  email= '';
+  email = '';
   password = '';
   invalidLogin = false;
 
@@ -24,7 +24,10 @@ export class SigninComponent implements OnInit {
    this.service.authenticate(this.email, this.password).subscribe(
      (data: any) => {
        console.log(data);
-       this.router.navigate(['']);
+       this.router.navigate([''])
+         .then(() => {
+           window.location.reload();
+         });
        this.invalidLogin = false;
      }
    );

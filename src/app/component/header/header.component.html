@@ -1,93 +1,23 @@
-<header>
-  <div class="header-area">
-    <div class="header-top_area">
-      <div class="container">
-        <div class="row">
-          <div class="col-xl-6 col-md-6">
-            <div class="social_media_links">
-              <a href="#">
-                <i class="fa fa-linkedin"></i>
-              </a>
-              <a href="#">
-                <i class="fa fa-facebook"></i>
-              </a>
-              <a href="#">
-                <i class="fa fa-google-plus"></i>
-              </a>
-            </div>
-          </div>
-          <div class="col-xl-6 col-md-6">
-            <div class="short_contact_list">
-              <ul>
-                <li>
-                  <a href="#" *ngIf="profile">
-                    <i class="fa fa-envelope"></i>
-                    <span
-                      class="__cf_email__"
-                      data-cfemail="b0d9ded6dff0d4dfd3ddd5d49ed3dfdd"
-                      >{{ profile.userDr.email }}</span
-                    ></a
-                  >
-                </li>
-                <li>
-                  <a href="#" *ngIf="profile">
-                    <i class="fa fa-phone"></i>{{ profile.userDr.mobileTel }}</a
-                  >
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink=""><i class="bi bi-file-medical"></i> DocMed</a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" routerLinkActive="active" routerLink=""><i class="bi bi-house"></i> Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" *ngIf="role == 'ROLE_DR' " routerLink="/profile">Profile</a>
+        </li>
+      </ul>
     </div>
-    <div id="sticky-header" class="main-header-area">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-xl-3 col-lg-2">
-            <div class="logo">
-              <a routerLink="/">
-                <img src="../../assets/img/logo.png" alt="logo" />
-              </a>
-            </div>
-          </div>
-          <div class="col-xl-6 col-lg-7">
-            <div class="main-menu d-none d-lg-block">
-              <nav>
-                <ul id="navigation">
-                  <li><a class="active" routerLink="">home</a></li>
-                  <li><a routerLink="/profile">Profile</a></li>
-                  <li>
-                    <a routerLink="/schedule/add">RDV </a>
-                  </li>
-
-                </ul>
-              </nav>
-            </div>
-          </div>
-          <div class="col-xl-3 col-lg-3 d-none d-lg-block" *ngIf="!connected">
-            <div class="Appointment">
-              <div class="book_btn d-none d-lg-block">
-                <a class="popup-with-form" routerLink="/auth">Login</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-xl-3 col-lg-3 d-none d-lg-block" *ngIf="connected">
-            <div class="Appointment">
-              <div class="book_btn d-none d-lg-block">
-                <a
-                  class="popup-with-form"
-                  (click)="logout()"
-                  style="cursor: pointer"
-                  >Logout</a
-                >
-              </div>
-            </div>
-          </div>
-          <div class="col-12">
-            <div class="mobile_menu d-block d-lg-none"></div>
-          </div>
-        </div>
-      </div>
+    <div class="mx-2">
+      <label class="text-light" *ngIf="isAuth">Bienvenue {{user.lastName}} {{user.firstName}}</label>
+    </div>
+    <div class="d-flex">
+      <a class="btn btn-warning fw-bold me-2" role="button" data-bs-toggle="button" routerLink="/user/add" *ngIf="!isAuth"><i class="bi bi-person-plus-fill"></i> SIGN UP</a>
+      <a class="btn btn-warning fw-bold" role="button" data-bs-toggle="button" routerLink="/auth/signin" *ngIf="!isAuth"><i class="bi bi-box-arrow-in-right"></i> SIGN IN</a>
+      <a class="btn btn-warning fw-bold signout" role="button" data-bs-toggle="button" *ngIf="isAuth" (click)="logOut()"><i class="bi bi-box-arrow-in-right"></i> SIGN OUT</a>
     </div>
   </div>
-</header>
+</nav>

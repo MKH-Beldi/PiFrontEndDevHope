@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Profil } from 'src/app/model/profil';
-import { ProfilService } from 'src/app/shared/profil.service';
+import {User} from '../../model/user';
+import {AuthService} from '../../shared/auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -8,21 +9,33 @@ import { ProfilService } from 'src/app/shared/profil.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  connected:Boolean = true
-  profile : Profil
-  userId
-  constructor(private profileService:ProfilService) { }
+
+  username: string;
+  user = new User();
+  isAuth: boolean;
+  role: string;
+
+  constructor(private loginService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
-    this.profileService.getByp('id', '1').subscribe(
-      (res:Profil[])=>{
-        this.profile = res[0]
-        this.userId = this.profile.userDr.id
-      },
-      (err)=>{console.log(err)}
-    )
+    this.isAuth = this.loginService.isUserLoggedIn();
+    if (this.isAuth) {
+      this.username = sessionStorage.getItem('username');
+      this.loginService.getUser().subscribe(
+        (data: User) => {
+          this.user = data;
+          this.role = this.user.roles[0];
+        }
+      );
+    }
   }
-  logout(){
-   console.log('logout..')
+
+  logOut(){
+    this.loginService.logOut();
+    this.router.navigate([''])
+      .then(() => {
+        window.location.reload();
+      });
   }
+
 }
