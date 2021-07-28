@@ -16,7 +16,7 @@
           </ul>
         </li>
       </ul>
-      <label>{{this.username}}</label>
+      <label>{{user.lastName}}</label>
     </div>
     <a mat-button *ngIf="!loginService.isUserLoggedIn()" routerLink="/login" class="nav-link">Login</a>
     <a mat-button *ngIf="loginService.isUserLoggedIn()"  class="nav-link">LogOut</a>

@@ -4,7 +4,7 @@ import {LOCALE_ID, NgModule} from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import localeFr from '@angular/common/locales/fr';
 import { registerLocaleData } from '@angular/common';
 import { SpecialtyDrService } from './shared/specialty-dr.service';
@@ -40,7 +40,8 @@ import {ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from './component/footer/footer.component';
 import { UserRegisterFormComponent } from './component/form/user-register-form/user-register-form.component';
 import { SigninComponent } from './component/signin/signin.component';
-import {MatButtonModule} from "@angular/material/button";
+import {BasicAuthHtppInterceptorService} from "./shared/basic-auth-interceptor.service";
+import {AuthService} from "./shared/auth.service";
 
 
 
@@ -91,10 +92,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     CKEditorModule,
     ReactiveFormsModule,
     FullCalendarModule,
-    MatButtonModule,
-
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'fr-FR'}, SpecialtyDrService, ConsultationService, SymptomService],
+  providers: [{ provide: LOCALE_ID, useValue: 'fr-FR'}, { provide: HTTP_INTERCEPTORS, useClass: BasicAuthHtppInterceptorService, multi: true}, SpecialtyDrService, ConsultationService, SymptomService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

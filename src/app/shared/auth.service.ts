@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
+import {User} from '../model/user';
 
 @Injectable({
   providedIn: 'root'
@@ -26,11 +27,15 @@ export class AuthService {
 
   isUserLoggedIn() {
     let user = sessionStorage.getItem('username');
-    console.log(!(user === null));
     return !(user === null);
   }
 
   logOut() {
     sessionStorage.removeItem('username');
   }
+
+  getUser() {
+    return this.http.get<User>('http://127.0.0.1:8000/api/getUser');
+  }
+
 }

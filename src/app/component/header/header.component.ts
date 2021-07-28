@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../shared/auth.service';
+import {User} from '../../model/user';
 
 @Component({
   selector: 'app-header',
@@ -9,11 +10,17 @@ import {AuthService} from '../../shared/auth.service';
 export class HeaderComponent implements OnInit {
 
   username: string;
+  user: User;
 
   constructor(private loginService: AuthService) { }
 
   ngOnInit(): void {
     this.username = sessionStorage.getItem('username');
+    this.loginService.getUser().subscribe(
+      (data: User) => {
+        this.user = data;
+      }
+    );
   }
 
 }
