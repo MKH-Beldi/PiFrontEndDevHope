@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Symptom} from '../../model/symptom';
 import {SymptomService} from '../../shared/symptom.service';
 
@@ -14,6 +14,7 @@ export class SymptomListComponent implements OnInit {
   symptomsSelect: any[];
   symptomsSelected: Symptom[];
   symptomsZoneSelected;
+  @Output() sendSymptoms = new EventEmitter<Symptom[]>();
 
   constructor(private symptomService: SymptomService) { }
 
@@ -33,8 +34,9 @@ export class SymptomListComponent implements OnInit {
     );
   }
 
-  getSelectedValue(){
+  sendNotifSymptoms(){
     console.log(this.symptomsSelected);
+    this.sendSymptoms.emit(this.symptomsSelected);
   }
 
 

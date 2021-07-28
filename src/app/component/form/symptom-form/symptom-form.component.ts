@@ -17,6 +17,7 @@ export class SymptomFormComponent implements OnInit {
   @Output() addEvent = new EventEmitter<Symptom>();
   @Output() editEvent = new EventEmitter<Symptom>();
 
+
   constructor(private symptomService: SymptomService) { }
 
   ngOnInit(): void {
