@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Schedule} from "../../../../model/schedule";
 import {ScheduleService} from "../../../../shared/schedule.service";
 import {NotificationService} from "../../../../shared/notification.service";
+import DateTimeFormat = Intl.DateTimeFormat;
 
 @Component({
   selector: 'app-schedule-table',
@@ -10,13 +11,13 @@ import {NotificationService} from "../../../../shared/notification.service";
 })
 export class ScheduleTableComponent implements OnInit {
   @Output() editEvent = new EventEmitter<Schedule>();
-  @Input() idChild: number
-  @Input()  titlechild: string;
+  @Input() idChild: number;
+  @Input()  titlechild : string;
+  @Input() startchild : Date;
+  @Input()  endchild : Date;
+  schedule = new Schedule();
   schedules: Schedule[];
 
-  @Input() startchild: Date;
-  @Input()  endchild: Date;
-  schedule = new Schedule();
   constructor( private scheduleService: ScheduleService, private notifyService: NotificationService) { }
 
   ngOnInit(): void {
@@ -28,8 +29,6 @@ export class ScheduleTableComponent implements OnInit {
     this.scheduleService.deleteSchedule(schedule.id).subscribe(
       (status) => {
         if (status.status === 201){
-          const indexDelete = this.schedules.indexOf(schedule);
-          this.schedules.splice(indexDelete, 1);
           this.notifyService.showError('rendez-vous  supprimé avec succès !', 'Delete');
         }
         console.log(this.schedule);

@@ -5,8 +5,8 @@ import {ConsultationTableComponent} from './component/table/consultation-table/c
 import {SymptomTableComponent} from './component/table/symptom-table/symptom-table.component';
 import {SymptomListComponent} from './component/symptom-list/symptom-list.component';
 import {SymptomFormComponent} from './component/form/symptom-form/symptom-form.component';
-import {ScheduleComponent} from "./component/schedule/schedule.component";
-import {ScheduleTableComponent} from "./component/table/schedule/schedule-table/schedule-table.component";
+import {ScheduleComponent} from './component/schedule/schedule.component';
+import {ScheduleTableComponent} from './component/table/schedule/schedule-table/schedule-table.component';
 import { HomeComponent } from './component/home/home.component';
 import { ProfilComponent } from './component/profil/profil.component';
 import { AddPublicationComponent } from './component/add-publication/add-publication.component';
@@ -25,7 +25,6 @@ const routes: Routes = [
   { path: 'symptom/list', component: SymptomListComponent },
   { path: 'symptom/add', component: SymptomFormComponent },
   { path: 'schedule/add', component: ScheduleComponent },
-  { path: 'schedule/edit/:id', component: ScheduleTableComponent },
   { path: 'schedule/edit/:id', component: ScheduleTableComponent },
   { path: 'publication/add/:userId', component: AddPublicationComponent },
   { path: 'publication/list/:userId', component: ListPublicationComponent },

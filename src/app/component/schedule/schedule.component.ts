@@ -6,6 +6,7 @@ import {ScheduleService} from '../../shared/schedule.service';
 import {Schedule} from '../../model/schedule';
 import {NotificationService} from '../../shared/notification.service';
 import DateTimeFormat = Intl.DateTimeFormat;
+import {formatNumber} from "@angular/common";
 
 declare let $: any;
 declare let s: any;
@@ -23,7 +24,7 @@ export class ScheduleComponent {
 
   schedules: Schedule[];
   star: DateTimeFormat;
-  idEvent: number;
+  idEvent: number ;
   titleEvent: string;
   startEvent: Date;
   endEvent: Date;
@@ -97,10 +98,16 @@ export class ScheduleComponent {
 
 
 
-    this.idEvent= info.event.id;
+    this.idEvent = info.event.id  ;
     this.titleEvent = info.event.title;
     this.startEvent = info.event.start;
     this.endEvent = info.event.end;
+    console.log(typeof this.idEvent);
+    console.log(typeof info);
+
+    console.log(typeof this.startEvent);
+   // var idEvent: number = +this.idEvent;
+
 
     //  alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
     //alert('View: ' + info.view.type);
@@ -116,13 +123,15 @@ export class ScheduleComponent {
 
 
 
-  updateSchedule( id: number, schedule: Schedule  ) {
-
+  updateSchedule(  schedule: Schedule  ) {
+    schedule.id = +schedule.id;
     console.log(schedule);
-    this.scheduleService.updateSchedule(2, schedule).subscribe(
+    this.scheduleService.updateSchedule(+schedule.id, schedule).subscribe(
+
       (status) => {
         if (status.status === 201 ){
           this.notifyService.showInfo('schedule modifié avec succès !', 'Modification');
+
         }
       }
     );
