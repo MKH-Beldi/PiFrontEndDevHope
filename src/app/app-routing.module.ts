@@ -10,11 +10,12 @@ import { ProfilComponent } from './component/profil/profil.component';
 import { AddPublicationComponent } from './component/add-publication/add-publication.component';
 import { ListPublicationComponent } from './component/list-publication/list-publication.component';
 import { CommentComponent } from './component/comment/comment.component';
+import { ListProfileComponent } from './component/list-profile/list-profile.component';
 
 
 const routes: Routes = [
-  {path:"",component:HomeComponent},
-  {path:"profile",component:ProfilComponent},
+  {path: '' , component: HomeComponent},
+  {path: 'profile' , component: ProfilComponent},
   { path: 'consultation/table', component: ConsultationTableComponent },
   { path: 'consultation/add', component: ConsultationFormComponent },
   { path: 'consultation/edit/:id', component: ConsultationFormComponent },
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'publication/add/:userId', component: AddPublicationComponent },
   { path: 'publication/list/:userId', component: ListPublicationComponent },
   { path: 'comment/list/:pubId/:userId', component: CommentComponent },
+  { path: 'profile/list', component: ListProfileComponent },
 ];
 
 @NgModule({

@@ -46,6 +46,7 @@ import { FooterComponent } from './component/footer/footer.component';
 import { AddPublicationComponent } from './component/add-publication/add-publication.component';
 import { ListPublicationComponent } from './component/list-publication/list-publication.component';
 import { PublicationFormComponent } from './component/form/publication-form/publication-form.component';
+import { ListProfileComponent } from './component/list-profile/list-profile.component';
 
 
 registerLocaleData(localeFr);
@@ -82,7 +83,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     FooterComponent,
     AddPublicationComponent,
     ListPublicationComponent,
-    PublicationFormComponent, ] ,
+    PublicationFormComponent,
+    ListProfileComponent, ] ,
   imports: [
     BrowserModule,
     AppRoutingModule,

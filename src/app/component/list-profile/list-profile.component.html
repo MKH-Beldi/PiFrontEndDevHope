@@ -1,0 +1,173 @@
+
+
+
+<app-header></app-header>
+
+<div class="container">
+  <div class="row mt-2">
+    <div class="col-md-8">
+      <h2><i class="bi bi-table"></i> Profiles table</h2>
+      <div
+        class="spinner-border text-primary m-3"
+        role="status"
+        *ngIf="!profiles"
+      >
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="search-box">
+        <i class="bi bi-search"></i>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search By biography"
+          [(ngModel)]="searchValue"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <table class="table table-hover table-bordered">
+      <thead>
+      <tr>
+        <th scope="col"><i class="bi bi-funnel-fill"></i></th>
+        <th scope="col">
+          <select
+            class="filtre form-select form-select-sm"
+            [(ngModel)]="filtreValue"
+            (change)="getFiltreName('note')"
+          >
+            <option selected [ngValue]="undefined">Filtre</option>
+            <option *ngFor="let object of profileSelect">
+              {{ object }}
+            </option>
+          </select>
+        </th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+      <tr>
+        <th scope="col" [appSort]="profiles" data-order="desc" data-name="id">
+          #
+        </th>
+        <th
+          scope="col"
+          [appSort]="profiles"
+          data-order="desc"
+          data-name="imgCover"
+        >
+          <i class="bi bi-chevron-bar-expand"></i> ImgCover
+        </th>
+        <th
+          scope="col"
+          [appSort]="profiles"
+          data-order="desc"
+          data-name="nom"
+        >
+          <i class="bi bi-chevron-bar-expand"></i> Nom
+        </th>
+        <th
+          scope="col"
+          [appSort]="profiles"
+          data-order="desc"
+          data-name="prenom"
+        >
+          <i class="bi bi-chevron-bar-expand"></i> Prenom
+        </th>
+        <th
+          scope="col"
+          [appSort]="profiles"
+          data-order="desc"
+          data-name="biography"
+        >
+          <i class="bi bi-chevron-bar-expand"></i> Biography
+        </th>
+        <th
+          scope="col"
+          [appSort]="profiles"
+          data-order="desc"
+          data-name="currentPosition"
+        >
+          <i class="bi bi-chevron-bar-expand"></i> Current Position
+        </th>
+
+        <th
+          scope="col"
+          [appSort]="profiles"
+          data-order="desc"
+          data-name="note"
+        >
+          <i class="bi bi-chevron-bar-expand"></i> Note
+        </th>
+        <th
+          scope="col"
+          [appSort]="profiles"
+          data-order="desc"
+          data-name="academicTraining"
+        >
+          <i class="bi bi-chevron-bar-expand"></i> Academic Training
+        </th>
+        <th
+          scope="col"
+          [appSort]="profiles"
+          data-order="desc"
+          data-name="workExperience"
+        >
+          <i class="bi bi-chevron-bar-expand"></i> Work Experience
+        </th>
+        <th
+          scope="col"
+          [appSort]="profiles"
+          data-order="desc"
+          data-name="createdAt"
+          data-type="date"
+        >
+          <i class="bi bi-chevron-bar-expand"></i> Date creation
+        </th>
+        <th
+          scope="col"
+          [appSort]="profiles"
+          data-order="desc"
+          data-name="updatedAt"
+          data-type="date"
+        >
+          <i class="bi bi-chevron-bar-expand"></i> Date modification
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr
+        *ngFor="
+            let object of profiles
+              | searchFilter: searchValue
+              | searchFilter: filtreValue:filtreName
+              | paginate: config
+          "
+      >
+        <th>{{ object.id }}</th>
+        <td>{{ object.imgCover }}</td>
+        <td>{{ object.userDr.lastName }}</td>
+        <td>{{ object.userDr.firstName }}</td>
+        <td>{{ object.biography }}</td>
+        <td>{{ object.currentPosition }}</td>
+        <td>{{ object.note }}</td>
+        <td>{{ object.academicTraining }}</td>
+        <td>{{ object.workExperience }}</td>
+        <td>{{ object.createdAt | date: "medium":"GMT" }}</td>
+        <td>{{ object.updatedAt | date: "medium":"GMT" }}</td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="row">
+      <div class="col d-flex justify-content-center">
+        <pagination-controls
+          (pageChange)="pageChanged($event)"
+        ></pagination-controls>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

@@ -25,7 +25,7 @@
                     <span
                       class="__cf_email__"
                       data-cfemail="b0d9ded6dff0d4dfd3ddd5d49ed3dfdd"
-                      >{{ profile.userDr.email }}</span
+                    >{{ profile.userDr.email }}</span
                     ></a
                   >
                 </li>
@@ -55,12 +55,13 @@
               <nav>
                 <ul id="navigation">
                   <li><a class="active" routerLink="">home</a></li>
-                  <li><a routerLink="/profile">Profile</a></li>
+                  <li><a routerLink="/profile">My Profile</a></li>
+                  <li><a routerLink="/profile/list">Profile list</a></li>
                   <li>
                     <a
                       [routerLink]="['/publication/list/', userId]"
                       *ngIf="userId"
-                      >Consultation</a
+                    >Publications</a
                     >
                   </li>
                 </ul>
@@ -81,7 +82,7 @@
                   class="popup-with-form"
                   (click)="logout()"
                   style="cursor: pointer"
-                  >Logout</a
+                >Logout</a
                 >
               </div>
             </div>

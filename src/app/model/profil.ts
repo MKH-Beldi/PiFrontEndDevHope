@@ -1,5 +1,5 @@
 import DateTimeFormat = Intl.DateTimeFormat;
-import {User} from "./user";
+import {User} from './user';
 
 export class Profil {
   id: number;
