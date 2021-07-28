@@ -61,7 +61,6 @@ addForm:Boolean
     comment.contente = this.newComment
     const user = new User()
     user.id = this.userId
-    comment.user = user
     const pub = new Publication()
     pub.id = this.pubId
     comment.publication = pub
@@ -69,7 +68,7 @@ addForm:Boolean
     this.commentService.addComment(comment).subscribe(
       (res)=>{console.log(res)
         this.notifyService.showSuccess('Commentaire ajouté avec succès !', 'Ajout');
-        //this.comments.push()
+        this.comments.push(comment);
       },
       (err)=>{console.log(err)}
     )

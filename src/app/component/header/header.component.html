@@ -9,6 +9,9 @@
         <li class="nav-item">
           <a class="nav-link" routerLinkActive="active" *ngIf="role == 'ROLE_DR' " routerLink="/profile">Profile</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active"  *ngIf="isAuth" routerLink="/publication/list">List publications</a>
+        </li>
       </ul>
     </div>
     <div class="mx-2">

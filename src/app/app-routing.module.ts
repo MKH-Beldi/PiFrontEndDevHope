@@ -36,6 +36,7 @@ const routes: Routes = [
   { path: 'schedule/edit/:id', component: ScheduleTableComponent },
   { path: 'publication/add/:userId', component: AddPublicationComponent },
   { path: 'publication/list/:userId', component: ListPublicationComponent },
+  { path: 'publication/list', component: ListPublicationComponent },
   { path: 'comment/list/:pubId/:userId', component: CommentComponent },
   { path: 'certificat/table', component: CertificatListComponent },
   { path: 'medicalExam/table', component: MedicalExamListComponent },
