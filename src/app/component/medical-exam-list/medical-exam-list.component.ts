@@ -53,7 +53,7 @@ export class MedicalExamListComponent implements OnInit {
 
   }
   addMedicalExam(medicalExam: MedicalExam){
-    this.consultation= new Consultation();
+    this.consultation = new Consultation();
     this.userLab = new User();
     this.userLab.id = 1;
     medicalExam.userLab = this.userLab;
