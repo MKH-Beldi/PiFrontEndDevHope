@@ -1,5 +1,5 @@
 <div class=container>
-  <h2><i class="bi bi-check2-circle"></i> Ajouter vos symptômes</h2>
+  <h2><i class="bi bi-check2-circle"></i> Ajouter symptômes</h2>
   <div class="container">
     <div class="row">
 
@@ -22,7 +22,7 @@
         </div>
       </div>
 
-      <div class="col-md-6">
+      <div class="col-md-10">
         <label for="symtoms" class="form-label" id="symtomsLabel" name="symtomsLabel">Symptômes <span style="color: red"> *</span></label>
         <ng-select  aria-label="symtomsLabel" id="symtoms" name="symtoms"
                    [items]="symptomsSelect"
@@ -32,7 +32,6 @@
                    multiple="true"
                    required="true"
                    [(ngModel)]="symptomsSelected"
-                    (change)="getSelectedValue()"
                    #symptoms="ngModel"
                    >
         </ng-select>
@@ -44,5 +43,9 @@
         </div>
       </div>
   </div>
+    <div class="col-md-2">
+      <button *ngIf="!idCons" type="submit" class="btn btn-primary" (click)="sendNotifSymptoms()"><i class="bi bi-save2"></i> Enregistrer</button>
+      <button *ngIf="idCons" type="submit" class="btn btn-primary" (click)="addSympSToConsul()"><i class="bi bi-save2"></i> Enregistrer à la consultation</button>
+    </div>
 </div>
-
+</div>

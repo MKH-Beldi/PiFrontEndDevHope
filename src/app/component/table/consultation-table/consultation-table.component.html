@@ -1,3 +1,6 @@
+<app-consultation-form  *ngIf="viewForm">
+
+</app-consultation-form>
 <div class=container>
   <div class="row mt-2">
     <div class="col-md-8">
@@ -19,29 +22,37 @@
         <th scope="col"></th>
         <th scope="col"></th>
         <th scope="col"></th>
-        <th scope="col" class="text-lg-center h5"></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
       </tr>
       <tr>
         <th scope="col" [appSort]="consultations" data-order="desc" data-name="id">#</th>
         <th scope="col">Patient</th>
         <th scope="col">Médecin</th>
-        <th scope="col"> RDV</th>
+        <th scope="col">RDV</th>
+        <th scope="col">Symptômes</th>
         <th scope="col" [appSort]="consultations" data-order="desc" data-name="status"><i class="bi bi-chevron-bar-expand"></i> Statut</th>
         <th scope="col">Actions</th>
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let object of consultations | searchFilter:searchValue | searchFilter:filtreValue:filtreName | paginate: config">
+      <tr  *ngFor="let object of consultations  | searchFilter:searchValue | searchFilter:filtreValue:filtreName | paginate: config " [ngClass]="getStyle(object)">
+        <ng-container *ngIf="user.id == object.schedules[0].userPatient.id || user.id == object.schedules[0].userDr.id || user.roles[0] == 'ROLE_ADMIN'">
         <th>{{ object.id}}</th>
         <td>{{ object.schedules[0].userPatient.firstName }} {{ object.schedules[0].userPatient.lastName }}</td>
         <td>{{ object.schedules[0].userDr.firstName }} {{ object.schedules[0].userDr.lastName }}</td>
-        <td>{{ object.schedules[0].start | date : 'medium'  : 'GMT+2' }}</td>
+        <td>{{ object.schedules[0].start | date : 'MMM d, y, h:mm a'  : 'GMT+2' }}</td>
+        <td>
+          <ng-container *ngFor="let o of object.symptoms">
+          {{ o.description }} ,
+          </ng-container>
+        </td>
         <td>{{ object.status}}</td>
         <td class="text-lg-center h5">
-          <a  role="button" class="text-warning p-2" title="View" data-toggle="tooltip" ><i class="bi bi-eye"></i></a>
           <a [routerLink]="['/consultation/edit', object.id]" role="button" class="text-info p-2" title="Edit" data-toggle="tooltip" ><i class="bi bi-pencil-square"></i></a>
           <a role="button" class="text-danger p-2" title="Delete" data-toggle="tooltip" (click)="deleteConsultation(object)"><i class="bi bi-trash"></i></a>
         </td>
+        </ng-container>
       </tr>
       </tbody>
     </table>

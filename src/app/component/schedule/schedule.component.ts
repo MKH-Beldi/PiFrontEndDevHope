@@ -6,8 +6,13 @@ import {ScheduleService} from '../../shared/schedule.service';
 import {Schedule} from '../../model/schedule';
 import {NotificationService} from '../../shared/notification.service';
 import DateTimeFormat = Intl.DateTimeFormat;
-import {formatNumber} from "@angular/common";
-import {ActivatedRoute, Router} from '@angular/router';
+import {ConsultationService} from "../../shared/consultation.service";
+import {Consultation} from "../../model/consultation";
+import {User} from "../../model/user";
+import {AuthService} from '../../shared/auth.service';
+import {Router} from "@angular/router";
+import * as moment from "moment";
+import {DatePipe} from "@angular/common";
 
 declare let $: any;
 declare let s: any;
@@ -25,14 +30,18 @@ export class ScheduleComponent {
 
   schedules: Schedule[];
   star: DateTimeFormat;
-  idEvent: number ;
+  idEvent: number;
   titleEvent: string;
-  startEvent: Date;
-  endEvent: Date;
+  startEvent : string = new Date().toISOString();
+  endEvent : string = new Date().toISOString();
+
   s: Schedule;
   list: [];
+  consultation = new Consultation();
+  user = new User();
 
   submitted = false;
+
 
   calendarOptions: CalendarOptions = {
     headerToolbar: {
@@ -44,43 +53,47 @@ export class ScheduleComponent {
     eventTimeFormat: { hour12: false, hour: '2-digit', minute: '2-digit' },
 
     weekends: true,
-
     editable: true,
     selectable: true,
     selectMirror: true,
 
     // dayMaxEvents: true,
-
     eventClick: this.showSchedule.bind(this),
     dateClick: this.handleDateClick.bind(this), // bind is important!
     events: [ ]
   };
 
-
-
-  constructor(private scheduleService: ScheduleService ,private notifyService: NotificationService , private router: Router) {}
+  constructor(private router: Router, private loginService: AuthService, private scheduleService: ScheduleService, private notifyService: NotificationService, private consultationService: ConsultationService) {}
 
   ngOnInit(): void {
-
-    this.scheduleService.getSchedule().subscribe(
-      (data: any[]) => {
-        this.schedules = data;
-        this.calendarOptions.events = data;
+    this.loginService.getUser().subscribe(
+      (data: User) => {
+        this.user = data;
+        if (this.user.roles[0] == 'ROLE_ADMIN'){
+          this.scheduleService.getSchedule().subscribe(
+            (data: any[]) => {
+              this.schedules = data;
+              this.calendarOptions.events = data;
+            }
+          );
+        }else if (this.user.roles[0] == 'ROLE_DR') {
+          this.scheduleService.getBy('userDr', this.user.id).subscribe(
+            (data: any[]) => {
+              this.schedules = data;
+              this.calendarOptions.events = data;
+          }
+          );
+        }else if (this.user.roles[0] == 'ROLE_PATIENT') {
+          this.scheduleService.getBy('userPatient', this.user.id).subscribe(
+            (data: any[]) => {
+              this.schedules = data;
+              this.calendarOptions.events = data;
+            }
+          );
+        }
       }
     );
   }
-
-  getScheduleBy () {
-    //this. = this.serviceRoute.snapshot.params.idEvent;
-    this.scheduleService.getBy('schedule',1).subscribe(
-      (res: any [])=>{
-
-        this.schedules = res;
-        this.calendarOptions.events = res;
-      }
-    );
-
-}
 
   addSchedule(schedule: Schedule){
     console.log(schedule);
@@ -90,8 +103,19 @@ export class ScheduleComponent {
           schedule.id = data[0];
           this.schedules.push(schedule);
           this.notifyService.showSuccess('schedule ajouté avec succès !', 'Ajout');
-          $("#myModal").modal("hide");
-
+          $("#myModal1").modal("hide");
+          this.consultation.status = this.consultationService.getStatus()[0];
+          this.consultationService.addConsultation(this.consultation).subscribe(
+            (data: any[]) => {
+              let s = new Schedule();
+              s.consultation = new Consultation();
+              s.consultation.id = data[0];
+              const idCons = data[0];
+              console.log(s);
+              this.scheduleService.updateSchedule(schedule.id, s).subscribe();
+              this.router.navigate(['/symptom/list', idCons]);
+            }
+          );
         }
       }
     );
@@ -100,7 +124,6 @@ export class ScheduleComponent {
   handleDateClick(arg) {
 
     $("#myModal1").modal("show");
-   // alert('selected ' + arg.startStr + ' to ' + arg.endStr);
     this.star = arg.dateStr;
     console.log(this.star);
     console.log((arg.id));
@@ -114,22 +137,26 @@ export class ScheduleComponent {
     $("#myModal2").modal("show");
     $("#myModal1").modal("hide");
 
+    console.log(this.endEvent);
+    console.log(this.startEvent);
 
-
-    this.idEvent = info.event.id  ;
+    this.idEvent= info.event.id;
     this.titleEvent = info.event.title;
-    this.startEvent = info.event.start;
-    this.endEvent = info.event.end;
-    console.log(typeof this.idEvent);
-    console.log(typeof info);
+    //this.startEvent = info.event.start;
+    //this.endEvent = info.event.end;
+    const datepipe : DatePipe = new DatePipe('en-US');
 
-    console.log(typeof this.startEvent);
-   // var idEvent: number = +this.idEvent;
+    this.endEvent = datepipe.transform(info.event.end, 'dd-MM-yyyy HH:mm:ss');
+    this.startEvent =  datepipe.transform(info.event.start, 'dd-MM-yyyy HH:mm:ss');
+
+
+    console.log(this.endEvent);
+    console.log(this.startEvent);
 
 
     //  alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
     //alert('View: ' + info.view.type);
-    console.log(info);
+    console.log(info.event.id);
 
   }
 
@@ -141,17 +168,16 @@ export class ScheduleComponent {
 
 
 
-  updateSchedule(  schedule: Schedule  ) {
-    schedule.id = +schedule.id;
+  updateSchedule( id: number, schedule: Schedule  ) {
+
     console.log(schedule);
     this.scheduleService.updateSchedule(+schedule.id, schedule).subscribe(
-
       (status) => {
         if (status.status === 201 ){
           this.notifyService.showInfo('schedule modifié avec succès !', 'Modification');
-          this.router.navigate(['/schedule/list']);
-
         }
+        $("#myModal2").modal("hide");
+
       }
     );
   }

@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {MedicalExamService} from "../../shared/medical-exam.service";
 import {MedicalExam} from '../../model/medicalExam';
 import {FileMedicalExamService} from "../../shared/file-medical-exam.service";
+import {Certificat} from "../../model/certificat";
+import {User} from "../../model/user";
+import {Consultation} from "../../model/consultation";
+import {FileMedicalExam} from "../../model/fileMedicalExam";
 
 @Component({
   selector: 'app-medical-exam-list',
@@ -9,16 +13,22 @@ import {FileMedicalExamService} from "../../shared/file-medical-exam.service";
   styleUrls: ['./medical-exam-list.component.css']
 })
 export class MedicalExamListComponent implements OnInit {
+  medicalExamToEdit: MedicalExam;
   viewForm: boolean;
   addMode: boolean;
   medicalExams: MedicalExam[];
+  fileMedicalExams: FileMedicalExam[];
   config: any;
   medicalExam: MedicalExam;
   totalData: any;
+  userLab: User;
+  consultation: Consultation;
+  d: any;
   constructor(private medicalExamService: MedicalExamService,
               private fileMedicalExamService: FileMedicalExamService) { }
 
   ngOnInit(): void {
+    this.medicalExam=new MedicalExam();
     this.viewForm = false ;
     this.medicalExamService.getAll().subscribe(
       (data: MedicalExam[]) => {
@@ -32,21 +42,56 @@ export class MedicalExamListComponent implements OnInit {
       totalItems: this.totalData
     };
   }
+  editMedicalExam(medicalExam: MedicalExam){
 
+  }
   sendEdit(me:MedicalExam){
 
   }
-  deleteMedicalExam(me: MedicalExam){
-   // this.fileMedicalExamService.deleteMedicalExam(me.id);
-    this.medicalExamService.deleteMedicalExam(me.id).subscribe(
-        (status) => {
-          if (status.status === 404 ){
-            const indexDelete = this.medicalExams.indexOf(me);
-            this.medicalExams.splice(indexDelete, 1);
-          }
+  addMedicalExam(medicalExam: MedicalExam){
+    this.consultation= new Consultation();
+    this.userLab = new User();
+    this.userLab.id = 1;
+    medicalExam.userLab = this.userLab;
+    this.consultation.id = 1;
+    medicalExam.consultation = this.consultation;
+
+    this.medicalExamService.addMedicalExam(medicalExam).subscribe(
+      (data: any[]) => {
+        if (data[0]){
+          this.medicalExams.push(medicalExam);
+          this.viewForm = false;
         }
-      );
-    }
+      }
+    );
+    this.ngOnInit();
+  }
+  deleteMedicalExam(me: MedicalExam){
+     this.fileMedicalExamService.getBy('medicalExam', me.id).subscribe(
+      (data: FileMedicalExam[]) => {
+        this.fileMedicalExams = data;
+        console.log(this.fileMedicalExams);
+        if (this.fileMedicalExams[0] = null){
+          this.fileMedicalExamService.deleteFileMedicalExam(this.fileMedicalExams[0].id).subscribe(
+            (data: FileMedicalExam[]) => {
+              const indexDelete = this.medicalExams.indexOf(me);
+
+              this.medicalExams.splice(indexDelete, 1);
+
+              this.medicalExamService.deleteMedicalExam(me.id).subscribe();
+            }
+          );
+      }
+        else {
+          const indexDelete = this.medicalExams.indexOf(me);
+
+          this.medicalExams.splice(indexDelete, 1);
+          this.medicalExamService.deleteMedicalExam(me.id).subscribe();
+
+        }
+      }
+    );
+  }
 
   pageChanged(event){
     console.log('next');

@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {User} from '../model/user';
+
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  url = 'http://127.0.0.1:8000/api/user/';
-//http://127.0.0.1:8000/api/user/get/id/1
+  url = 'http://127.0.0.1:8000/api/login/';
+  userRoles: string[] = ['ROLE_ADMIN', 'ROLE_DR', 'ROLE_PATIENT', 'ROLE_LAB'];
+
   constructor(private http: HttpClient) {
   }
 
@@ -15,12 +17,12 @@ export class UserService {
     return this.http.get<User[]>(this.url);
   }
 
-  getById(id: number) {
-    return this.http.get<User>(this.url + id);
+  getBy(criteria: string, value: any) {
+    return this.http.get<User[]>(this.url + 'get/' + criteria + '/' + value);
   }
 
   addUser(u: User) {
-    return this.http.post(this.url, u);
+    return this.http.post(this.url + 'create', u);
   }
 
   deleteUser(id: number) {
@@ -30,7 +32,8 @@ export class UserService {
   updateUser(id: number, u: User) {
     return this.http.put(this.url + id, u);
   }
-  getUserByCriteria(criteria, value){
-    return this.http.get<User>(this.url +'get/'+criteria+'/'+value);
+
+  getRoles(){
+    return this.userRoles;
   }
 }

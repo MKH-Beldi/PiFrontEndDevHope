@@ -10,7 +10,7 @@ import { Symptom } from 'src/app/model/symptom';
 
 export class PublicationFormComponent implements OnInit {
   @Output() editEvent = new EventEmitter<Publication>();
-  @Input() publication : Publication
+  @Input() publication : Publication;
 
   constructor() { }
 

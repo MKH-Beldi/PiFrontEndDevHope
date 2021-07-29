@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Publication } from 'src/app/model/publication';
 import { NotificationService } from 'src/app/shared/notification.service';
 import { PublicationService } from 'src/app/shared/publication.service';
+import {AuthService} from '../../shared/auth.service';
+import {User} from "../../model/user";
 
 @Component({
   selector: 'app-list-publication',
@@ -18,6 +20,7 @@ export class ListPublicationComponent implements OnInit {
   config: any;
   totalData: any;
   viewForm: boolean;
+  user = new User();
 
 
   publications : Publication[]
@@ -25,23 +28,29 @@ export class ListPublicationComponent implements OnInit {
   constructor(private serviceRoute: ActivatedRoute,
     private publicationService:PublicationService,
     private notifyService: NotificationService,
-    private router: Router,
+    private router: Router, private loginService: AuthService
+
 
 ) { }
 
   ngOnInit(): void {
      this.userId = this.serviceRoute.snapshot.params.userId;
-    this.publicationService.getAll().subscribe(
-      (res:Publication[])=>{
-        this.publications = res
-        console.log(this.publications)
-        this.totalData = this.publications.length;
-        this.publicationSelect = this.publications.map(
-                o => o.title).filter((value, index, self) => self.indexOf(value) === index);
-      },(err)=>{
-        console.log(err)
-      }
-    )
+     this.loginService.getUser().subscribe(
+       (data: User) => {
+         this.user = data;
+         this.publicationService.getAll().subscribe(
+           (res: Publication[]) => {
+             this.publications = res
+             console.log(this.publications)
+             this.totalData = this.publications.length;
+             this.publicationSelect = this.publications.map(
+               o => o.title).filter((value, index, self) => self.indexOf(value) === index);
+           }, (err) => {
+             console.log(err);
+           }
+         );
+       }
+     );
 
     this.viewForm = false ;
     this.config = {
@@ -99,6 +108,6 @@ export class ListPublicationComponent implements OnInit {
     this.config.currentPage = event;
   }
   commentPublication(p:Publication){
-    this.router.navigate(['/comment/list/', p.id,this.userId]);
+    this.router.navigate(['/comment/list/', p.id,this.user.id]);
   }
 }

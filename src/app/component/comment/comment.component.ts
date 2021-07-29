@@ -12,26 +12,26 @@ import { NotificationService } from 'src/app/shared/notification.service';
   styleUrls: ['./comment.component.css']
 })
 export class CommentComponent implements OnInit {
-userId
-pubId
-comments : any[]
-showForm:Boolean = false
-newComment
-commentToEdit
-addForm:Boolean
+  userId
+  pubId
+  comments : any[]
+  showForm:Boolean = false
+  newComment
+  commentToEdit
+  addForm:Boolean
   constructor(    private serviceRoute: ActivatedRoute,
-    private commentService : CommentService,
-    private notifyService: NotificationService,
+                  private commentService : CommentService,
+                  private notifyService: NotificationService,
 
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     this.userId = this.serviceRoute.snapshot.params.userId;
     this.pubId = this.serviceRoute.snapshot.params.pubId;
     this.commentService.getByc('publication',this.pubId).subscribe(
       (res)=>{
-      console.log(res)
-      this.comments = res
+        console.log(res)
+        this.comments = res
       },
       (err)=>{console.log(err)}
     )
@@ -57,19 +57,18 @@ addForm:Boolean
     this.addForm = true;
   }
   addComment(){
-    const comment = new Comment();
-    comment.contente = this.newComment;
-    const user = new User();
-    user.id = this.userId;
-    comment.user = user;
-    const pub = new Publication();
-    pub.id = this.pubId;
-    comment.publication = pub;
-    console.log({comment});
+    const comment = new Comment()
+    comment.contente = this.newComment
+    const user = new User()
+    user.id = this.userId
+    const pub = new Publication()
+    pub.id = this.pubId
+    comment.publication = pub
+    console.log({comment})
     this.commentService.addComment(comment).subscribe(
       (res)=>{console.log(res)
         this.notifyService.showSuccess('Commentaire ajouté avec succès !', 'Ajout');
-        //this.comments.push()
+        this.comments.push(comment);
       },
       (err)=>{console.log(err)}
     )

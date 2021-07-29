@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { Profil } from 'src/app/model/profil';
 import { NotificationService } from 'src/app/shared/notification.service';
 import { ProfilService } from 'src/app/shared/profil.service';
+import {AuthService} from '../../shared/auth.service';
+import {User} from '../../model/user';
 
 @Component({
   selector: 'app-profil',
@@ -11,16 +13,24 @@ import { ProfilService } from 'src/app/shared/profil.service';
 })
 export class ProfilComponent implements OnInit {
   profile: Profil;
+  idUser: number;
   constructor(private profileService: ProfilService,
               private notifyService: NotificationService,
-              private router: Router) { }
+              private router: Router, private loginService: AuthService) { }
 
   ngOnInit(): void {
-    this.profileService.getByp('id', '1').subscribe(
-      (res: Profil []) => {
-        this.profile = res[0];
-        console.log(this.profile); },
-      (err) => {console.log(err); }
+    this.loginService.getUser().subscribe(
+      (data: User) => {
+        this.idUser = data.id;
+        console.log(this.idUser);
+        this.profileService.getByp('userDr', this.idUser).subscribe(
+          (res: Profil[]) => {
+            console.log(res[0]);
+            this.profile = res[0];
+            console.log(this.profile); },
+          (err) => {console.log(err); }
+        );
+      }
     );
   }
 modifier(){
