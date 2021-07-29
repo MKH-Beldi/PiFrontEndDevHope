@@ -1,5 +1,13 @@
 <div class="container mt-3">
-  <h2><i class="bi bi-pencil-square"></i>Consultation</h2>
+  <div class="row">
+    <div class="col-md-8">
+      <h2><i class="bi bi-pencil-square"></i>Consultation</h2>
+    </div>
+    <div class="col-md-4">
+      <a type="submit" class="btn btn-warning" [routerLink]="['/medicalExam/table', idCons]"><i class="bi bi-kanban"></i> MedicalExam</a>
+      <a type="submit" class="btn btn-warning" [routerLink]="['/medicalExam/table', idCons]"><i class="bi bi-kanban"></i> Créer Certif</a>
+    </div>
+  </div>
   <div class="container">
       <div class="col-md-4">
         <label class="form-label">Nom de patient : {{consultation.schedules[0].userPatient.lastName}}</label>

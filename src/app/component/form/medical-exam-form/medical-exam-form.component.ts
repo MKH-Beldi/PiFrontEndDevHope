@@ -22,6 +22,7 @@ export class MedicalExamFormComponent implements OnInit {
   @Input() addModeChild: boolean;
   @Input() medicalExam1: MedicalExam;
   @Output() editEvent = new EventEmitter<MedicalExam>();
+  @Output() addEvent = new EventEmitter<MedicalExam>();
 
   constructor(private medicalExamService: MedicalExamService, private activatedRoute: ActivatedRoute, private fileMedicalExamService: FileMedicalExamService) { }
 
@@ -32,15 +33,13 @@ export class MedicalExamFormComponent implements OnInit {
     }
   }
 
-  addMedicalExam() {
-    this.consultation = new Consultation();
-    this.userLab.id = 1;
-    this.medicalExam.userLab = this.userLab;
-    this.consultation.id = +this.idCons;
-    this.medicalExam.consultation = this.consultation;
-    this.medicalExamService.addMedicalExam(this.medicalExam).subscribe();
-  }
 
+  sendAddNotif(){
+    let consultation = new Consultation();
+    consultation.id = +this.idCons;
+    this.medicalExam.consultation = consultation;
+    this.addEvent.emit(this.medicalExam);
+  }
   sendEditNotif() {
     this.editEvent.emit(this.medicalExam);
   }

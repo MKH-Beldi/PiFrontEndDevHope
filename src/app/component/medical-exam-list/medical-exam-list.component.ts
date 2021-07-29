@@ -53,13 +53,7 @@ export class MedicalExamListComponent implements OnInit {
 
   }
   addMedicalExam(medicalExam: MedicalExam){
-    this.consultation = new Consultation();
-    this.userLab = new User();
-    this.userLab.id = 1;
     medicalExam.userLab = this.userLab;
-    this.consultation.id = 1;
-    medicalExam.consultation = this.consultation;
-
     this.medicalExamService.addMedicalExam(medicalExam).subscribe(
       (data: any[]) => {
         if (data[0]){

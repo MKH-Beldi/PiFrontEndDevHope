@@ -22,7 +22,7 @@
                     </div>
                     <div class="form-row border-bottom p-4">
                       <label class="text-inverse font-12 text-uppercase"> date fin </label>
-                      <input type="datetime-local" class="border-0 p-0 font-14 form-control"   name="end" id="end" class="title inp "  [(ngModel)]="schedule.end"  />
+                      <input type="datetime" class="border-0 p-0 font-14 form-control"   name="end" id="end" class="title inp "  [(ngModel)]="schedule.end"  />
                     </div>
                     <div>
                       <button type="submit"  class="m-0 border-0 py-4 font-14 font-monospace btn btn-danger-gradiant btn-block position-relative rounded-0 text-center text-black-50 text-uppercase" (click)="sendAddNotif()" [disabled]="f.invalid"

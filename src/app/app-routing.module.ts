@@ -58,6 +58,7 @@ const routes: Routes = [
   { path: 'schedule/edit/:id', canActivate: [AuthGuardService], component: ScheduleTableComponent },
   { path: 'user/drList', component: DrListComponent },
   { path: 'profile/list', canActivate: [AuthGuardService], component: ListProfileComponent},
+  { path: 'fileMedicalExam/table/:idCons', canActivate: [AuthGuardService], component: FileMedicalExamListComponent },
   { path: '**', component: NotFoundComponent}
 ];
 

@@ -44,9 +44,17 @@ export class FileMedicalExamListComponent implements OnInit {
     console.log('next');
     this.config.currentPage = event;
   }
-  deleteFileMedicalExam(fme:FileMedicalExam){
+  deleteFileMedicalExam(fme:FileMedicalExam) {
+    this.fileMedicalExamService.deleteFileMedicalExam(fme.id).subscribe(
+      (data: FileMedicalExam[]) => {
+        const indexDelete = this.fileMedicalExams.indexOf(fme);
+        this.fileMedicalExams.splice(indexDelete, 1);
+      }
+    );
 
   }
+
+
   sendEdit(fme:FileMedicalExam){
 
   }
@@ -57,10 +65,7 @@ export class FileMedicalExamListComponent implements OnInit {
 
   }
   addFileMedicalExam(fme:FileMedicalExam){
-    this.medicalExam = new MedicalExam();
-    this.medicalExam.id = 27;
     fme.urlFile = 'aaaa';
-    fme.medicalExam = this.medicalExam;
     console.log(fme);
     this.fileMedicalExamService.addFileMedicalExam(fme).subscribe(
       (data: any[]) => {

@@ -13,7 +13,6 @@ export class ConsultationComponent implements OnInit {
 
   idCons: string;
   consultation: Consultation;
-
   Editor = BalloonEditor;
   editorConfig = {
 
