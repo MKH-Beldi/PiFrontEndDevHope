@@ -8,6 +8,7 @@ import {User} from '../model/user';
 export class UserService {
 
   url = 'http://127.0.0.1:8000/api/login/';
+
   userRoles: string[] = ['ROLE_ADMIN', 'ROLE_DR', 'ROLE_PATIENT', 'ROLE_LAB'];
 
   constructor(private http: HttpClient) {

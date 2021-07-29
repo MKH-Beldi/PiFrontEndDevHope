@@ -6,6 +6,7 @@ import {Certificat} from "../../model/certificat";
 import {User} from "../../model/user";
 import {Consultation} from "../../model/consultation";
 import {FileMedicalExam} from "../../model/fileMedicalExam";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-medical-exam-list',
@@ -24,13 +25,16 @@ export class MedicalExamListComponent implements OnInit {
   userLab: User;
   consultation: Consultation;
   d: any;
+  idCons: string;
+  user = new User();
   constructor(private medicalExamService: MedicalExamService,
-              private fileMedicalExamService: FileMedicalExamService) { }
+              private fileMedicalExamService: FileMedicalExamService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.medicalExam=new MedicalExam();
     this.viewForm = false ;
-    this.medicalExamService.getAll().subscribe(
+    this.idCons = this.route.snapshot.params.idCons;
+    this.medicalExamService.getBy('consultation', this.idCons).subscribe(
       (data: MedicalExam[]) => {
         this.medicalExams = data;
         this.totalData = data.length;

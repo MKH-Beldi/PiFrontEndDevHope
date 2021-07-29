@@ -4,7 +4,7 @@ import { Publication } from 'src/app/model/publication';
 import { NotificationService } from 'src/app/shared/notification.service';
 import { PublicationService } from 'src/app/shared/publication.service';
 import {AuthService} from '../../shared/auth.service';
-import {User} from "../../model/user";
+import {User} from '../../model/user';
 
 @Component({
   selector: 'app-list-publication',

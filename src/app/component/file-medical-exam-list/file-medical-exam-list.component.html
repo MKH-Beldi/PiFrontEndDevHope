@@ -47,18 +47,18 @@
       </thead>
       <tbody>
       <tr start="i" *ngFor="let object of fileMedicalExams  | paginate: config ; let i = index">
-        <th scope="row">{{ i+1 }}</th>
-        <td>{{ object.title }}</td>
-        <td>{{ object.description }}</td>
-        <td>{{ object.urlFile }}</td>
+          <th scope="row">{{ i+1 }}</th>
+          <td>{{ object.title }}</td>
+          <td>{{ object.description }}</td>
+          <td>{{ object.urlFile }}</td>
 
-        <td>{{ object.createdAt | date : 'medium'  : 'GMT+2' }}</td>
-        <td>{{ object.createdAt | date : 'medium'  : 'GMT+2' }}</td>
-        <td><a [routerLink]="['/medicalExamView', object.medicalExam.id]" routerLinkActive="active"><button class="btn btn-primary">{{ object.medicalExam.id }}</button></a></td>
-        <td class="text-lg-center h5">
-          <a role="button" class="text-info p-2" title="Edit" data-toggle="tooltip" (click)="sendEdit(object)"><i class="bi bi-pencil-square"></i></a>
-          <a role="button" class="text-danger p-2" title="Delete" data-toggle="tooltip" (click)="deleteFileMedicalExam(object)"><i class="bi bi-trash"></i></a>
-        </td>
+          <td>{{ object.createdAt | date : 'medium'  : 'GMT+2' }}</td>
+          <td>{{ object.createdAt | date : 'medium'  : 'GMT+2' }}</td>
+          <td><a [routerLink]="['/medicalExamView', object.medicalExam.id]" routerLinkActive="active"><button class="btn btn-primary">{{ object.medicalExam.id }}</button></a></td>
+          <td class="text-lg-center h5">
+            <a role="button" class="text-info p-2" title="Edit" data-toggle="tooltip" (click)="sendEdit(object)"><i class="bi bi-pencil-square"></i></a>
+            <a role="button" class="text-danger p-2" title="Delete" data-toggle="tooltip" (click)="deleteFileMedicalExam(object)"><i class="bi bi-trash"></i></a>
+          </td>
       </tr>
       </tbody>
       <div class="row">

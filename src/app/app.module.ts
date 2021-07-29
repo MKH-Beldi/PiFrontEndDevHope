@@ -4,8 +4,6 @@ import {LOCALE_ID, NgModule} from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import localeFr from '@angular/common/locales/fr';
 import { registerLocaleData } from '@angular/common';
 import { SpecialtyDrService } from './shared/specialty-dr.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -31,9 +29,6 @@ import {FileMedicalExamFormComponent} from './component/form/file-medical-exam-f
 import {CertificatViewComponent} from './component/certificat-view/certificat-view.component';
 import {MedicalExamListComponent} from './component/medical-exam-list/medical-exam-list.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
-import timeGridPlugin from '@fullcalendar/timegrid';
-import interactionPlugin from '@fullcalendar/interaction';
-import dayGridPlugin from '@fullcalendar/daygrid';
 import {ScheduleComponent} from './component/schedule/schedule.component';
 import {ReactiveFormsModule } from '@angular/forms';
 import {ScheduleFormComponent} from './component/form/schedule-form/schedule-form.component';
@@ -54,7 +49,12 @@ import { SigninComponent } from './component/signin/signin.component';
 import {BasicAuthHtppInterceptorService} from './shared/basic-auth-interceptor.service';
 import {AuthService} from './shared/auth.service';
 import {HeaderComponent} from './component/header/header.component';
-import {ProfilService} from './shared/profil.service';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import localeFr from '@angular/common/locales/fr';
+import { NotFoundComponent } from './component/not-found/not-found.component';
 
 registerLocaleData(localeFr);
 
@@ -96,7 +96,8 @@ FullCalendarModule.registerPlugins([
     CertificatListComponent,
     MedicalExamViewComponent,
     UserRegisterFormComponent,
-    SigninComponent
+    SigninComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -113,7 +114,7 @@ FullCalendarModule.registerPlugins([
     ReactiveFormsModule,
     FullCalendarModule
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'fr-FR'}, { provide: HTTP_INTERCEPTORS, useClass: BasicAuthHtppInterceptorService, multi: true}, SpecialtyDrService, ConsultationService, SymptomService, AuthService, ProfilService ],
+  providers: [{ provide: LOCALE_ID, useValue: 'fr-FR'}, { provide: HTTP_INTERCEPTORS, useClass: BasicAuthHtppInterceptorService, multi: true}, SpecialtyDrService, ConsultationService, SymptomService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -51,6 +51,7 @@
         <td class="text-lg-center h5">
           <a [routerLink]="['/consultation/edit', object.id]" role="button" class="text-info p-2" title="Edit" data-toggle="tooltip" ><i class="bi bi-pencil-square"></i></a>
           <a role="button" class="text-danger p-2" title="Delete" data-toggle="tooltip" (click)="deleteConsultation(object)"><i class="bi bi-trash"></i></a>
+          <a [routerLink]="['/medicalExam/table', object.id]" role="button" class="text-info p-2" title="Edit" data-toggle="tooltip" ><i class="bi bi-view-list"></i></a>
         </td>
         </ng-container>
       </tr>

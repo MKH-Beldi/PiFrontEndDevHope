@@ -4,6 +4,9 @@ import {MedicalExamService} from '../../../shared/medical-exam.service';
 import {Consultation} from '../../../model/consultation';
 import {User} from '../../../model/user';
 import {Certificat} from "../../../model/certificat";
+import {ActivatedRoute} from "@angular/router";
+import {FileMedicalExam} from "../../../model/fileMedicalExam";
+import {FileMedicalExamService} from "../../../shared/file-medical-exam.service";
 
 @Component({
   selector: 'app-medical-exam-form',
@@ -11,24 +14,33 @@ import {Certificat} from "../../../model/certificat";
   styleUrls: ['./medical-exam-form.component.css']
 })
 export class MedicalExamFormComponent implements OnInit {
-medicalExam = new MedicalExam();
-consultation = new Consultation();
-user = new User();
+  medicalExam = new MedicalExam();
+  consultation = new Consultation();
+  idCons: string;
+  userLab = new User();
+  user = new User();
   @Input() addModeChild: boolean;
   @Input() medicalExam1: MedicalExam;
-  @Output() addEvent = new EventEmitter<MedicalExam>();
   @Output() editEvent = new EventEmitter<MedicalExam>();
-  constructor(private medicalExamService: MedicalExamService) { }
+
+  constructor(private medicalExamService: MedicalExamService, private activatedRoute: ActivatedRoute, private fileMedicalExamService: FileMedicalExamService) { }
 
   ngOnInit(): void {
+    this.idCons = this.activatedRoute.snapshot.params.idCons;
     if (this.addModeChild){
       this.medicalExam = new MedicalExam();
     }
   }
-  sendAddNotif(){
-    console.log("khra");
-    this.addEvent.emit(this.medicalExam);
+
+  addMedicalExam() {
+    this.consultation = new Consultation();
+    this.userLab.id = 1;
+    this.medicalExam.userLab = this.userLab;
+    this.consultation.id = +this.idCons;
+    this.medicalExam.consultation = this.consultation;
+    this.medicalExamService.addMedicalExam(this.medicalExam).subscribe();
   }
+
   sendEditNotif() {
     this.editEvent.emit(this.medicalExam);
   }

@@ -11,7 +11,7 @@
   [starChild]="star"> </app-schedule-form>
 </div>
   <div class="modal" id="myModal2">
-<app-schedule-table   [routerLink]="['/schedule/add']" (editEvent) ="updateSchedule(idEvent , $event)" [idChild]="idEvent" [titlechild]="titleEvent"  [startchild]="startEvent"  [endchild]="endEvent" > </app-schedule-table>
+<app-schedule-table (editEvent) ="updateSchedule(idEvent , $event)" [idChild]="idEvent" [titlechild]="titleEvent"  [startchild]="startEvent"  [endchild]="endEvent" > </app-schedule-table>
   </div>
 
 

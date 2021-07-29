@@ -15,35 +15,43 @@ import { MedicalExamListComponent } from './component/medical-exam-list/medical-
 import { FileMedicalExamListComponent } from './component/file-medical-exam-list/file-medical-exam-list.component';
 import { CertificatListComponent } from './component/certificat-list/certificat-list.component';
 import { MedicalExamViewComponent } from './component/medical-exam-view/medical-exam-view.component';
+import { MedicalExamFormComponent } from './component/form/medical-exam-form/medical-exam-form.component';
 import { UserRegisterFormComponent } from './component/form/user-register-form/user-register-form.component';
 import { SigninComponent } from './component/signin/signin.component';
 import { ScheduleFormComponent } from './component/form/schedule-form/schedule-form.component';
+import {AuthGuardService} from './shared/auth-guard.service';
+import {NotFoundComponent} from './component/not-found/not-found.component';
+import {HomeComponent} from './component/home/home.component';
+
 
 
 
 const routes: Routes = [
-  {path: 'profile' , component: ProfilComponent},
-  { path: 'consultation/table', component: ConsultationTableComponent },
-  { path: 'consultation/add', component: ConsultationFormComponent },
-  { path: 'consultation/edit/:id', component: ConsultationFormComponent },
-  { path: 'symptom/table', component: SymptomTableComponent },
-  { path: 'symptom/list', component: SymptomListComponent },
-  { path: 'symptom/add', component: SymptomFormComponent },
-  { path: 'symptom/list/:idCons', component: SymptomListComponent },
-  { path: 'publication/add/:userId', component: AddPublicationComponent },
-  { path: 'publication/list/:userId', component: ListPublicationComponent },
-  { path: 'publication/list', component: ListPublicationComponent },
-  { path: 'comment/list/:pubId/:userId', component: CommentComponent },
-  { path: 'certificat/table', component: CertificatListComponent },
-  { path: 'medicalExam/table', component: MedicalExamListComponent },
-  { path: 'fileMedicalExam/table', component: FileMedicalExamListComponent },
+  { path: '', component: HomeComponent},
+  {path: 'profile' , canActivate: [AuthGuardService], component: ProfilComponent},
+  { path: 'consultation/table' , canActivate: [AuthGuardService], component: ConsultationTableComponent },
+  { path: 'consultation/add' , canActivate: [AuthGuardService], component: ConsultationFormComponent },
+  { path: 'consultation/edit/:id', canActivate: [AuthGuardService], component: ConsultationFormComponent },
+  { path: 'symptom/table', canActivate: [AuthGuardService], component: SymptomTableComponent },
+  { path: 'symptom/list', canActivate: [AuthGuardService], component: SymptomListComponent },
+  { path: 'symptom/add', canActivate: [AuthGuardService], component: SymptomFormComponent },
+  { path: 'symptom/list/:idCons', canActivate: [AuthGuardService], component: SymptomListComponent },
+  { path: 'publication/add/:userId', canActivate: [AuthGuardService], component: AddPublicationComponent },
+  { path: 'publication/list/:userId', canActivate: [AuthGuardService], component: ListPublicationComponent },
+  { path: 'publication/list', canActivate: [AuthGuardService], component: ListPublicationComponent },
+  { path: 'comment/list/:pubId/:userId', canActivate: [AuthGuardService], component: CommentComponent },
+  { path: 'certificat/table', canActivate: [AuthGuardService], component: CertificatListComponent },
+  { path: 'medicalExam/table/:idCons', canActivate: [AuthGuardService], component: MedicalExamListComponent },
+  { path: 'medicalExam/add/:idCons', canActivate: [AuthGuardService], component: MedicalExamFormComponent },
+  { path: 'fileMedicalExam/table', canActivate: [AuthGuardService], component: FileMedicalExamListComponent },
   { path: 'user/add', component: UserRegisterFormComponent },
   { path: 'auth/signin', component: SigninComponent },
-  { path: 'medicalExamView/:id', component: MedicalExamViewComponent },
-  { path: 'schedule/list/:userId', component: ScheduleComponent },
-  { path: 'schedule/list', component: ScheduleComponent },
-  { path: 'schedule/add', component: ScheduleFormComponent },
-  { path: 'schedule/edit/:id', component: ScheduleTableComponent }
+  { path: 'medicalExamView/:id', canActivate: [AuthGuardService], component: MedicalExamViewComponent },
+  { path: 'schedule/list/:userId', canActivate: [AuthGuardService], component: ScheduleComponent },
+  { path: 'schedule/list', canActivate: [AuthGuardService], component: ScheduleComponent },
+  { path: 'schedule/add', canActivate: [AuthGuardService], component: ScheduleFormComponent },
+  { path: 'schedule/edit/:id', canActivate: [AuthGuardService], component: ScheduleTableComponent },
+  { path: '**', component: NotFoundComponent}
 ];
 
 @NgModule({
