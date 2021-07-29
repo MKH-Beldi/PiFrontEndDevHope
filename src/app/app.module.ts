@@ -99,7 +99,7 @@ FullCalendarModule.registerPlugins([
     UserRegisterFormComponent,
     SigninComponent,
     ListProfileComponent,
-    NotFoundComponent
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

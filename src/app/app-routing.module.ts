@@ -52,8 +52,9 @@ const routes: Routes = [
   { path: 'schedule/list', canActivate: [AuthGuardService], component: ScheduleComponent },
   { path: 'schedule/add', canActivate: [AuthGuardService], component: ScheduleFormComponent },
   { path: 'schedule/edit/:id', canActivate: [AuthGuardService], component: ScheduleTableComponent },
+  { path: 'profile/list', canActivate: [AuthGuardService], component: ListProfileComponent},
   { path: '**', component: NotFoundComponent},
-  { path: 'profile/list', component: ListProfileComponent }
+
 ];
 
 @NgModule({

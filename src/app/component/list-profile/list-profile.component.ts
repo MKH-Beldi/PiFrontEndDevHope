@@ -5,6 +5,8 @@ import { Publication } from 'src/app/model/publication';
 import { NotificationService } from 'src/app/shared/notification.service';
 import { ProfilService } from 'src/app/shared/profil.service';
 import { PublicationService } from 'src/app/shared/publication.service';
+import {AuthService} from '../../shared/auth.service';
+import {User} from '../../model/user';
 
 
 @Component({
@@ -20,14 +22,14 @@ export class ListProfileComponent implements OnInit {
   config: any;
   totalData: any;
   viewForm: boolean;
-
+  user = new User();
 
   profiles: Profil[];
   userId;
   constructor(private serviceRoute: ActivatedRoute,
               private profileService: ProfilService,
               private notifyService: NotificationService,
-              private router: Router,
+              private router: Router, private loginService: AuthService
 
   ) { }
 
