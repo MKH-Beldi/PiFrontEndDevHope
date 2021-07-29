@@ -1,4 +1,3 @@
-<app-header></app-header>
 <app-publication-form
   *ngIf="viewForm"
   (editEvent)="editPublication($event)"
@@ -31,152 +30,152 @@
   <div class="container">
     <table class="table table-hover table-bordered">
       <thead>
-        <tr>
-          <th scope="col"><i class="bi bi-funnel-fill"></i></th>
-          <th scope="col">
-            <select
-              class="filtre form-select form-select-sm"
-              [(ngModel)]="filtreValue"
-              (change)="getFiltreName('title')"
-            >
-              <option selected [ngValue]="undefined">Filtre</option>
-              <option *ngFor="let object of publicationSelect">
-                {{ object }}
-              </option>
-            </select>
-          </th>
-          <th scope="col"></th>
-          <th scope="col"></th>
-          <th scope="col"></th>
-          <th scope="col" class="text-lg-center h5">
-            <a
-              *ngIf="viewForm"
-              role="button"
-              class="text-danger p-2"
-              title="Add"
-              data-toggle="tooltip"
-              (click)="viewForm = false"
-              ><i class="bi bi-x-circle"></i
-            ></a>
-          </th>
-        </tr>
-        <tr>
-          <th
-            scope="col"
-            [appSort]="publications"
-            data-order="desc"
-            data-name="id"
+      <tr>
+        <th scope="col"><i class="bi bi-funnel-fill"></i></th>
+        <th scope="col">
+          <select
+            class="filtre form-select form-select-sm"
+            [(ngModel)]="filtreValue"
+            (change)="getFiltreName('title')"
           >
-            #
-          </th>
-          <th
-            scope="col"
-            [appSort]="publications"
-            data-order="nom"
-            data-name="nom"
-          >
-            <i class="bi bi-chevron-bar-expand"></i> Nom
-          </th>
-          <th
-            scope="col"
-            [appSort]="publications"
-            data-order="prenom"
-            data-name="prenom"
-          >
-            <i class="bi bi-chevron-bar-expand"></i> Prenom
-          </th>
-          <th
-            scope="col"
-            [appSort]="publications"
-            data-order="desc"
-            data-name="title"
-          >
-            <i class="bi bi-chevron-bar-expand"></i> Titre
-          </th>
-          <th
-            scope="col"
-            [appSort]="publications"
-            data-order="desc"
-            data-name="contente"
-          >
-            <i class="bi bi-chevron-bar-expand"></i> Contenu
-          </th>
+            <option selected [ngValue]="undefined">Filtre</option>
+            <option *ngFor="let object of publicationSelect">
+              {{ object }}
+            </option>
+          </select>
+        </th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col" class="text-lg-center h5">
+          <a
+            *ngIf="viewForm"
+            role="button"
+            class="text-danger p-2"
+            title="Add"
+            data-toggle="tooltip"
+            (click)="viewForm = false"
+          ><i class="bi bi-x-circle"></i
+          ></a>
+        </th>
+      </tr>
+      <tr>
+        <th
+          scope="col"
+          [appSort]="publications"
+          data-order="desc"
+          data-name="id"
+        >
+          #
+        </th>
+        <th
+          scope="col"
+          [appSort]="publications"
+          data-order="nom"
+          data-name="nom"
+        >
+          <i class="bi bi-chevron-bar-expand"></i> Nom
+        </th>
+        <th
+          scope="col"
+          [appSort]="publications"
+          data-order="prenom"
+          data-name="prenom"
+        >
+          <i class="bi bi-chevron-bar-expand"></i> Prenom
+        </th>
+        <th
+          scope="col"
+          [appSort]="publications"
+          data-order="desc"
+          data-name="title"
+        >
+          <i class="bi bi-chevron-bar-expand"></i> Titre
+        </th>
+        <th
+          scope="col"
+          [appSort]="publications"
+          data-order="desc"
+          data-name="contente"
+        >
+          <i class="bi bi-chevron-bar-expand"></i> Contenu
+        </th>
 
-          <th
-            scope="col"
-            [appSort]="publications"
-            data-order="desc"
-            data-name="file"
-          >
-            <i class="bi bi-chevron-bar-expand"></i> File
-          </th>
-          <th
-            scope="col"
-            [appSort]="publications"
-            data-order="desc"
-            data-name="createdAt"
-            data-type="date"
-          >
-            <i class="bi bi-chevron-bar-expand"></i> Date creation
-          </th>
-          <th
-            scope="col"
-            [appSort]="publications"
-            data-order="desc"
-            data-name="updatedAt"
-            data-type="date"
-          >
-            <i class="bi bi-chevron-bar-expand"></i> Date modification
-          </th>
-          <th scope="col">Actions</th>
-        </tr>
+        <th
+          scope="col"
+          [appSort]="publications"
+          data-order="desc"
+          data-name="file"
+        >
+          <i class="bi bi-chevron-bar-expand"></i> File
+        </th>
+        <th
+          scope="col"
+          [appSort]="publications"
+          data-order="desc"
+          data-name="createdAt"
+          data-type="date"
+        >
+          <i class="bi bi-chevron-bar-expand"></i> Date creation
+        </th>
+        <th
+          scope="col"
+          [appSort]="publications"
+          data-order="desc"
+          data-name="updatedAt"
+          data-type="date"
+        >
+          <i class="bi bi-chevron-bar-expand"></i> Date modification
+        </th>
+        <th scope="col">Actions</th>
+      </tr>
       </thead>
       <tbody>
-        <tr
-          *ngFor="
+      <tr
+        *ngFor="
             let object of publications
               | searchFilter: searchValue
               | searchFilter: filtreValue:filtreName
               | paginate: config
           "
-        >
-          <th>{{ object.id }}</th>
-          <td>{{ object.title }}</td>
-          <td>{{ object.userDr.lastName }}</td>
-          <td>{{ object.userDr.firstName }}</td>
-          <td>{{ object.contente }}</td>
-          <td>{{ object.file }}</td>
-          <td>{{ object.createdAt | date: "medium":"GMT" }}</td>
-          <td>{{ object.updatedAt | date: "medium":"GMT" }}</td>
-          <td class="text-lg-center h5">
-            <a
-
-              role="button"
-              class="text-info p-2"
-              title="Edit"
-              data-toggle="tooltip"
-              (click)="sendEdit(object)"
-              ><i class="bi bi-pencil-square"></i
-            ></a>
-            <a
-
-              role="button"
-              class="text-danger p-2"
-              title="Delete"
-              data-toggle="tooltip"
-              (click)="deletePublication(object)"
-              ><i class="bi bi-trash"></i
-            ></a>
-            <a
-              role="button"
-              class="text-success p-2"
-              title="Comment"
-              data-toggle="tooltip"
-              (click)="commentPublication(object)"
-              ><i class="far fa-comment"></i
-            ></a>
-          </td>
-        </tr>
+      >
+        <th>{{ object.id }}</th>
+        <td>{{ object.title }}</td>
+        <td>{{ object.userDr.lastName }}</td>
+        <td>{{ object.userDr.firstName }}</td>
+        <td>{{ object.contente }}</td>
+        <td>{{ object.file }}</td>
+        <td>{{ object.createdAt | date: "medium":"GMT" }}</td>
+        <td>{{ object.updatedAt | date: "medium":"GMT" }}</td>
+        <td class="text-lg-center h5">
+          <a
+            *ngIf="object.userDr.id == user.id || user.roles[0] == 'ROLE_ADMIN'"
+            role="button"
+            class="text-info p-2"
+            title="Edit"
+            data-toggle="tooltip"
+            (click)="sendEdit(object)"
+          ><i class="bi bi-pencil-square"></i
+          ></a>
+          <a
+            *ngIf="object.userDr.id == user.id || user.roles[0] == 'ROLE_ADMIN'"
+            role="button"
+            class="text-danger p-2"
+            title="Delete"
+            data-toggle="tooltip"
+            (click)="deletePublication(object)"
+          ><i class="bi bi-trash"></i
+          ></a>
+          <a
+            role="button"
+            class="text-success p-2"
+            title="Comment"
+            data-toggle="tooltip"
+            (click)="commentPublication(object)"
+          ><i class="far fa-comment"></i
+          ></a>
+        </td>
+      </tr>
       </tbody>
     </table>
     <div class="row">
@@ -188,5 +187,3 @@
     </div>
   </div>
 </div>
-
-<app-footer></app-footer>

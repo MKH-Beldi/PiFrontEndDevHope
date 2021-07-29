@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FileMedicalExamService} from '../../../shared/file-medical-exam.service';
 import {FileMedicalExam} from '../../../model/fileMedicalExam';
 import {MedicalExam} from "../../../model/medicalExam";
@@ -11,13 +11,23 @@ import {MedicalExam} from "../../../model/medicalExam";
 export class FileMedicalExamFormComponent implements OnInit {
 fileMedicalExam = new FileMedicalExam();
 medicalExam = new MedicalExam();
+  @Input() addModeChild: boolean;
+  @Input() fileMedicalExam1: FileMedicalExam;
+  @Output() addEvent = new EventEmitter<FileMedicalExam>();
+  @Output() editEvent = new EventEmitter<FileMedicalExam>();
   constructor(private fileMedicalExamService: FileMedicalExamService) { }
 
   ngOnInit(): void {
+    if (this.addModeChild){
+      this.fileMedicalExam = new FileMedicalExam();
+    }
   }
-addFileMedicalExam(){
-    this.medicalExam.id = 1;
-    this.fileMedicalExam.medicalExam = this.medicalExam;
-    this.fileMedicalExamService.addFileMedicalExam(this.fileMedicalExam).subscribe();
+
+  sendAddNotif(){
+    console.log("khra");
+    this.addEvent.emit(this.fileMedicalExam);
+  }
+  sendEditNotif() {
+    this.editEvent.emit(this.fileMedicalExam);
   }
 }

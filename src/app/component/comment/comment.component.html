@@ -1,4 +1,3 @@
-<app-header></app-header>
 <div class="container">
   <h1>Comments :</h1>
   <div class="spinner-border text-warning m-3" role="status" *ngIf="!comments">
@@ -10,13 +9,13 @@
         <div class="d-flex justify-content-end">
           <span style="color: blue">
             <i class="fas fa-plus-square mx-2"></i
-          ></span>
+            ></span>
           {{ comment.createdAt | date: "medium":"GMT" }}
         </div>
         <div class="d-flex justify-content-end">
           <span style="color: orange">
             <i class="fas fa-pen-square mx-2"></i
-          ></span>
+            ></span>
           {{ comment.updatedAt | date: "medium":"GMT" }}
         </div>
         <h3 class="mb-30">
@@ -26,7 +25,6 @@
           “ {{ comment.contente }} ”
         </blockquote>
         <a
-
           role="button"
           class="text-danger p-2"
           title="Update"
@@ -35,9 +33,8 @@
         >
           <span style="color: orange">
             <i class="fas fa-pen-alt mx-2 my-1"></i></span
-        ></a>
+          ></a>
         <a
-
           role="button"
           class="text-danger p-2"
           title="Delete"
@@ -46,7 +43,7 @@
         >
           <span style="color: red">
             <i class="far fa-trash-alt mx-2 my-1"></i></span
-        ></a>
+          ></a>
       </div>
     </div>
     <div class="row">
@@ -92,7 +89,7 @@
               >
                 <span style="color: green">
                   <i class="fas fa-plus-square mx-2 my-1 fa-2x"></i
-                ></span>
+                  ></span>
               </a>
               <a
                 *ngIf="f.valid && !addForm"
@@ -104,7 +101,7 @@
               >
                 <span style="color: orange">
                   <i class="fas fa-pen-square mx-2 my-1 fa-2x"></i
-                ></span>
+                  ></span>
               </a>
             </form>
           </div>
@@ -113,5 +110,3 @@
     </div>
   </div>
 </div>
-
-<app-footer></app-footer>

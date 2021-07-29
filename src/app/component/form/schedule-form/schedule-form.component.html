@@ -1,0 +1,42 @@
+<div class="modal-dialog">
+
+  <div class="modal-content">
+    <div class="banner3">
+      <div class="py-5 banner" style="background-image:url(https://www.wrappixel.com/demos/ui-kit/wrapkit/assets/images/form-banners/banner2/banner-bg.jpg);">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-7 col-lg-5">
+              <h3 class="my-3 text-white font-weight-medium text-uppercase">Creer RDV</h3>
+              <div class="bg-white">
+
+                <form #f="ngForm"  >
+                  <div class="form-row border-bottom p-4">
+                    <label class="text-inverse font-14 text-uppercase"> titre </label>
+                    <input type="text" class="border-0 p-0 font-14 form-control" placeholder="Entrer le nom de rendez vous" type="text" name="title" id="title"  [(ngModel)]="schedule.title" required ngModel #l="ngModel" />
+                    <div class="alert alert-danger" *ngIf="l.invalid && l.touched" >
+
+                      <div >Title is required</div>
+                    </div>
+                    <div class="form-row border-bottom p-4">
+                      <label class="text-inverse font-12 text-uppercase"> date Début </label>
+                      <input type="text" class="border-0 p-0 font-14 form-control"  type="text"  name="start" id="start" class="title inp " [(ngModel)]="starChild" />
+                    </div>
+                    <div class="form-row border-bottom p-4">
+                      <label class="text-inverse font-12 text-uppercase"> date fin </label>
+                      <input type="text" class="border-0 p-0 font-14 form-control"  type="text"  name="end" id="end" class="title inp "  [(ngModel)]="schedule.end"  />
+                    </div>
+                    <div>
+                      <button type="submit"  class="m-0 border-0 py-4 font-14 font-monospace btn btn-danger-gradiant btn-block position-relative rounded-0 text-center text-black-50 text-uppercase" (click)="sendAddNotif()" [disabled]="f.invalid"
+                      >
+                        <a > </a>
+                        <span> Book Yor Appointment Now </span>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div></div></div></div>

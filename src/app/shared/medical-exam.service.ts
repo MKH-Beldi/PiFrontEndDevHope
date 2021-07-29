@@ -27,6 +27,6 @@ export class MedicalExamService {
   }
 
   deleteMedicalExam(id: number) {
-    return this.http.delete(this.url + 'delete/' + id, {observe: 'response'});
+    return this.http.delete(this.url + 'delete/' + id);
   }
 }

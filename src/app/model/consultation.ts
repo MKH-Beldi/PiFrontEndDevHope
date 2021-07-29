@@ -1,6 +1,5 @@
 import {Schedule} from './schedule';
 import {Symptom} from './symptom';
-import {User} from "./user";
 
 export class Consultation {
   id: number;
