@@ -23,10 +23,10 @@ export class ListPublicationComponent implements OnInit {
   user = new User();
 
 
-  publications : Publication[]
-  userId
+  publications: Publication[];
+  userId;
   constructor(private serviceRoute: ActivatedRoute,
-              private publicationService:PublicationService,
+              private publicationService: PublicationService,
               private notifyService: NotificationService,
               private router: Router, private loginService: AuthService
 
@@ -40,8 +40,8 @@ export class ListPublicationComponent implements OnInit {
         this.user = data;
         this.publicationService.getAll().subscribe(
           (res: Publication[]) => {
-            this.publications = res
-            console.log(this.publications)
+            this.publications = res;
+            console.log(this.publications);
             this.totalData = this.publications.length;
             this.publicationSelect = this.publications.map(
               o => o.title).filter((value, index, self) => self.indexOf(value) === index);
@@ -67,37 +67,31 @@ export class ListPublicationComponent implements OnInit {
   }
   editPublication(p: Publication) {
     this.viewForm = true;
-    console.log(p)
-    //p.updatedAt = new Intl.DateTimeFormat('en-US')
-    this.publications.map(pub=> {
-      if(pub.id == p.id){
-        pub = p
-        console.log('found ', pub)
+    this.publications.map(pub => {
+      if (pub.id === p.id){
+        pub = p;
       }
-    })
-    console.log(this.publications)
-    this.publicationService.updatePublication(p.id,p).subscribe(
-      (res)=>{
-        console.log(res)
+    });
+    this.publicationService.updatePublication(p.id, p).subscribe(
+      (res) => {
         this.notifyService.showSuccess('Publication modifiée avec succès !', 'Modification');
 
       },
-      (err)=>{
-        console.log(err)
+      (err) => {
+        console.log(err);
       },
-    )
+    );
   }
   deletePublication(p: Publication){
-    this.publicationService.deletePublication(p.id,p).subscribe(
-      (res)=>{
-        console.log(res)
+    this.publicationService.deletePublication(p.id, p).subscribe(
+      (res) => {
         this.notifyService.showSuccess('Publication supprimée avec succès !', 'Suppression');
-        this.publications = this.publications.filter(pub=>pub.id != p.id)
+        this.publications = this.publications.filter(pub => pub.id !== p.id);
       },
-      (err)=>{
-        console.log(err)
+      (err) => {
+        console.log(err);
       },
-    )
+    );
   }
 
   getFiltreName(by: string){
@@ -107,7 +101,7 @@ export class ListPublicationComponent implements OnInit {
   pageChanged(event){
     this.config.currentPage = event;
   }
-  commentPublication(p:Publication){
-    this.router.navigate(['/comment/list/', p.id,this.user.id]);
+  commentPublication(p: Publication){
+    this.router.navigate(['/comment/list/', p.id, this.user.id]);
   }
 }

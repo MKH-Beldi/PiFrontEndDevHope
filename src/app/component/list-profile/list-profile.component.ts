@@ -34,16 +34,16 @@ export class ListProfileComponent implements OnInit {
   ngOnInit(): void {
     this.userId = this.serviceRoute.snapshot.params.userId;
     this.profileService.getAll().subscribe(
-      (res: Profil[])=>{
-        this.profiles = res
-        console.log(this.profiles)
+      (res: Profil[]) => {
+        this.profiles = res;
+        console.log(this.profiles);
         this.totalData = this.profiles.length;
         this.profileSelect = this.profiles.map(
           o => o.note).filter((value, index, self) => self.indexOf(value) === index);
-      },(err)=>{
-        console.log(err)
+      }, ( err) => {
+        console.log(err);
       }
-    )
+    );
 
     this.viewForm = false ;
     this.config = {
