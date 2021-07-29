@@ -108,6 +108,6 @@ export class ListPublicationComponent implements OnInit {
     this.config.currentPage = event;
   }
   commentPublication(p:Publication){
-    this.router.navigate(['/comment/list/', p.id,this.user.id]);
+    this.router.navigate(['/comment/list/', p.id]);
   }
 }

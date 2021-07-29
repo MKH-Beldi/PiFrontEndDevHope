@@ -1,0 +1,11 @@
+<div class="mx-3">
+  <div class="card " style="width: 18rem;">
+    <img src="assets/img/dr.jpg" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{ dr.firstName}} {{ dr.lastName}}</h5>
+      <p class="card-text">Spécialité : {{ dr.specialtyDr[0].name }}</p>
+      <a *ngIf="isAuth" [routerLink]="['/schedule/list/', dr.id]" class="btn btn-primary">RDV</a>
+      <a *ngIf="!isAuth" routerLink='/auth/signin' class="btn btn-primary">Se connecter pour rdv</a>
+    </div>
+  </div>
+</div>

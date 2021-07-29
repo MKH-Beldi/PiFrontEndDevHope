@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
+import {ConsultationService} from "../../shared/consultation.service";
+import {Consultation} from "../../model/consultation";
+import * as BalloonEditor from '@ckeditor/ckeditor5-build-balloon';
 
 @Component({
   selector: 'app-consultation',
@@ -7,9 +11,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConsultationComponent implements OnInit {
 
-  constructor() { }
+  idCons: string;
+  consultation: Consultation;
+
+  Editor = BalloonEditor;
+  editorConfig = {
+
+  };
+  constructor(private activtedRoute: ActivatedRoute, private consultationService: ConsultationService) { }
 
   ngOnInit(): void {
+    this.idCons = this.activtedRoute.snapshot.params.id;
+    this.consultationService.getBy('id', +this.idCons).subscribe(
+      (data: Consultation[]) => {
+        this.consultation = data[0];
+      }
+    );
+
   }
 
 }

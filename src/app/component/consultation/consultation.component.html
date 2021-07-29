@@ -1,1 +1,48 @@
-<p>consultation works!</p>
+<div class="container mt-3">
+  <h2><i class="bi bi-pencil-square"></i>Consultation</h2>
+  <div class="container">
+      <div class="col-md-4">
+        <label class="form-label">Nom de patient : {{consultation.schedules[0].userPatient.lastName}}</label>
+      </div>
+      <div class="col-md-4">
+        <label  class="form-label">Prénom de patient : {{consultation.schedules[0].userPatient.firstName}}</label>
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">Date de naissance : {{consultation.schedules[0].userPatient.dateOfBirth | date : 'shortDate'  : 'GMT+2'}}</label>
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">RDV : {{consultation.schedules[0].start | date : 'shortDate'  : 'GMT+2'}}</label>
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">Statut : {{consultation.status}}</label>
+      </div>
+      <div class="col-12 mb-3">
+        <label class="form-label">Liste des symptômes :</label>
+        <ul>
+          <li *ngFor="let object of consultation.symptoms">{{object.description}}</li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Poids (Kg) : {{consultation.weightPatient}}</label>
+      </div>
+      <div class="col-md-3">
+        <label  class="form-label">Hauteur (m) : {{consultation.heightPatient}}</label>
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Temperature (c°) : {{consultation.bodyTemperature}}</label>
+      </div>
+      <div class="col-md-3">
+        <label  class="form-label">Tension artérielle (mmHg) : {{consultation.bloodPressure}}</label>
+      </div>
+      <div class="col-12">
+        <label class="form-label">Diagnostic : </label>
+        <ckeditor class="form-control diagnostic" id="diagnosticPatient" name="diagnosticPatient"
+                  [config]="editorConfig" [editor]="Editor"
+                  disabled
+                  [(ngModel)]="consultation.diagnostic">
+        </ckeditor>
+      </div>
+  </div>
+</div>
+
+

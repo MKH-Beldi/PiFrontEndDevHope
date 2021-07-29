@@ -16,14 +16,11 @@ export class SigninComponent implements OnInit {
   constructor(private service: AuthService, private router: Router) { }
 
   ngOnInit(): void {
-
-
   }
 
   login(){
    this.service.authenticate(this.email, this.password).subscribe(
      (data: any) => {
-       console.log(data);
        this.router.navigate([''])
          .then(() => {
            window.location.reload();

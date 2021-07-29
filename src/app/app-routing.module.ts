@@ -22,6 +22,10 @@ import { ScheduleFormComponent } from './component/form/schedule-form/schedule-f
 import {AuthGuardService} from './shared/auth-guard.service';
 import {NotFoundComponent} from './component/not-found/not-found.component';
 import {HomeComponent} from './component/home/home.component';
+import {DrSingleComponent} from "./component/dr-single/dr-single.component";
+import {DrListComponent} from "./component/dr-list/dr-list.component";
+import {ConsultationComponent} from "./component/consultation/consultation.component";
+import {ListProfileComponent} from "./component/list-profile/list-profile.component";
 
 
 
@@ -29,6 +33,7 @@ import {HomeComponent} from './component/home/home.component';
 const routes: Routes = [
   { path: '', component: HomeComponent},
   {path: 'profile' , canActivate: [AuthGuardService], component: ProfilComponent},
+  { path: 'consultation/view/:id' , canActivate: [AuthGuardService], component: ConsultationComponent },
   { path: 'consultation/table' , canActivate: [AuthGuardService], component: ConsultationTableComponent },
   { path: 'consultation/add' , canActivate: [AuthGuardService], component: ConsultationFormComponent },
   { path: 'consultation/edit/:id', canActivate: [AuthGuardService], component: ConsultationFormComponent },
@@ -39,7 +44,7 @@ const routes: Routes = [
   { path: 'publication/add/:userId', canActivate: [AuthGuardService], component: AddPublicationComponent },
   { path: 'publication/list/:userId', canActivate: [AuthGuardService], component: ListPublicationComponent },
   { path: 'publication/list', canActivate: [AuthGuardService], component: ListPublicationComponent },
-  { path: 'comment/list/:pubId/:userId', canActivate: [AuthGuardService], component: CommentComponent },
+  { path: 'comment/list/:pubId', canActivate: [AuthGuardService], component: CommentComponent },
   { path: 'certificat/table', canActivate: [AuthGuardService], component: CertificatListComponent },
   { path: 'medicalExam/table/:idCons', canActivate: [AuthGuardService], component: MedicalExamListComponent },
   { path: 'medicalExam/add/:idCons', canActivate: [AuthGuardService], component: MedicalExamFormComponent },
@@ -47,10 +52,12 @@ const routes: Routes = [
   { path: 'user/add', component: UserRegisterFormComponent },
   { path: 'auth/signin', component: SigninComponent },
   { path: 'medicalExamView/:id', canActivate: [AuthGuardService], component: MedicalExamViewComponent },
-  { path: 'schedule/list/:userId', canActivate: [AuthGuardService], component: ScheduleComponent },
+  { path: 'schedule/list/:drId', canActivate: [AuthGuardService], component: ScheduleComponent },
   { path: 'schedule/list', canActivate: [AuthGuardService], component: ScheduleComponent },
   { path: 'schedule/add', canActivate: [AuthGuardService], component: ScheduleFormComponent },
   { path: 'schedule/edit/:id', canActivate: [AuthGuardService], component: ScheduleTableComponent },
+  { path: 'user/drList', component: DrListComponent },
+  { path: 'profile/list', canActivate: [AuthGuardService], component: ListProfileComponent},
   { path: '**', component: NotFoundComponent}
 ];
 

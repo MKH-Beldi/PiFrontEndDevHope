@@ -24,17 +24,18 @@
         <blockquote class="generic-blockquote">
           “ {{ comment.contente }} ”
         </blockquote>
-        <a
+        <a *ngIf="userId == comment.user.id|| role == 'ROLE_ADMIN'"
           role="button"
           class="text-danger p-2"
           title="Update"
           data-toggle="tooltip"
+
           (click)="updateComment(comment)"
         >
           <span style="color: orange">
             <i class="fas fa-pen-alt mx-2 my-1"></i></span
         ></a>
-        <a
+        <a *ngIf="userId == comment.user.id|| role == 'ROLE_ADMIN'"
           role="button"
           class="text-danger p-2"
           title="Delete"

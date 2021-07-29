@@ -14,16 +14,15 @@
                     <label class="text-inverse font-14 text-uppercase"> titre </label>
                     <input type="text" class="border-0 p-0 font-14 form-control" placeholder="Entrer le nom de rendez vous" type="text" name="title" id="title"  [(ngModel)]="schedule.title" required ngModel #l="ngModel" />
                     <div class="alert alert-danger" *ngIf="l.invalid && l.touched" >
-
                       <div >Title is required</div>
                     </div>
                     <div class="form-row border-bottom p-4">
                       <label class="text-inverse font-12 text-uppercase"> date Début </label>
-                      <input type="text" class="border-0 p-0 font-14 form-control"  type="text"  name="start" id="start" class="title inp " [(ngModel)]="starChild" />
+                      <input type="datetime" class="border-0 p-0 font-14 form-control"    value="{{starChild}}"   name="start"  id="start" class="title inp " [(ngModel)]="starChild" />
                     </div>
                     <div class="form-row border-bottom p-4">
                       <label class="text-inverse font-12 text-uppercase"> date fin </label>
-                      <input type="text" class="border-0 p-0 font-14 form-control"  type="text"  name="end" id="end" class="title inp "  [(ngModel)]="schedule.end"  />
+                      <input type="datetime-local" class="border-0 p-0 font-14 form-control"   name="end" id="end" class="title inp "  [(ngModel)]="schedule.end"  />
                     </div>
                     <div>
                       <button type="submit"  class="m-0 border-0 py-4 font-14 font-monospace btn btn-danger-gradiant btn-block position-relative rounded-0 text-center text-black-50 text-uppercase" (click)="sendAddNotif()" [disabled]="f.invalid"

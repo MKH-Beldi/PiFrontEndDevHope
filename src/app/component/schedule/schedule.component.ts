@@ -1,4 +1,3 @@
-
 import {Component, OnInit, ViewChild} from '@angular/core';
 import { CalendarOptions } from '@fullcalendar/angular';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
@@ -11,6 +10,7 @@ import {Consultation} from "../../model/consultation";
 import {User} from "../../model/user";
 import {AuthService} from '../../shared/auth.service';
 import {Router} from "@angular/router";
+import {DatePipe} from "@angular/common";
 
 declare let $: any;
 declare let s: any;
@@ -30,14 +30,16 @@ export class ScheduleComponent {
   star: DateTimeFormat;
   idEvent: number;
   titleEvent: string;
-  startEvent: Date;
-  endEvent: Date;
+  startEvent : string = new Date().toISOString();
+  endEvent : string = new Date().toISOString();
+
   s: Schedule;
   list: [];
   consultation = new Consultation();
   user = new User();
 
   submitted = false;
+
 
   calendarOptions: CalendarOptions = {
     headerToolbar: {
@@ -59,8 +61,6 @@ export class ScheduleComponent {
     events: [ ]
   };
 
-
-
   constructor(private router: Router, private loginService: AuthService, private scheduleService: ScheduleService, private notifyService: NotificationService, private consultationService: ConsultationService) {}
 
   ngOnInit(): void {
@@ -79,7 +79,7 @@ export class ScheduleComponent {
             (data: any[]) => {
               this.schedules = data;
               this.calendarOptions.events = data;
-          }
+            }
           );
         }else if (this.user.roles[0] == 'ROLE_PATIENT') {
           this.scheduleService.getBy('userPatient', this.user.id).subscribe(
@@ -135,16 +135,26 @@ export class ScheduleComponent {
     $("#myModal2").modal("show");
     $("#myModal1").modal("hide");
 
-
+    console.log(this.endEvent);
+    console.log(this.startEvent);
 
     this.idEvent= info.event.id;
     this.titleEvent = info.event.title;
-    this.startEvent = info.event.start;
-    this.endEvent = info.event.end;
+    //this.startEvent = info.event.start;
+    //this.endEvent = info.event.end;
+    const datepipe : DatePipe = new DatePipe('en-US');
+
+    this.endEvent = datepipe.transform(info.event.end, 'dd-MM-yyyy HH:mm:ss');
+    this.startEvent =  datepipe.transform(info.event.start, 'dd-MM-yyyy HH:mm:ss');
+
+
+    console.log(this.endEvent);
+    console.log(this.startEvent);
+
 
     //  alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
     //alert('View: ' + info.view.type);
-    console.log(info);
+    console.log(info.event.id);
 
   }
 
@@ -159,24 +169,16 @@ export class ScheduleComponent {
   updateSchedule( id: number, schedule: Schedule  ) {
 
     console.log(schedule);
-    this.scheduleService.updateSchedule(2, schedule).subscribe(
+    this.scheduleService.updateSchedule(+schedule.id, schedule).subscribe(
       (status) => {
         if (status.status === 201 ){
           this.notifyService.showInfo('schedule modifié avec succès !', 'Modification');
         }
+        $("#myModal2").modal("hide");
+
       }
     );
   }
 
 }
-
-
-
-
-
-
-
-
-
-
 

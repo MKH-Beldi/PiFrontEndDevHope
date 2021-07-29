@@ -24,6 +24,7 @@ export class ConsultationTableComponent implements OnInit {
   viewForm: boolean;
   user = new User();
   status: any[];
+  role: string;
 
   constructor(private loginService: AuthService, private consultationService: ConsultationService, private notifyService: NotificationService, private scheduleService: ScheduleService) { }
 
@@ -31,6 +32,7 @@ export class ConsultationTableComponent implements OnInit {
     this.loginService.getUser().subscribe(
       (data: User) => {
         this.user = data;
+        this.role = data.roles[0]
       }
     );
     this.consultationService.getAll().subscribe(

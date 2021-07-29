@@ -55,6 +55,9 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import localeFr from '@angular/common/locales/fr';
 import { NotFoundComponent } from './component/not-found/not-found.component';
+import { DrSingleComponent } from './component/dr-single/dr-single.component';
+import { DrListComponent } from './component/dr-list/dr-list.component';
+import { ListProfileComponent } from './component/list-profile/list-profile.component';
 
 registerLocaleData(localeFr);
 
@@ -97,7 +100,10 @@ FullCalendarModule.registerPlugins([
     MedicalExamViewComponent,
     UserRegisterFormComponent,
     SigninComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    DrSingleComponent,
+    DrListComponent,
+    ListProfileComponent
   ],
   imports: [
     BrowserModule,

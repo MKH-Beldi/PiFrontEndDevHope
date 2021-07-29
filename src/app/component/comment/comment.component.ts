@@ -5,6 +5,7 @@ import { Publication } from 'src/app/model/publication';
 import { User } from 'src/app/model/user';
 import { CommentService } from 'src/app/shared/comment.service';
 import { NotificationService } from 'src/app/shared/notification.service';
+import {AuthService} from "../../shared/auth.service";
 
 @Component({
   selector: 'app-comment',
@@ -12,29 +13,38 @@ import { NotificationService } from 'src/app/shared/notification.service';
   styleUrls: ['./comment.component.css']
 })
 export class CommentComponent implements OnInit {
-userId
+userId: number;
 pubId
 comments : any[]
 showForm:Boolean = false
 newComment
+  role: string;
 commentToEdit
+  user: User;
 addForm:Boolean
   constructor(    private serviceRoute: ActivatedRoute,
     private commentService : CommentService,
-    private notifyService: NotificationService,
+    private notifyService: NotificationService, private loginService: AuthService
 
     ) { }
 
   ngOnInit(): void {
-    this.userId = this.serviceRoute.snapshot.params.userId;
     this.pubId = this.serviceRoute.snapshot.params.pubId;
-    this.commentService.getByc('publication',this.pubId).subscribe(
-      (res)=>{
-      console.log(res)
-      this.comments = res
-      },
-      (err)=>{console.log(err)}
-    )
+  this.loginService.getUser().subscribe(
+    (data: User) => {
+      this.user = data;
+      this.role = this.user.roles[0];
+      this.userId = this.user.id;
+      this.commentService.getByc('publication',this.pubId).subscribe(
+        (res)=>{
+          console.log(res)
+          this.comments = res
+        },
+        (err)=>{console.log(err)}
+      )
+    }
+  );
+
   }
   updateComment(comment){
     this.commentToEdit = comment
@@ -57,13 +67,14 @@ addForm:Boolean
     this.addForm = true;
   }
   addComment(){
-    const comment = new Comment()
+    let comment = new Comment()
     comment.contente = this.newComment
-    const user = new User()
-    user.id = this.userId
+    let user = new User()
+    user.id = this.user.id
     const pub = new Publication()
     pub.id = this.pubId
     comment.publication = pub
+    comment.user = user;
     console.log({comment})
     this.commentService.addComment(comment).subscribe(
       (res)=>{console.log(res)

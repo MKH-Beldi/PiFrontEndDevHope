@@ -1,8 +1,8 @@
-<div class=container>
+<div class="container mt-3">
   <h2><i class="bi bi-box-arrow-in-right"></i> Se connecter</h2>
   <div class="container">
     <form #f="ngForm" class="row g-3">
-      <div class="row">
+      <div class="row mb-3 mt-3">
         <div class="col-md-4">
           <label for="email" class="form-label">Email<span style="color: red"> *</span></label>
           <input type="text" class="form-control" id="email" name="email"
@@ -20,7 +20,7 @@
           </div>
         </div>
       </div>
-      <div class="row">
+      <div class="row mb-3">
         <div class="col-md-4">
           <label for="pass" class="form-label">Password<span style="color: red"> *</span></label>
           <input type="password" class="form-control" id="pass" name="pass"
@@ -28,7 +28,7 @@
                  #pass= "ngModel"
                  minlength="6"
                  [(ngModel)]="password">
-          <div *ngIf="pass.pristine" id="passwordHelp" class="form-text"><i class="bi bi-info-circle"></i> Password doit contenir au moins 6 caractères.</div>
+          <div *ngIf="pass.pristine" id="passwordHelp" class="form-text"><i class="bi bi-info-circle"></i> Password doit contenir au moins 8 caractères.</div>
           <div *ngIf="pass.invalid && (pass.dirty || pass.touched)" class="mt-1">
           <span *ngIf="pass.errors.required" class="form-text text-danger">
             <i class="bi bi-exclamation-circle"></i> Password est requise.

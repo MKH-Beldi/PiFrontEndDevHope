@@ -9,7 +9,7 @@ export class UserService {
 
   url = 'http://127.0.0.1:8000/api/login/';
 
-  userRoles: string[] = ['ROLE_ADMIN', 'ROLE_DR', 'ROLE_PATIENT', 'ROLE_LAB'];
+  userRoles: { name: string, role: string }[] = [{ 'name': 'Médecin' , 'role': 'ROLE_DR' }, { 'name': 'Patient' , 'role': 'ROLE_PATIENT' }, { 'name': 'LAB Agent' , 'role': 'ROLE_LAB' }];
 
   constructor(private http: HttpClient) {
   }
