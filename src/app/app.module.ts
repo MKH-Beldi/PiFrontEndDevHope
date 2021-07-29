@@ -4,7 +4,7 @@ import {LOCALE_ID, NgModule} from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
-import { registerLocaleData } from '@angular/common';
+import {DatePipe, registerLocaleData} from '@angular/common';
 import { SpecialtyDrService } from './shared/specialty-dr.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule} from '@angular/material/form-field';
@@ -120,7 +120,7 @@ FullCalendarModule.registerPlugins([
     ReactiveFormsModule,
     FullCalendarModule
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'fr-FR'}, { provide: HTTP_INTERCEPTORS, useClass: BasicAuthHtppInterceptorService, multi: true}, SpecialtyDrService, ConsultationService, SymptomService, AuthService],
+  providers: [{ provide: LOCALE_ID, useValue: 'fr-FR'}, DatePipe, { provide: HTTP_INTERCEPTORS, useClass: BasicAuthHtppInterceptorService, multi: true}, SpecialtyDrService, ConsultationService, SymptomService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

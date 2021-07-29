@@ -26,6 +26,7 @@ import {DrSingleComponent} from "./component/dr-single/dr-single.component";
 import {DrListComponent} from "./component/dr-list/dr-list.component";
 import {ConsultationComponent} from "./component/consultation/consultation.component";
 import {ListProfileComponent} from "./component/list-profile/list-profile.component";
+import {CertificatViewComponent} from "./component/certificat-view/certificat-view.component";
 
 
 
@@ -59,6 +60,8 @@ const routes: Routes = [
   { path: 'user/drList', component: DrListComponent },
   { path: 'profile/list', canActivate: [AuthGuardService], component: ListProfileComponent},
   { path: 'fileMedicalExam/table/:idCons', canActivate: [AuthGuardService], component: FileMedicalExamListComponent },
+  { path: 'certificat/table/:id', canActivate: [AuthGuardService], component: CertificatListComponent },
+  { path: 'certificatView/:id', canActivate: [AuthGuardService], component: CertificatViewComponent },
   { path: '**', component: NotFoundComponent}
 ];
 

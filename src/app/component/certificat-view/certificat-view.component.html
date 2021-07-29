@@ -1,21 +1,36 @@
-<table class="table" id="table">
-  <thead>
-  <tr>
-    <th scope="col">#</th>
-    <th scope="col">Name</th>
-    <th scope="col">Description</th>
-    <th scope="col">CreatedAt</th>
-    <th scope="col">UpdatedAt</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr >
-    <th scope="row"></th>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  </tbody>
-  <button (click)="generatePDF()">Generate PDF</button>
-</table>
+<div id="table">
+  <div class="modal-dialog modal-dialog-centered"   role="document">
+    <div class="modal-content" >
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-sm-11">
+              <div class="row text-center">
+                <div class="col-sm-12 margin-proptitle">
+                  <p class="header-large">Certificat medical</p>
+                </div>
+              </div>
+              <div class="col-sm-12 margin-prop">
+                <p>Je soussigné docteur<b> {{userDr.firstName}} {{userDr.lastName}}.</b></p>
+              </div>
+              <div class="col-sm-12 margin-prop">
+                <p>Certifie que l'examen de M/Mme <b> {{userPatient.firstName}} {{userPatient.lastName}}</b></p>
+              </div>
+              <div class="col-sm-12 margin-prop">
+                <p>Nécessite un repos de <b> {{certif.nbrRestDay }} jours </b>,  sauf complications, du<b> {{certif.startDate| date : 'mediumDate' }} </b> au <b>{{certif.endDate| date : 'mediumDate' }}</b> .</p>
+              </div>
+              <div class="row">
+                <div class="col-sm-12 col-md-12 text-center margin-propsign">
+                  <p id="smallFont"><b>Signature</b> </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<button (click)="generatePDF()">Imprimer</button>
+

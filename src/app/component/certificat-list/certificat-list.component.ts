@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {CertificatService} from '../../shared/certificat.service';
 import {Certificat} from '../../model/certificat';
+import {DatePipe} from "@angular/common";
 @Component({
   selector: 'app-certificat-list',
   templateUrl: './certificat-list.component.html',
@@ -17,8 +18,14 @@ export class CertificatListComponent implements OnInit {
   totalData: any;
   addMode: boolean;
   viewForm: boolean;
+  d: DatePipe;
+  d2: DatePipe;
+  d3: DatePipe;
+  d4: DatePipe;
+  df: DatePipe;
+  nbr: number;
 
-  constructor(private certificatService: CertificatService) { }
+  constructor(private certificatService: CertificatService, private datePipe : DatePipe) { }
 
   ngOnInit(): void{
     this.viewForm = false ;
@@ -66,7 +73,7 @@ export class CertificatListComponent implements OnInit {
     this.config.currentPage = event;
   }
   addCerificat(c: Certificat){
-console.log("aywah");
+
 // this.d = this.certificat.startDate;
     // this.d2 = this.datePipe.transform(this.d, 'yyyy-MM-dd');
     // this.d3 = new Date(this.d2).getTime();
