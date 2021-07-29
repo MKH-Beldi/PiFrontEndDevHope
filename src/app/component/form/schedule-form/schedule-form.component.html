@@ -16,6 +16,22 @@
                     <div class="alert alert-danger" *ngIf="l.invalid && l.touched" >
                       <div >Title is required</div>
                     </div>
+
+
+
+
+                    <select class="form-select" aria-label="role" id="role" name="role"
+                            required
+                            *ngIf="user.roles == 'ROLE_DR'"
+                            [(ngModel)]="userDR"
+                            #roles="ngModel">
+                      <option disabled selected [ngValue]="undefined">Choisir ...</option>
+                      <option *ngFor="let object of userDR" [ngValue]="object">
+                        {{ object }}
+                      </option>
+                    </select>
+
+
                     <div class="form-row border-bottom p-4">
                       <label class="text-inverse font-12 text-uppercase"> date Début </label>
                       <input type="datetime" class="border-0 p-0 font-14 form-control"    value="{{starChild}}"   name="start"  id="start" class="title inp " [(ngModel)]="starChild" />
