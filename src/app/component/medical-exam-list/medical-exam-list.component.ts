@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {MedicalExamService} from "../../shared/medical-exam.service";
 import {MedicalExam} from '../../model/medicalExam';
 import {FileMedicalExamService} from "../../shared/file-medical-exam.service";
@@ -15,8 +15,8 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class MedicalExamListComponent implements OnInit {
   medicalExamToEdit: MedicalExam;
-  viewForm: boolean;
   addMode: boolean;
+  viewForm: boolean;
   medicalExams: MedicalExam[];
   fileMedicalExams: FileMedicalExam[];
   config: any;
@@ -27,6 +27,8 @@ export class MedicalExamListComponent implements OnInit {
   d: any;
   idCons: string;
   user = new User();
+  @Input() medicalExam1: MedicalExam;
+
   constructor(private medicalExamService: MedicalExamService,
               private fileMedicalExamService: FileMedicalExamService, private route: ActivatedRoute) { }
 
@@ -40,16 +42,20 @@ export class MedicalExamListComponent implements OnInit {
         this.totalData = data.length;
       }
     );
+    this.viewForm = false ;
     this.config = {
       itemsPerPage: 8,
       currentPage: 1,
       totalItems: this.totalData
     };
   }
-  editMedicalExam(medicalExam: MedicalExam){
-
+  editMedicalExam(){
+    console.log(this.medicalExam1);
   }
-  sendEdit(me:MedicalExam){
+  editEvent(me:MedicalExam){
+    console.log(me);
+    this.viewForm = true;
+    this.addMode = false;
 
   }
   addMedicalExam(medicalExam: MedicalExam){
@@ -65,7 +71,7 @@ export class MedicalExamListComponent implements OnInit {
     this.ngOnInit();
   }
   deleteMedicalExam(me: MedicalExam){
-     this.fileMedicalExamService.getBy('medicalExam', me.id).subscribe(
+    this.fileMedicalExamService.getBy('medicalExam', me.id).subscribe(
       (data: FileMedicalExam[]) => {
         this.fileMedicalExams = data;
         console.log(this.fileMedicalExams);
@@ -79,7 +85,7 @@ export class MedicalExamListComponent implements OnInit {
               this.medicalExamService.deleteMedicalExam(me.id).subscribe();
             }
           );
-      }
+        }
         else {
           const indexDelete = this.medicalExams.indexOf(me);
 

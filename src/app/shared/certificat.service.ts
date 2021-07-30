@@ -29,7 +29,4 @@ export class CertificatService {
   deleteCertificat(id: number) {
     return this.http.delete(this.url + 'delete/' + id, {observe: 'response'});
   }
-  getZone() {
-    return this.http.get<Certificat[]>(this.url + 'getZone');
-  }
 }

@@ -75,6 +75,7 @@ export class FileMedicalExamListComponent implements OnInit {
         }
       }
     );
+    this.ngOnInit();
   }
 
 }

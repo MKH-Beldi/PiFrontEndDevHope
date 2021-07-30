@@ -19,6 +19,7 @@ export class MedicalExamFormComponent implements OnInit {
   idCons: string;
   userLab = new User();
   user = new User();
+  isAddMode: Boolean ;
   @Input() addModeChild: boolean;
   @Input() medicalExam1: MedicalExam;
   @Output() editEvent = new EventEmitter<MedicalExam>();
@@ -31,6 +32,9 @@ export class MedicalExamFormComponent implements OnInit {
     if (this.addModeChild){
       this.medicalExam = new MedicalExam();
     }
+    else {
+      this.medicalExam = this.medicalExam1;
+    }
   }
 
 
@@ -40,7 +44,10 @@ export class MedicalExamFormComponent implements OnInit {
     this.medicalExam.consultation = consultation;
     this.addEvent.emit(this.medicalExam);
   }
+
   sendEditNotif() {
-    this.editEvent.emit(this.medicalExam);
+
+    this.editEvent.emit(this.medicalExam1);
   }
+
 }

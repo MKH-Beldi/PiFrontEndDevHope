@@ -1,6 +1,8 @@
 
 <div class=container>
-  <h2><i class="bi bi-plus-circle"></i> Ajouter un Medical Examen</h2>
+  <h2 *ngIf="addModeChild"><i class="bi bi-plus-circle"></i> Ajouter un Medical Examen</h2>
+  <h2 *ngIf="!addModeChild"><i class="bi bi-plus-circle"></i> Modifier le Medical Examen</h2>
+
   <form #f="ngForm" class="container">
     <div class="row">
       <div class="col-md-4">
@@ -69,7 +71,9 @@
 
     </div>
     <div class="col-12 mb-3">
-      <button type="submit" class="btn btn-success" (click)="sendAddNotif()" [disabled]="f.invalid "><i class="bi bi-plus-circle"></i> Ajouter</button>
+      <button *ngIf="addModeChild" type="submit" class="btn btn-success" (click)="sendAddNotif()" [disabled]="f.invalid "><i class="bi bi-plus-circle"></i> Ajouter</button>
+      <button *ngIf="!addModeChild" type="submit" class="btn btn-success" (click)="sendEditNotif()" [disabled]="f.invalid "><i class="bi bi-plus-circle"></i> Modifier</button>
+
     </div>
 
   </form>

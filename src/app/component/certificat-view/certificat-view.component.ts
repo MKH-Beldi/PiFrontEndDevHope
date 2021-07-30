@@ -34,6 +34,15 @@ export class CertificatViewComponent implements OnInit {
   }
   ngOnInit(): void {
     this.id = this.activatedRoute.snapshot.params.id;
+
+    this.certificatService.getBy('id', 1).subscribe(
+      (data: Certificat[]) => {
+        this.certificats = data;
+        this.certif = data[0];
+        console.log(this.id);
+        console.log(this.certif);
+      }
+    );
     this.certificatService.getBy('id', this.id).subscribe(
       (data: Certificat[]) => {
         this.certificats = data;

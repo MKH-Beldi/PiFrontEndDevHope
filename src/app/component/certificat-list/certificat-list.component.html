@@ -1,27 +1,24 @@
-<app-certificat-form *ngIf="viewForm" (addEvent)="addCerificat($event)"
-                  (editEvent)="editCertificat($event)"
-                  [addModeChild]="addMode"
-                  [certificat1]="certificatToEdit"
+<app-certificat-form *ngIf="viewForm" (addEvent)="addCerificat($event,idC)"
+                     (editEvent)="editCertificat($event)"
+                     [addModeChild]="addMode"
+                     [certificat1]="certificatToEdit"
 ></app-certificat-form>
 <div class=container>
   <div class="row mt-2">
     <div class="col-md-8">
       <h2><i class="bi bi-table"></i> Certificats table</h2>
     </div>
-    <div class="col-md-4">
-      <div class="search-box ">
-        <i class="bi bi-search"></i>
-        <input type="text" class="form-control" placeholder="Search" [(ngModel)]="searchValue">
-      </div>
-    </div>
+
   </div>
   <div class="container">
     <table class="table table-hover table-bordered">
       <thead>
       <tr>
-        <th scope="col"><i class="bi bi-funnel-fill"></i></th>
         <th scope="col"></th>
         <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+
         <th scope="col"></th>
         <th scope="col" class="text-lg-center h5">
           <a *ngIf="!viewForm" role="button" class="text-success p-2" title="Add" data-toggle="tooltip" (click)="viewForm = true; addMode=true"><i class="bi bi-plus-square"></i></a>
@@ -29,14 +26,12 @@
         </th>
       </tr>
       <tr>
-
         <th scope="col" [appSort]="certificats" data-order="desc" data-name="id">#</th>
         <th scope="col" [appSort]="certificats" data-order="desc" data-name="nbrRestDay"><i class="bi bi-chevron-bar-expand">Nombre de Jours</i></th>
         <th scope="col" [appSort]="certificats" data-order="desc" data-name="start date"><i class="bi bi-chevron-bar-expand"></i>Date Début</th>
         <th scope="col" [appSort]="certificats" data-order="desc" data-name="end date   "><i class="bi bi-chevron-bar-expand"></i>Date Fin</th>
         <th scope="col" [appSort]="certificats" data-order="desc" data-name="createdAt" data-type="date"><i class="bi bi-chevron-bar-expand"></i> Date creation</th>
-        <th scope="col" [appSort]="certificats" data-order="desc" data-name="updatedAt" data-type="date"><i class="bi bi-chevron-bar-expand"></i> Date modification </th>
-        <th scope="col">Actions</th>
+        <th scope="col"><i class="bi bi-gear"></i> Actions</th>
       </tr>
       </thead>
       <tbody>
@@ -46,11 +41,8 @@
         <td>{{ object.startDate | date : 'mediumDate'  : 'GMT+2' }}</td>
         <td>{{ object.endDate | date : 'mediumDate'  : 'GMT+2' }}</td>
         <td>{{ object.createdAt | date : 'medium'  : 'GMT+2' }}</td>
-        <td>{{ object.updatedAt | date : 'medium'  : 'GMT+2' }}</td>
-        <td><a [routerLink]="['/certificatView', object.consultation.id]" routerLinkActive="active"><button class="btn btn-primary">{{ object.consultation.id }}</button></a></td>
-
         <td class="text-lg-center h5">
-          <a role="button" class="text-info p-2" title="Edit" data-toggle="tooltip" (click)="sendEdit(object)"><i class="bi bi-pencil-square"></i></a>
+          <a [routerLink]="['/certificatView', object.id]" routerLinkActive="active"><i class="bi bi-printer"></i></a>
           <a role="button" class="text-danger p-2" title="Delete" data-toggle="tooltip" (click)="deleteCertificat(object)"><i class="bi bi-trash"></i></a>
         </td>
       </tr>

@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {CertificatService} from '../../shared/certificat.service';
 import {Certificat} from '../../model/certificat';
 import {DatePipe} from "@angular/common";
+import {AuthService} from '../../shared/auth.service';
+import {User} from "../../model/user";
+import {ActivatedRoute} from '@angular/router';
 @Component({
   selector: 'app-certificat-list',
   templateUrl: './certificat-list.component.html',
@@ -24,12 +27,24 @@ export class CertificatListComponent implements OnInit {
   d4: DatePipe;
   df: DatePipe;
   nbr: number;
-
-  constructor(private certificatService: CertificatService, private datePipe : DatePipe) { }
+  user = new User();
+  status: any[];
+  role: string;
+  idCons:number;
+  constructor(private loginService: AuthService,private certificatService: CertificatService,
+              private datePipe : DatePipe, private route : ActivatedRoute) { }
 
   ngOnInit(): void{
+    this.idCons = this.route.snapshot.params.id;
+
+    this.loginService.getUser().subscribe(
+      (data: User) => {
+        this.user = data;
+        this.role = data.roles[0];
+      }
+    );
     this.viewForm = false ;
-    this.certificatService.getAll().subscribe(
+    this.certificatService.getBy('consultation', this.idCons).subscribe(
       (data: Certificat[]) => {
         this.certificats = data;
         this.totalData = data.length;
@@ -73,25 +88,22 @@ export class CertificatListComponent implements OnInit {
     this.config.currentPage = event;
   }
   addCerificat(c: Certificat){
-
-// this.d = this.certificat.startDate;
-    // this.d2 = this.datePipe.transform(this.d, 'yyyy-MM-dd');
-    // this.d3 = new Date(this.d2).getTime();
-    // this.nbr = this.certificat.nbrRestDay;
-//  this.d4 = this.d3 + (this.nbr * 86400000);
-//  this.df = this.datePipe.transform(this.d4, 'yyyy-MM-dd');
-    // console.log(this.df);
-//  console.log(this.d4);
-     //c.endDate = c.df;
-     this.certificatService.addCertificat(c).subscribe(
-       (data: any[]) => {
-         if (data[0]){
-           this.certificats.push(c);
-           this.viewForm = false;
-         }
-       }
-     );
-     this.ngOnInit();
+    //this.d = c.startDate;
+    //this.d2 = this.datePipe.transform(this.d, 'yyyy-MM-dd');
+    //this.d3 = new Date(this.d2).getTime();
+    //this.nbr = c.nbrRestDay;
+    //this.d4 = this.d3 + (this.nbr * 86400000);
+    //this.df = this.datePipe.transform(this.d4, 'yyyy-MM-dd');
+    c.endDate = c.startDate;
+    this.certificatService.addCertificat(c).subscribe(
+      (data: any[]) => {
+        if (data[0]){
+          this.certificats.push(c);
+          this.viewForm = false;
+        }
+      }
+    );
+    this.ngOnInit();
   }
   sendEdit(c: Certificat) {
     this.viewForm = true;
