@@ -49,12 +49,19 @@ export class MedicalExamListComponent implements OnInit {
       totalItems: this.totalData
     };
   }
-  editMedicalExam(){
+  editMedicalExam(me: MedicalExam){
     console.log(this.medicalExam1);
+    this.medicalExamService.updateMedicalExam(me.id, me).subscribe(
+      () => {
+        this.viewForm = false;
+      }
+
+    );
   }
   editEvent(me:MedicalExam){
     console.log(me);
     this.viewForm = true;
+    this.medicalExamToEdit = me;
     this.addMode = false;
 
   }

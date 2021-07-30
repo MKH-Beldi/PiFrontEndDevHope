@@ -47,7 +47,7 @@ export class MedicalExamFormComponent implements OnInit {
 
   sendEditNotif() {
 
-    this.editEvent.emit(this.medicalExam1);
+    this.editEvent.emit(this.medicalExam);
   }
 
 }

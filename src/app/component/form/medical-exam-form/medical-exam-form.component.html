@@ -63,8 +63,7 @@
         <label for="inputState">Le Status</label>
         <select id="inputState" class="form-control" name="nombre" [(ngModel)]="medicalExam.status" required #status="ngModel">
           <option value="en cours" selected>en cours</option>
-          <option value="allah yarhmou">allah yarhmou</option>
-          <option value="fl janna">fl janna</option>
+          <option value="terminé">terminé</option>
         </select>
         <div *ngIf="status.invalid && (status.dirty || status.touched)" id="symtomDescriptionHelp" class="form-text"><i class="bi bi-info-circle"></i> Veuillez Sélectionner le status.</div>
       </div>
