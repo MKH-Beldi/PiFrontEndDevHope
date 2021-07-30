@@ -181,6 +181,16 @@ export class ScheduleComponent {
       }
     );
   }
+  hidModule2()
+  {         $("#myModal2").modal("hide");
+
+
+  }
+  hidModule1()
+  {         $("#myModal1").modal("hide");
+
+
+  }
 
 }
 

@@ -8,6 +8,7 @@
             <div class="col-md-7 col-lg-5">
               <h3 class="my-3 text-white font-weight-medium text-uppercase">Creer RDV</h3>
               <div class="bg-white">
+                <button type="button" class="btn-close" aria-label="Close" (click)="hidmod"></button>
 
                 <form #f="ngForm"  >
                   <div class="form-row border-bottom p-4">
@@ -20,16 +21,8 @@
 
 
 
-                    <select class="form-select" aria-label="role" id="role" name="role"
-                            required
-                            *ngIf="user.roles == 'ROLE_DR'"
-                            [(ngModel)]="userDR"
-                            #roles="ngModel">
-                      <option disabled selected [ngValue]="undefined">Choisir ...</option>
-                      <option *ngFor="let object of userDR" [ngValue]="object">
-                        {{ object }}
-                      </option>
-                    </select>
+
+
 
 
                     <div class="form-row border-bottom p-4">

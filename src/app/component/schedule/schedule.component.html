@@ -8,9 +8,10 @@
 </div>
 <div class="modal" id="myModal1">
   <app-schedule-form (addEvent)="addSchedule($event)"
+                     (hidmod)="hidModule1()"
                      [starChild]="star" > </app-schedule-form>
 </div>
 <div class="modal" id="myModal2">
-  <app-schedule-table    (editEvent) ="updateSchedule(idEvent , $event)" [idChild]="idEvent" [titlechild]="titleEvent"  [startchild]="startEvent"  [endchild]="endEvent" > </app-schedule-table>
+  <app-schedule-table  (hidmod2)="hidModule1()"  (editEvent) ="updateSchedule(idEvent , $event)" [idChild]="idEvent" [titlechild]="titleEvent"  [startchild]="startEvent"  [endchild]="endEvent" > </app-schedule-table>
 </div>
 

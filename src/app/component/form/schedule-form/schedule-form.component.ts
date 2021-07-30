@@ -21,17 +21,12 @@ export class ScheduleFormComponent implements OnInit {
 
   @Output() addEvent = new EventEmitter<Schedule>();
   @Output() editEvent = new EventEmitter<Schedule>();
+  @Output() hidmod = new EventEmitter<Schedule>();
 
   constructor(private loginService: AuthService , private userService: UserService) { }
   ngOnInit(): void {
-    this.userService.getAll().subscribe(
-      (data: User) => {
-        this.user = data;
-        this.userDR = this.user.roles;
-      });
+         }
 
-    console.log(this.userDR);
-  }
 
   sendAddNotif() {
     this.schedule.start = new Date(this.starChild);

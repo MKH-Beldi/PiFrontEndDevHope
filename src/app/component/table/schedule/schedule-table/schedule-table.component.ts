@@ -14,6 +14,7 @@ import {DatePipe} from "@angular/common";
 })
 export class ScheduleTableComponent implements OnInit {
   @Output() editEvent = new EventEmitter<Schedule>();
+  @Output() hidmod2 = new EventEmitter<Schedule>();
   @Input() idChild: number;
   @Input()  titlechild : string;
   @Input() startchild : Date ;
