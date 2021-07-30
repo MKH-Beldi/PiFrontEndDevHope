@@ -3,6 +3,7 @@ import {ActivatedRoute} from "@angular/router";
 import {ConsultationService} from "../../shared/consultation.service";
 import {Consultation} from "../../model/consultation";
 import * as BalloonEditor from '@ckeditor/ckeditor5-build-balloon';
+import {Schedule} from "../../model/schedule";
 
 @Component({
   selector: 'app-consultation',
@@ -12,7 +13,7 @@ import * as BalloonEditor from '@ckeditor/ckeditor5-build-balloon';
 export class ConsultationComponent implements OnInit {
 
   idCons: string;
-  consultation: Consultation;
+  consultation = new Consultation();
   Editor = BalloonEditor;
   editorConfig = {
 
@@ -24,6 +25,7 @@ export class ConsultationComponent implements OnInit {
     this.consultationService.getBy('id', +this.idCons).subscribe(
       (data: Consultation[]) => {
         this.consultation = data[0];
+        console.log(this.consultation);
       }
     );
 

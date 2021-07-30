@@ -54,11 +54,15 @@ export class UserRegisterFormComponent implements OnInit {
                   this.profileService.addProfil(this.profile).subscribe(
                     () => {
                       this.notifyService.showInfo('Profile créé avec succès !', 'Ajout');
+                      this.router.navigate(['']).then(
+                        () => {
+                          window.location.reload();
+                        });
                     }
                   );
                 }
-                this.router.navigate(['']).then(
-                  () => {
+              this.router.navigate(['']).then(
+                () => {
                   window.location.reload();
                 });
             }

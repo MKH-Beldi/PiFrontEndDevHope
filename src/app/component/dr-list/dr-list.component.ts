@@ -19,7 +19,6 @@ export class DrListComponent implements OnInit {
       (data: User[]) => {
         this.listDr = data.filter(
           o => o.roles.includes('ROLE_DR'));
-        console.log(this.listDr)
       }
     );
   }

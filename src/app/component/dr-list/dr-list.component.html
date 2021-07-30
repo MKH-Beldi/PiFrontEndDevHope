@@ -1,14 +1,16 @@
 <div class="container mt-3 mb-3">
- <div class="row mb-3">
-   <div class="col">
-     <div class="search-box ">
-       <i class="bi bi-search"></i>
-       <input type="text" class="form-control" placeholder="Search" [(ngModel)]="searchValue">
+   <div class="row mb-3">
+     <div class="col">
+       <div class="search-box ">
+         <i class="bi bi-search"></i>
+         <input type="text" class="form-control" placeholder="Search" [(ngModel)]="searchValue">
+       </div>
      </div>
    </div>
- </div>
-  <div class="d-flex flex-row">
-    <app-dr-single *ngFor="let object of listDr | searchFilter:searchValue" [dr]="object">
-    </app-dr-single>
+  <div>
+    <div class="row">
+      <app-dr-single class="col-md-3 mb-3" *ngFor="let object of listDr | searchFilter:searchValue" [dr]="object">
+      </app-dr-single>
+    </div>
   </div>
 </div>

@@ -32,7 +32,7 @@ import {CertificatViewComponent} from "./component/certificat-view/certificat-vi
 
 
 const routes: Routes = [
-  { path: '', component: HomeComponent},
+  { path: '', component: DrListComponent },
   {path: 'profile' , canActivate: [AuthGuardService], component: ProfilComponent},
   { path: 'consultation/view/:id' , canActivate: [AuthGuardService], component: ConsultationComponent },
   { path: 'consultation/table' , canActivate: [AuthGuardService], component: ConsultationTableComponent },
@@ -57,7 +57,6 @@ const routes: Routes = [
   { path: 'schedule/list', canActivate: [AuthGuardService], component: ScheduleComponent },
   { path: 'schedule/add', canActivate: [AuthGuardService], component: ScheduleFormComponent },
   { path: 'schedule/edit/:id', canActivate: [AuthGuardService], component: ScheduleTableComponent },
-  { path: 'user/drList', component: DrListComponent },
   { path: 'profile/list', canActivate: [AuthGuardService], component: ListProfileComponent},
   { path: 'fileMedicalExam/table/:idCons', canActivate: [AuthGuardService], component: FileMedicalExamListComponent },
   { path: 'certificat/table/:id', canActivate: [AuthGuardService], component: CertificatListComponent },

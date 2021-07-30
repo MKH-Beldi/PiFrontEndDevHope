@@ -49,9 +49,9 @@
         </td>
         <td>{{ object.status}}</td>
         <td class="text-lg-center h5">
-          <a [routerLink]="['/consultation/edit', object.id]" role="button" class="text-info p-2" title="Edit" data-toggle="tooltip" ><i class="bi bi-pencil-square"></i></a>
-          <a role="button" class="text-danger p-2" title="Delete" data-toggle="tooltip" (click)="deleteConsultation(object)"><i class="bi bi-trash"></i></a>
-          <a [routerLink]="['/consultation/view', object.id]" role="button" class="text-warning p-2" title="Edit" data-toggle="tooltip" ><i class="bi bi-eye"></i></a>
+          <a *ngIf="role == 'ROLE_DR' || role == 'ROLE_ADMIN'" [routerLink]="['/consultation/edit', object.id]" role="button" class="text-info p-2" title="Edit" data-toggle="tooltip" ><i class="bi bi-pencil-square"></i></a>
+          <a *ngIf="role == 'ROLE_DR' || role == 'ROLE_ADMIN'" role="button" class="text-danger p-2" title="Delete" data-toggle="tooltip" (click)="deleteConsultation(object)"><i class="bi bi-trash"></i></a>
+          <a [routerLink]="['/consultation/view', object.id]" role="button" class="text-warning p-2" title="view" data-toggle="tooltip" ><i class="bi bi-eye"></i></a>
         </td>
         </ng-container>
       </tr>
